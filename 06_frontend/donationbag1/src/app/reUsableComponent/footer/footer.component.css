@@ -1,0 +1,89 @@
+.footer {
+  padding: 50px;
+  padding-bottom: 50px;
+  background-color: #1e2436;
+  color: #FFF;
+}
+
+@media screen and (max-width: 940px) {
+  .footer {
+      padding: 30px 10px;
+  }
+}
+
+.footer h2 {
+  font-size: 26px;
+  margin-top: 10px;
+  color: #FFF;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.footer p {
+  text-align: justify;
+  text-indent: 20px;
+  font-size: .9rem;
+}
+
+.footer .link-list li {
+  padding: 10px;
+  border-bottom: 1px solid #6C6C6C;
+  font-size: .9rem;
+}
+
+.footer .link-list li a {
+  color: #FFF;
+}
+
+.footer .link-list li i {
+  float: right;
+}
+
+.footer .map-img {
+  font-weight: 600;
+  font-size: 17px;
+  padding-left: 20px;
+}
+
+.footer address {
+  font-weight: 300;
+}
+
+.footer address a {
+  color: #FFF;
+  font-size: 1rem;
+  font-family: "mouse-300", Arial, Helvetica, sans-serif;
+}
+
+.copy {
+  padding: 20px;
+ background: #1a202f;
+  color: #FFF;
+}
+
+.copy a {
+  color: #FFF;
+}
+
+.copy span {
+  float: right;
+}
+
+.copy span i {
+  margin-right: 20px;
+}
+
+.kf-2 {
+  background-color: #FCFCFC;
+  padding: 50px;
+}
+
+@media screen and (max-width: 940px) {
+  .kf-2 {
+      padding: 30px 10px;
+  }
+}
+
+.kf-2 .single-key {
+  box-shadow: 0 2px 3px 0 rgba(218, 218, 253, 0.35), 0 0px 3px 0 rgba(206, 206, 238, 0.35);
+}

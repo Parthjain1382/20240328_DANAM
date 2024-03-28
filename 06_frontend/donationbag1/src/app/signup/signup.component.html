@@ -1,0 +1,35 @@
+<form>
+  <div class="container" style="    top: 450px;">
+    <h1>Sign Up</h1>
+    <p>Please fill in this form to create an account.</p>
+
+        <label for="email"><b>Username</b></label>
+      <input type="text" name="username"  [(ngModel)]="username" (blur)="validateUsername()" (focus)="hideUsernameError()" placeholder="Enter Your Username" type="text" required>
+      <span class="error usernameError" [ngStyle]="{'display':usernameErrorVisibility?'':'none'}">{{usernameErrorMessage}}</span>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" name="email" (blur)="validateEmail()" (focus)="hideEmailError()" [(ngModel)]="email" placeholder="Enter Your Email" type="text"  required>
+      <span class="error emailError"  [ngStyle]="{'display':emailErrorVisibility?'':'none'}"  >{{emailErrorMessage}}</span>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" name="password" (change)="validatePassword()"  (focus)="hidePasswordError()" [(ngModel)]="password" placeholder="Enter Your Password" type="text"  required>
+      <span class="error passwordError"  [ngStyle]="{'display':passwordErrorVisibility?'':'none'}" >{{passwordErrorMessage}}</span>
+
+      <label for="psw"><b>Address </b></label>
+      <input type="text" name="address" placeholder="Enter Address"  [(ngModel)]="address" required>
+
+      <label for="psw"><b>Company Name </b></label>
+      <input type="text" name="companyName" placeholder="Company name" [(ngModel)]="companyName" required>
+
+      <label for="phoneNumber"for="psw" ><b>Phone Number</b></label>
+     <input type="number" type="phone" [(ngModel)]="phonenumber" min=10 name="phone" placeholder="915XXXXXXX" required>
+
+     <br>
+     <span class="already-have-an">Already have an account?</span>&nbsp;
+     <span class="login2" style="font-size:2em;"><a href="signin" (click)="navToLogin()"style="color:blue; ">Login</a></span>
+
+     <div class="clearfix">
+      <button type="submit" class="btn" [disabled]="submitDisabled" (click)="storeUserCred()">Sign Up</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,64 @@
+
+.about-us {
+    background-color: #edf1f5;
+    @include big-padding();
+
+    .natur-row {
+        margin-top: 20px;
+    }
+
+    .text-part {
+        h2 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-indent: 20px;
+            margin-bottom: 15px;
+            line-height: 27px;
+            font-weight: 500;
+            text-align: justify;
+            font-size: .9rem;
+        }
+
+    }
+
+    .image-part {
+        .about-quick-box {
+            .about-qcard {
+                padding: 50px 30px;
+                background-color: #FFF;
+                @include shado-4();
+                border-radius: 15px;
+                text-align: center;
+                margin-bottom: 30px;
+
+                p {
+                    font-weight: 600;
+                    font-size: 1.2rem;
+
+                }
+
+                i {
+                    font-size: 3rem;
+                    margin-bottom: 30px;
+                    color: #3cc88f;
+                }
+
+                .red {
+                    color: #ff6b70;
+                }
+
+                .yell {
+                    color: #f7a900;
+                }
+
+                .blu {
+                    color: #21d7d9;
+                }
+            }
+        }
+    }
+}

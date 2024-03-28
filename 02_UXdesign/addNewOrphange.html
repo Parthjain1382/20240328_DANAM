@@ -1,0 +1,58 @@
+<!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Please Fill in the form</title>
+  <link href='https://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="./assets/css/form.css">
+</head>
+<body>
+
+
+<form action="takeaction.php" method="post">
+
+  <h1>Please Fill in the form</h1>
+ 
+  <fieldset>
+    <legend><span class="number">1</span>Enter Your Details</legend>
+    <label for="name">Orphanage Name:</label>
+    <input type="text" id="name" name="user_name">
+
+<label for="universityname">Email</label>
+    <input type="email" id="mail" name="user_email">
+
+  <label for="universityname">Description about the Orphanage</label>
+  <input type="text" id="mail" name="user_email">
+
+<label for="cityname">Address</label>
+    <input type="text" id="mail" name="user_email">
+    
+
+  <label for="contactnumber">Contact No:</label>
+    <input type="text" id="contactno" name="user_number">
+    
+    <label for="contactnumber">Image Url's</label>
+    <input type="text" id="contactno" name="user_number">
+    
+  </fieldset>
+  
+  <fieldset>
+  
+    <label><b>What You Need :</b></label>
+    <label type="radio" name="howmuch" value="male">Beds<br>
+    <input type="number" min="1">
+    <label for="Clothes">Clothes</label>
+    <label name="howmuch" value="male">For Male<br>
+    <input type="number" min="0">
+    <label name="howmuch" value="male">Female<br>
+    <input type="number" min="0">
+  
+
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

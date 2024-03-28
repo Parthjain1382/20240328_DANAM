@@ -1,0 +1,25 @@
+
+    <form style="margin-bottom: 60px;">
+        <div class="container" style="  top: 450px; margin:30px; padding-right: 65px;">
+          <h1>Signin</h1>
+          <p>Please fill in this form to Login to your account.</p>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" name="email" [(ngModel)]="email" placeholder="Example@gmail.com" (blur)="handleEmailBlur($event)" (onchange)="handelOnchange($event)" (focus)="onEmailFocus()">
+            <span [ngStyle]="{'visibility':emailErrorVisible?'':'hidden'}" class="error_msg">{{emailError[0] && emailError[0].errorMsg}}</span>
+
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw"  [(ngModel)]="password" (blur)="handlePasswordBlur($event)" (focus)="onPasswordFocus()" (input)="handelPasswordChange($event)" required="">
+            <span [ngStyle]="{'visibility':passwordErrorVisible?'':'hidden'}" class="error_msg">{{passwordError[0]&&passwordError[0].errorMsg}}</span>
+
+
+
+
+          <div class="clearfix">
+            <button type="submit" class="btn" [disabled]="submitDisabled" (mouseenter)="handelOnmouseenter()"  (click)="fetchjwt()">Sign Up</button>
+      </div>
+        </div>
+      </form>
+
+

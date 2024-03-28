@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Reistration Form</title>
+    <link rel="stylesheet" href="./assets/css/form.css">
+</head>
+<body>
+    <form>
+        <div class="container" style="    top: 450px;">
+          <h1>Sign Up</h1>
+          <p>Please fill in this form to create an account.</p>
+      
+              <label for="email"><b>Username</b></label>
+            <input type="text" name="username" placeholder="Enter Username" required>
+            
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" required>
+            
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+            
+            <label for="psw"><b>Address </b></label>
+            <input type="text" placeholder="Enter Address"  required>
+
+            <label for="psw"><b>Company Name </b></label>
+            <input type="text" placeholder="Company name"  required>
+        
+            <label for="email" ><b>Phone Number</b></label>
+            <br>
+           <select name="phoneCode" required>
+            <option selected hidden value="" min="10">+91</option>
+            <option value="66">+93</option>
+            <option value="66">+92</option>
+            <option value="66">+91</option>
+            <option value="66">+90</option>
+           </select>
+           <input type="phone" name="phone" placeholder="915XXXXXXX" required>
+         
+      
+          <div class="clearfix">
+            <button type="submit" class="btn">Sign Up</button>
+          </div>
+        </div>
+      </form>
+
+</body>
+</html>

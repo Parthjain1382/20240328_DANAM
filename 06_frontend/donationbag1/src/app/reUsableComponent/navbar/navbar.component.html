@@ -1,0 +1,52 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 50px;">
+  <a class="navbar-brand" href="#">
+   adminname    |  contactInfo
+  </a>
+
+
+  <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav ms-auto mb-2 mb-lg-0">
+    <ng-container *ngIf="isSignedUp; else notSignedUpOptions">
+      <a > <button class="btn btn-sm btn-success" (click)="navToAdd()">Add Orphanage</button></a>
+      <button class="btn btn-sm btn-default" (click)="Logout()">SignOut</button>
+    </ng-container>
+
+    <ng-template #notSignedUpOptions>
+    <button class="btn btn-sm btn-default"  (click)="SignUp()">SignUp/In</button>
+  </ng-template>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 50px;">
+  <a class="navbar-brand" href="#">
+   DONATION BAG
+  </a>
+
+  <button class="navbar-toggler" type="button"
+          (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse "
+       [ngClass]="{ 'show': navbarOpen }">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="padding-right: 180px;" >
+      <li class="nav-item">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="aboutUs">About Us</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="services">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="gallery">Gallery</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="feedback">donor feedback</a>
+      </li>
+    </ul>
+  </div>
+</nav>
