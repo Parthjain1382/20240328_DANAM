@@ -10,6 +10,9 @@ import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { AddNewOrphanageComponent } from './add-new-orphanage/add-new-orphanage.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { AdminDashboardComponent } from './AdminComponents/admin-dashboard/admin-dashboard.component';
+import { CharityRequestComponent } from './AdminComponents/charity-request/charity-request.component';
+import { DonationComponent } from './AdminComponents/donation/donation.component';
 import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
 
@@ -24,6 +27,18 @@ export const routes: Routes = [
   { path: 'admin', component: AdminPageComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
+  {path:'',component:LandingComponent},
+  {path:'aboutUs',component:AboutservicesComponent  },
+  {path:'services',component:ServicesComponent  },
+  {path:'gallery',component:GalleryComponent  },
+  {path:'addNewOrphanage',component:AddNewOrphanageComponent },
+  {path:'signin',component:SigninComponent},
+  {path:'signup',component:SignupComponent},
+  // {path:'admin',component:AdminPageComponent},
+  {path:'admin',component:AdminDashboardComponent},
+  {path:'charityrequest',component:CharityRequestComponent},
+  {path:'donation',component:DonationComponent},
+
 ];
 
 @NgModule({
