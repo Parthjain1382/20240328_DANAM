@@ -25,7 +25,8 @@ export const routes: Routes = [
   // {path:'admin',component:AdminPageComponent},
   {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
-  {path:'donation',component:DonationComponent}
+  {path:'donation',component:DonationComponent},
+ 
 ];
 
 @NgModule({
