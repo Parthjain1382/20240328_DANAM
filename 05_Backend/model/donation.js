@@ -1,47 +1,27 @@
-import mongoose from "mongoose";
-import Orphanage from "./orphanage.js";
-import User from "./Users.js";
 
-const donationSchema = new mongoose.Schema({
-  orphanageId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Orphanage,
-    required:true
-  },
-  donorID:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:User,
-    required:true
-  },
-  donerThings:{
-    beds: {
-      type:Number,
-      required: true 
-      
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+// Define Donation Schema
+const DonationSchema = new Schema({
+    organization: {
+        type: Schema.Types.ObjectId,
+        ref: 'Organization',
+        required: true
     },
-    clothes: {
-     mens:{
-      type:Number,
-      required:true,
-      default:0
-     },
-     female:{
-      type:Number,
-      required:true,
-      default:0
-     }
+    amount: {
+        type: Number,
+        required: true
     },
-  },
-  // status:{
-  //   type:String,
-  //   required:true
-  // },
-  date:{
-    type:Date,
-    required:false
-    
-  }
+    causeTitle: {
+        type: String,
+        required: true
+    },
+    sections: [{
+        type: String
+    }]
 });
 
-const Donation = mongoose.model("Donation", donationSchema);
-export default Donation;
+// Create and export the Donation model
+const Donation = mongoose.model('Donation', DonationSchema);
+module.exports = Donation;
