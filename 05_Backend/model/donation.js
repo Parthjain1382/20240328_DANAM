@@ -9,19 +9,30 @@ const DonationSchema = new Schema({
         ref: 'Organization',
         required: true
     },
+    Donor: {
+      type: Schema.Types.ObjectId,
+      ref: 'Users',
+      required: true
+  },
     amount: {
         type: Number,
         required: true
     },
     causeTitle: {
         type: String,
+        
         required: true
     },
-    sections: [{
-        type: String
-    }]
+    date: {
+      type: Date,
+      default: Date.now
+  },
+    // sections: [{
+    //     type: String
+    // }]
+  
 });
 
 // Create and export the Donation model
 const Donation = mongoose.model('Donation', DonationSchema);
-module.exports = Donation;
+module.exports = Donation
