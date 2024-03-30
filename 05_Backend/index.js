@@ -14,16 +14,10 @@ app.use(express.json());
 
 
 // Internal dependencies
-import authRouter from "./router/auth.js";
-import userRouter from "./router/userrouter.js";
-import orphanageRouter from "./router/orphanage.js";
-import donorRouter from "./router/donor.js";
 
-// Routes
-app.use('/', authRouter);
-app.use('/user',userRouter);
-app.use('/orphanage',orphanageRouter);
-app.use('/donor',donorRouter);
+
+// RoutesS
+
 
 
 
