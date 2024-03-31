@@ -1,8 +1,11 @@
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 // Define Donation Schema
+
 const DonationSchema = new Schema({
   organization: {
     type: Schema.Types.ObjectId,
@@ -35,4 +38,4 @@ const DonationSchema = new Schema({
 
 // Create and export the Donation model
 const Donation = mongoose.model('Donation', DonationSchema);
-module.exports = Donation
+export default Donation;

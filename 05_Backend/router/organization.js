@@ -1,5 +1,5 @@
 import express from "express";
-import { organizationProfile } from "../controller/orgController";
+import { organizationProfile } from "../controller/orgController.js";
 
 const router = express.Router();
 
