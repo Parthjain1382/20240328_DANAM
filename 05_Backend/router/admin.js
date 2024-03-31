@@ -9,7 +9,9 @@ import { Router } from "express";
 
 const router = express.Router();
 
-router.get('/requests', getAllPendingCauses);
+
+//error here
+// router.get('/requests', getAllPendingCauses);
 
 
 // Exporting the router

@@ -5,7 +5,9 @@
 // Date, status: default: pending, descrption text, description image
 
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from "mongoose";
+
 const Schema = mongoose.Schema;
 
 // Define Cause Schema

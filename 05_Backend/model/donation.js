@@ -1,10 +1,11 @@
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 // Define Donation Schema
-.2
+
 const DonationSchema = new Schema({
   organization: {
     type: Schema.Types.ObjectId,
