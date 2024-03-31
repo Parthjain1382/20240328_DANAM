@@ -19,6 +19,6 @@ const organizationProfile = async (req, res) => {
   }
 }
 
-export default {
+export {
   organizationProfile
 }

@@ -57,9 +57,7 @@ const createDonation = async (req, res) => {
 }
 
 
-
-
-export default{
+export {
   donorList,
   getAllCauses,
   createDonation
