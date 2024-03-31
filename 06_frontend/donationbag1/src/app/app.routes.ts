@@ -15,6 +15,7 @@ import { CharityRequestComponent } from './AdminComponents/charity-request/chari
 import { DonationComponent } from './AdminComponents/donation/donation.component';
 import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
+import { CharityInfoComponent } from './charity-info/charity-info.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -38,7 +39,7 @@ export const routes: Routes = [
   {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
-
+  {path:'charityInfo',component:CharityInfoComponent}
 ];
 
 @NgModule({
