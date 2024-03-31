@@ -3,43 +3,37 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
   role: {
     type: String,
-    enum: ["admin","CompanyUser"],
-    default: "CompanyUser"
+    enum: ["admin","donor"],
+    default: "donor"
   },
   username: {
     type: String,
-    required: true
+    // required: true
+    unique:true
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
     minlength: 8,
   },
   email: {
     type: String,
-    required: true
+    // required: true
   },
   phone_number: {
     type: String,
-    required: true
+    // required: true
   },
   address: {
     type: String,
-    required: true
-  },
-  // Fields specific to company users
-  companyName: {
-    type: String,
-    required: true // Company name is always required
-  },
-  companyEmail: {
-    type: String,
-    required: true,// Company email is always required
-    default:"none"
+    // required: true
   },
   numberOfDonations: {
     type: Number,
-    required: false 
+    // required: false 
+  },
+  contributionAmmount: {
+    type: Number
   }
 });
 

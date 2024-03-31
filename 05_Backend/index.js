@@ -3,6 +3,10 @@ import express from "express";
 import 'dotenv/config';
 import cors from 'cors';
 import { connectDatabase } from "./database.js";
+import authRoutes from './router/auth.js';
+import donorRoutes from './router/donor.js';
+import adminRoutes from './router/admin.js';
+import orgRoutes from './router/organization.js';
 
 // Connect to MongoDB
 connectDatabase();
@@ -14,16 +18,13 @@ app.use(express.json());
 
 
 // Internal dependencies
-import authRouter from "./router/auth.js";
-import userRouter from "./router/userrouter.js";
-import orphanageRouter from "./router/orphanage.js";
-import donorRouter from "./router/donor.js";
 
-// Routes
-app.use('/', authRouter);
-app.use('/user',userRouter);
-app.use('/orphanage',orphanageRouter);
-app.use('/donor',donorRouter);
+
+// RoutesS
+app.use('/auth', authRoutes);
+app.use('/donor', donorRoutes);
+app.use('/admin', adminRoutes);
+app.use('/charity', orgRoutes);
 
 
 

@@ -15,7 +15,10 @@ import { CharityRequestComponent } from './AdminComponents/charity-request/chari
 import { DonationComponent } from './AdminComponents/donation/donation.component';
 import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
+import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-page.component';
 import { CharityInfoComponent } from './charity-info/charity-info.component';
+import { SignUpOrganizationComponent } from './sign-up-organization/sign-up-organization.component';
+import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -34,11 +37,14 @@ export const routes: Routes = [
   {path:'gallery',component:GalleryComponent  },
   {path:'addNewOrphanage',component:AddNewOrphanageComponent },
   {path:'signin',component:SigninComponent},
+  {path:'signUpOrganization',component:SignUpOrganizationComponent},
+  {path:'signUpDonor',component:SignUpDonorComponent},
   {path:'signup',component:SignupComponent},
   // {path:'admin',component:AdminPageComponent},
   {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
+  {path:'profile',component:DonorProfilePageComponent},
   {path:'charityInfo',component:CharityInfoComponent}
 ];
 
