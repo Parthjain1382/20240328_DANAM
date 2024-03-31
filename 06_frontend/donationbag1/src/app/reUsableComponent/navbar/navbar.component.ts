@@ -36,9 +36,12 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  //login Method
-  SignUp(): void {
-    this.router.navigate(['/signup']);
+  //Signup Method
+  SignUpAsOrg(): void {
+    this.router.navigate(['/signUpOrganization']);
+  }
+  SignUpAsDonor(): void {
+    this.router.navigate(['/signUpDonor']);
   }
 
   Logout(): void {

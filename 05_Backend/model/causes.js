@@ -58,4 +58,5 @@ const CauseSchema = new Schema({
 
 // Create and export the Cause model
 const Cause = mongoose.model('Cause', CauseSchema);
-module.exports = Cause;
+
+export default Cause;

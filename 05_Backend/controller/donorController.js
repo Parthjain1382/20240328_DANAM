@@ -1,8 +1,8 @@
 
 // Importing internal dependencies (Model, Validators)
 import requireLogin from "../middleware/requireLogin.js";
-import Orphanage from "../model/orphanage.js"
-import inventory from "../model/Inventory.js";
+// import Orphanage from "../model/orphanage.js"
+// import inventory from "../model/Inventory.js";
 import Donation from "../model/donation.js";
 import Cause from "../model/causes.js";
 

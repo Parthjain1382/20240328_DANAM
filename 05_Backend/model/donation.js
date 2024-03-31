@@ -1,8 +1,10 @@
 
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 // Define Donation Schema
+.2
 const DonationSchema = new Schema({
   organization: {
     type: Schema.Types.ObjectId,
@@ -35,4 +37,4 @@ const DonationSchema = new Schema({
 
 // Create and export the Donation model
 const Donation = mongoose.model('Donation', DonationSchema);
-module.exports = Donation
+export default Donation;

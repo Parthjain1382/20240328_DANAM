@@ -41,7 +41,7 @@ export const routes: Routes = [
   {path:'signUpDonor',component:SignUpDonorComponent},
   {path:'signup',component:SignupComponent},
   // {path:'admin',component:AdminPageComponent},
-  {path:'admin',component:AdminDashboardComponent},
+  // {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
   {path:'profile',component:DonorProfilePageComponent},
