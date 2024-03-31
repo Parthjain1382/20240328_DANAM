@@ -27,5 +27,5 @@ const OrgSchema = new Schema({
 });
 
 // Create and export the Charity model
-const Organization = mongoose.model('Organization', OrgSchema);
-module.exports = Organization;
+const Organizations = mongoose.model('Organization', OrgSchema);
+module.exports = Organizations;
