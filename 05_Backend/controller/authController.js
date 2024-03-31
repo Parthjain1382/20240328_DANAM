@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 import Users from '../model/Users.js';
+import Organizations from '../model/organization.js';
+
 import signupValidation from '../dependencies/validations/signupValidation.js';
 import jwt from 'jsonwebtoken';
 import { passwordValidator } from '../dependencies/validations/userValidations.js';
@@ -82,4 +84,65 @@ const userLogin = async (req, res) => {
 
 
 
-export { userSignup,userLogin };
+
+
+
+
+
+
+
+const orgSignup = async (req, res) => {
+  try {
+      const { name, email, password, location } = req.body;
+
+      // Validate user input
+      // const validation = signupValidation({ name, email, password });
+      // if (!validation.success) {
+      //     return res.status(400).json({ error: validation.error });
+      // }
+
+      // Check if username or email already exists
+      const existingOrg = await Organizations.findOne({ name });
+      if (existingOrg) {
+          return res.status(400).json({ error: 'Username or email already exists' });
+      }
+
+      // Encrypt password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Create new user
+      const newOrg = new Organizations({
+          name,
+          email,
+          password: hashedPassword,
+          location
+      });
+
+      // Save user to database
+      await newOrg.save();
+
+      // Remove sensitive information before sending response
+      newOrg.password = undefined;
+
+      // Send success response
+      res.status(201).json({ message: 'Org registered successfully'/*, user: newUser*/ });
+  } catch (error) {
+      console.error('Error during org registration:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export { userSignup,userLogin, orgSignup };

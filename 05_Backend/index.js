@@ -4,6 +4,9 @@ import 'dotenv/config';
 import cors from 'cors';
 import { connectDatabase } from "./database.js";
 import authRoutes from './router/auth.js';
+import donorRoutes from './router/donor.js';
+import adminRoutes from './router/admin.js';
+import orgRoutes from './router/organization.js';
 
 // Connect to MongoDB
 connectDatabase();
@@ -18,7 +21,10 @@ app.use(express.json());
 
 
 // RoutesS
-app.use('/', authRoutes);
+app.use('/auth', authRoutes);
+app.use('/donor', donorRoutes);
+app.use('/admin', adminRoutes);
+app.use('/charity', orgRoutes);
 
 
 
