@@ -5,6 +5,9 @@
   overflow: visible;
 }
 
+#heading-texts {
+  color: #71b61b;
+}
 .causes-item .progress .progress-bar {
   position: relative;
   overflow: visible;
@@ -12,6 +15,14 @@
   border-radius: 0;
   transition: 5s;
   color: black;
+}
+.rounded-bot {
+  padding: 10px;
+  background-color: #71b61b;
+  border-radius: 0px 0px 5px 5px;
+}
+.border-chnage {
+  border-color: #71b61b;
 }
 
 .causes-item .progress .progress-bar span {
@@ -46,4 +57,82 @@
 .causes-item:hover .causes-overlay {
   height: 100%;
   opacity: 1;
+}
+
+.container {
+  width: 100vw;
+  margin: 50px auto;
+  background-color: #fafafa;
+}
+h2 {
+  text-align: center;
+  color: var(--main-purple-color);
+  background-color: #71b61b;
+  padding: 15px;
+}
+.boxes {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+.box {
+  width: 200px;
+  height: 170px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 2px solid var(--element-border-color);
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 5px;
+}
+i {
+  color: var(--main-purple-color);
+  font-size: 50px;
+}
+p {
+  color: black;
+  font-size: 30px;
+}
+input {
+  position: absolute;
+  left: 3%;
+  top: 3%;
+}
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+label::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border: 2px solid #9d9d9d;
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+}
+input[type="checkbox"]:checked + label::after,
+input[type="checkbox"]:not(:checked) + label::after {
+  content: "";
+  position: absolute;
+  top: 14.5px;
+  left: 14.5px;
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+}
+input[type="checkbox"]:checked + label::after {
+  background-color: #71b61b;
+}
+input[type="checkbox"]:not(:checked):hover + label::after {
+  background-color: var(--main-purple-color);
+  opacity: 0.2;
 }
