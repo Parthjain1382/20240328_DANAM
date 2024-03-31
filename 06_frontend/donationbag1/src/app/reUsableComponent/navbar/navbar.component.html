@@ -17,8 +17,11 @@
     </ng-container>
 
     <ng-template #notSignedUpOptions>
-      <button class="btn btn-sm btn-default" (click)="SignUp()">
-        SignUp/In
+      <button class="btn btn-sm btn-dark btn-style" (click)="SignUp()">
+        SignUp as Donar
+      </button>
+      <button class="btn btn-sm btn-dark btn-style" (click)="SignUp()">
+        SignUp as Organization
       </button>
     </ng-template>
   </div>
@@ -35,7 +38,7 @@
   </button>
 
   <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" style="padding-right: 180px">
+    <ul class="navbar-nav ms-auto mb-3 mb-lg-0" style="padding-right: 80px">
       <li class="nav-item">
         <a class="nav-link" href="#">Home</a>
       </li>
