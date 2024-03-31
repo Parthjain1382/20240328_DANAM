@@ -36,9 +36,6 @@ const CauseSchema = new Schema({
         enum: ['Health', 'Education', 'Environment', 'Social', 'Other'],
         required: true
     },
-    // sections: [{
-    //     type: String
-    // }],
     date: {
         type: Date,
         default: Date.now
