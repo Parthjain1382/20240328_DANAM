@@ -4,7 +4,7 @@ import requireLogin from "../middleware/requireLogin.js";
 import Orphanage from "../model/orphanage.js"
 import inventory from "../model/Inventory.js";
 import Donation from "../model/donation.js";
-import Cause from "../model/causes.js";
+import Causes from "../model/causes.js";
 
 
 /**To Get the List of all Donors
@@ -28,7 +28,7 @@ const donorList=async (req, res) => {
  */
 const getAllCauses = async (req, res) => {
   try {
-    const allCauses = await Cause.find();
+    const allCauses = await Causes.find();
     res.json(allCauses);
   } catch (err) {
     console.log(err.message);
