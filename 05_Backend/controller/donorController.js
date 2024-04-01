@@ -34,26 +34,27 @@ const donorList=async (req, res) => {
 // Controller function to get user profile details
 const getUserProfile = async (req, res) => {
   try {
-    // Extract the token from the request headers
+    // Extract the JWT token from the request headers
     const token = req.headers.authorization;
-
-    // Decode the token to extract the user's ID
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-    const userId = decodedToken.userId;
-
-    // Retrieve user profile details from the database based on user ID
-    const userProfile = await Users.findById(userId).select('username role phone_number email address');
-
-    // Check if user profile exists
-    if (!userProfile) {
-      return res.status(404).json({ error: 'User profile not found' });
+    
+    // Verify and decode the token to extract user ID
+    const decoded = jwt.verify(token,  process.env.SECRET_KEY);
+    console.log(decoded);
+    const userId = decoded._id;
+    
+    // Fetch user data from the database based on the user ID
+    const user = await Users.findById(userId);
+    
+    // If user data is not found
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
-
-    // If user profile exists, send it in the response
-    res.status(200).json(userProfile);
+    
+    // Return user data as response
+    res.status(200).json(user);
   } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 };
 
