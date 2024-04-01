@@ -19,6 +19,7 @@ import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-pa
 import { CharityInfoComponent } from './charity-info/charity-info.component';
 import { SignUpOrganizationComponent } from './sign-up-organization/sign-up-organization.component';
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
+import { MyCausePageComponent } from './my-cause-page/my-cause-page.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -45,7 +46,8 @@ export const routes: Routes = [
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
   {path:'profile',component:DonorProfilePageComponent},
-  {path:'charityInfo',component:CharityInfoComponent}
+  {path:'charityInfo',component:CharityInfoComponent},
+  {path:'mycause',component:MyCausePageComponent}
 ];
 
 @NgModule({
