@@ -1,0 +1,18 @@
+<div *ngFor="let cause of sampleCauses">
+    <div class="cause-card">
+      <div class="cause-tumb">
+        <img [src]="cause.imageUrl" alt="{{ cause.imageDescription }}">
+      </div>
+      <div class="cause-details">
+        <span class="cause-category">{{ cause.category }}</span>
+        <h4><a href="">{{ cause.title.slice(0,20)}}...</a></h4>
+        <p>{{ cause.description.slice(0,75)}}...</p>
+        <div class="cause-bottom-details">
+          <div class="cause-links">
+            <button mat-flat-button color="primary">{{ cause.buttonLabel }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
