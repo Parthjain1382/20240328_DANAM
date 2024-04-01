@@ -1,0 +1,10 @@
+.causes{
+    display: flex;
+    justify-content: center;
+}
+
+app-cause-card{
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+}

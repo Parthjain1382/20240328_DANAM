@@ -14,6 +14,7 @@ const OrgSchema = new Schema({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -27,5 +28,5 @@ const OrgSchema = new Schema({
 });
 
 // Create and export the Charity model
-const Organizations = mongoose.model('Organization', OrgSchema);
-module.exports = Organizations;
+const Organization = mongoose.model('Organization', OrgSchema);
+export default Organization;
