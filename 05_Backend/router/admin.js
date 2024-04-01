@@ -20,5 +20,7 @@ router.delete('/deleteCause',adminController.deleteCause)
 //for chariy list page in the the frontend
 router.get('/orgDetails',adminController.orgDetails)
 
+
+router.get('/donationList',adminController.donationList)
 // Exporting the router
 export default router;

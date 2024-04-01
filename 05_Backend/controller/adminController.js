@@ -1,13 +1,14 @@
 //importing nesscary models
 import Cause from "../model/causes.js";
+import donation from "../model/donation.js";
 import organization from "../model/organization.js"
+
 
 /** API to get all the causes based on status pending 
  * @param {*} req 
  * @param {*} res 
  */
 const getAllPendingCauses = async (req, res) => {
-  
   let stat = req.query.status
   try {
     const allCauses = await Cause.find({ status: 'pending' })
@@ -100,9 +101,28 @@ const orgDetails=async(req,res)=>{
   }
 }
 
+
+/**This function is responsible for getting the donation List 
+ * 
+ */
+const donationList=async(req,res)=>{
+  try{
+    const documents = await donation.find();
+    console.log(documents);
+    // This will be an array of all documents in the Organization collection
+    res.status(200).json(documents); 
+  } 
+  catch (err) {
+    console.error('Error retrieving documents:', err);
+  }
+}
+
+
 export default {
   getAllPendingCauses,
   updateCauseStatus,
   deleteCause,
-  orgDetails
+  orgDetails,
+  donationList
+  
 }
