@@ -295,7 +295,7 @@ const orgLogin = async (req, res) => {
       const org = await Organization.findOne({ name });   // Doubt syntax coloring not happening
 
       // Check if user exists
-      if (!user) {
+      if (!org) {
           return res.status(404).json({ error: 'Org not found' });
       }
 
@@ -306,7 +306,7 @@ const orgLogin = async (req, res) => {
       }
 
       // Generate JWT token
-      const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+      const token = jwt.sign({ _id: org._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
 
       // Send success response with username and token
       res.status(200).json({ message: 'Org signed in successfully', name: org.name, token });
