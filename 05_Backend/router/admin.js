@@ -1,4 +1,5 @@
 //import the controller
+
 import getAllPendingCauses from "../controller/adminController.js"
 import requireLogin from "../middleware/requireLogin.js";
 
@@ -8,6 +9,7 @@ import requireLogin from "../middleware/requireLogin.js";
 import express from "express";
 import { Router } from "express";
 
+const adminRouter = express.Router();
 const router = express.Router();
 
 
@@ -16,4 +18,4 @@ router.get('/requests',getAllPendingCauses);
 
 
 // Exporting the router
-export default router;
+export default adminRouter;

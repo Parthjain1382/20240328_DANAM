@@ -18,3 +18,4 @@ const getAllPendingCauses = async (req, res) => {
 }
 
 export default getAllPendingCauses
+
