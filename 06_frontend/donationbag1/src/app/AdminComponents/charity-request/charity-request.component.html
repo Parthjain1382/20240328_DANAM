@@ -1,4 +1,3 @@
-
 <!-- Dashboard -->
 <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
   <!-- Vertical Navbar -->
@@ -63,7 +62,7 @@
                       </div>
                       <br>
                   </div>
-                  
+
       <!-- Main -->
       <main class="py-6 bg-surface-secondary">
           <div class="container-fluid">
@@ -74,11 +73,11 @@
                       <table class="table table-hover table-nowrap">
                           <thead class="thead-light">
                               <tr>
-                                  <th scope="col">Orphanage Name</th>
+                                  <th scope="col">organization Name</th>
                                   <th scope="col">Request Date</th>
-                                  <th scope="col">Address</th>
-                                  <th scope="col">Reuquest Amount</th>
-                                  <th scope="col">Email</th>
+                                  <th scope="col">category</th>
+                                  <th scope="col">Funds Needed</th>
+                                  <th scope="col">Title</th>
                                   <th></th>
                               </tr>
                           </thead>
@@ -93,20 +92,20 @@
                                     </a>
                                 </td>
                                 <td>
-                                    Feb 15, 2021
+                                  {{item.date}}
                                 </td>
                                 <td>
                                     <!-- <img alt="..." src="https://preview.webpixels.io/web/img/other/logos/logo-1.png" class="avatar avatar-xs rounded-circle me-2"> -->
                                     <a class="text-heading font-semibold" href="#">
-                                        {{item.date}}
+                                        {{item.category}}
                                     </a>
                                 </td>
                                 <td>
-                                    ®️{{item.amount}}
+                                    {{item.amount}}
                                 </td>
                                 <td>
 
-                                        <i class="bg-success"></i>{{item.address}}
+                                        <i class="bg-success"></i>{{item.title}}
 
                                 </td>
                                 <td class="text-end">

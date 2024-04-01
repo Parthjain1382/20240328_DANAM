@@ -4,8 +4,9 @@ import 'dotenv/config';
 import cors from 'cors';
 import { connectDatabase } from "./database.js";
 import authRoutes from './router/auth.js';
-import orgRoutes from './router/organization.js'
-import userRoutes from './router/users.js'
+import orgRoutes from './router/organization.js';
+import userRoutes from './router/users.js';
+import adminRoutes from './router/admin.js';
 
 // Connect to MongoDB
 connectDatabase();
@@ -23,7 +24,7 @@ app.use(express.json());
 app.use('/', authRoutes);
 app.use('/org',orgRoutes );
 app.use('/donor',userRoutes)
-
+app.use('/admin', adminRoutes);
 
 
 // Start server
