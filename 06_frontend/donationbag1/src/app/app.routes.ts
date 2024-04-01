@@ -16,6 +16,7 @@ import { DonationComponent } from './AdminComponents/donation/donation.component
 import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
 import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-page.component';
+import { CreateCauseComponent } from './create-cause/create-cause.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -40,6 +41,7 @@ export const routes: Routes = [
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
   {path:'profile',component:DonorProfilePageComponent},
+  {path:'createcause',component:CreateCauseComponent}
 
 ];
 
