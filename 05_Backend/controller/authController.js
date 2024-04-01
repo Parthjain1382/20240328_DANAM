@@ -86,20 +86,58 @@ const userLogin = async (req, res) => {
 
 
 
+// const orgSignup = async (req, res) => {
+//   try {
+//       const { name, email, password, location } = req.body;
+
+//       // Validate user input
+//       // const validation = signupValidation({ name, email, password });
+//       // if (!validation.success) {
+//       //     return res.status(400).json({ error: validation.error });
+//       // }
+
+//       // Check if username or email already exists
+//       const existingOrg = await Organizations.findOne({ name });     //Doubt syntax coloring not happening
+//       if (existingOrg) {
+//           return res.status(400).json({ error: 'Username or email already exists' });
+
 const orgSignup = async (req, res) => {
   try {
       const { name, email, password, location } = req.body;
 
-      // Validate user input
+      // Validate user input (You can uncomment this part if you have validation logic)
       // const validation = signupValidation({ name, email, password });
       // if (!validation.success) {
       //     return res.status(400).json({ error: validation.error });
       // }
 
-      // Check if username or email already exists
-      const existingOrg = await Organizations.findOne({ name });     //Doubt syntax coloring not happening
+      // Check if organization name already exists
+      const existingOrg = await Organizations.findOne({ name });
       if (existingOrg) {
-          return res.status(400).json({ error: 'Username or email already exists' });
+          return res.status(400).json({ error: 'Organization name already exists' });
+      }
+
+      // Create a new organization
+      const newOrg = new Organizations({
+          name,
+          email,
+          password, // Remember to hash the password before storing it in the database
+          location
+      });
+
+      // Save the new organization to the database
+      await newOrg.save();
+
+      // Remove sensitive information before sending response
+      newOrg.password = undefined;
+
+      // Send success response
+      res.status(201).json({ message: 'Organization registered successfully', organization: newOrg });
+  } catch (error) {
+      console.error('Error during organization registration:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
         
 /**
@@ -278,13 +316,4 @@ const orgLogin = async (req, res) => {
 };
 
 
-
-
-
-
-
-
-
-
-export { userSignup,userLogin, orgSignup, orgLogin };
-export { userSignup,userLogin,forget_password,reset_password };
+export { userSignup,userLogin,forget_password,reset_password,orgSignup, orgLogin };

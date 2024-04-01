@@ -2,30 +2,28 @@
 // Importing internal dependencies (Model, Validators)
 
 import requireLogin from "../middleware/requireLogin.js";
-import Orphanage from "../model/orphanage.js"
-import inventory from "../model/Inventory.js";
-import Donation from "../model/donation.js";
+// import Orphanage from "../model/orphanage.js";
+// import inventory from "../model/Inventory.js";
+// import Donation from "../model/donation.js";
 import Causes from "../model/causes.js";
+import Users from '../model/Users.js';
+
+
 
 
 /**To Get the List of all Donors
  * */  
 const donorList=async (req, res) => {
-import Users from '../model/Users.js';
-
-// /**To Get the List of all Donors
-//  * */  
-// const donorList=async (req, res) => {
-//   try {
-//     //Finding the role==="CompanyUser"
-//     const companyUsers = await User.find({ role: 'CompanyUser' });
-//     // Return the list of company users
-//     res.json(companyUsers);
-//   } catch (error) {
-//     console.error('Error fetching company users:', error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// };
+  try {
+    //Finding the role==="CompanyUser"
+    const companyUsers = await User.find({ role: 'CompanyUser' });
+    // Return the list of company users
+    res.json(companyUsers);
+  } catch (error) {
+    console.error('Error fetching company users:', error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 
 
@@ -42,6 +40,11 @@ const getUserProfile = async (req, res) => {
     if (!userProfile) {
       return res.status(404).json({ error: 'User profile not found' });
     }
+  }
+  catch(error){
+    console.log(error.message);
+  }
+}
 
 
 /**
@@ -54,16 +57,11 @@ const getAllCauses = async (req, res) => {
   } catch (err) {
     console.log(err.message);
     res.status(500).send('Internal server error');
-    // Send user profile details in the response
-    res.status(200).json(userProfile);
-  } catch (error) {
-    console.error('Error fetching user profile:', error);
-    res.status(500).json({ error: 'Internal server error' });
   }
 };
 
 
 
 export default{
-   getUserProfile
+  donorList,  getUserProfile, getAllCauses
 }
