@@ -14,7 +14,7 @@ const router=express.Router()
 router.get('/donorList', donorController.donorList)
 
 // API endpoint for donor to make a payment to an orphanage
-router.post('/donate',requireLogin, donorController.donate)
+router.post('/donate',requireLogin, donorController.createDonation)
 
 router.get('/getprofile',requireLogin, donorController.getUserProfile)
 
