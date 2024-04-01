@@ -63,5 +63,5 @@ const getAllCauses = async (req, res) => {
 
 
 export default{
-  donorList, getUserProfile
+   getUserProfile, getAllCauses
 }
