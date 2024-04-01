@@ -17,6 +17,6 @@ router.get('/causes', donorController.getAllCauses);
 // API endpoint for donor to make a payment to an orphanage
 router.post('/donate',requireLogin, donorController.createDonation)
 
-router.get('/getprofile',requireLogin, donorController.getUserProfile)
+router.get('/getprofile', donorController.getUserProfile)
 
 export default router
