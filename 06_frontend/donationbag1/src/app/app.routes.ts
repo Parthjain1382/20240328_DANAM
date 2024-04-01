@@ -20,6 +20,7 @@ import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-pa
 import { CreateCauseComponent } from './create-cause/create-cause.component';
 
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
+import { ChartyListComponent } from './AdminComponents/charty-list/charty-list.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -45,8 +46,8 @@ export const routes: Routes = [
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
   {path:'profile',component:DonorProfilePageComponent},
-  {path:'createcause',component:CreateCauseComponent}
-
+  {path:'createcause',component:CreateCauseComponent},
+  {path:'charityList',component:ChartyListComponent},
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'charityrequest', component: CharityRequestComponent },
   { path: 'donation', component: DonationComponent },

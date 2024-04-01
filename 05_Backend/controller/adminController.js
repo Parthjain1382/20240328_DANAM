@@ -7,9 +7,15 @@ import Cause from "../model/causes.js";
 const getAllPendingCauses = async (req, res) => {
   
   let stat = req.query.status
-  
   try {
-    const allCauses = await Cause.find({ status: stat });
+    const allCauses = await Cause.find({ status: 'pending' })
+    .populate({
+      path: 'organization',
+      select: 'name' 
+    })
+    .exec();
+  
+  console.log(allCauses);
     res.json(allCauses);
   } catch (err) {
     console.log(err.message);
