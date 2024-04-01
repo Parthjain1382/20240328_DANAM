@@ -59,7 +59,7 @@ const getAllCauses = async (req, res) => {
 };
 
 const getCauseById = async (req, res) => {
-  const id = req.query.id; // Get the ID from query parameters
+  const id = req.query._id;
   try {
     const cause = await Causes.findById(id);
     if (!cause) {
