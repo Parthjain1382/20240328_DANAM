@@ -17,7 +17,7 @@ const CauseSchema = new Schema({
     organization: {
         type: Schema.Types.ObjectId,
         ref: 'Organization',
-        required: true
+        // required: true
     },
     fundsRaised: {
         type: Number,

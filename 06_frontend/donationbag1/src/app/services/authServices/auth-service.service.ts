@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthServiceService {
-
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  // Observable stream
   loggedIn$ = this.loggedIn.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   // Method to call when user logs in
   logIn() {
