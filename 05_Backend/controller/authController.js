@@ -86,6 +86,22 @@ const userLogin = async (req, res) => {
 
 
 
+const orgSignup = async (req, res) => {
+  try {
+      const { name, email, password, location } = req.body;
+
+      // Validate user input
+      // const validation = signupValidation({ name, email, password });
+      // if (!validation.success) {
+      //     return res.status(400).json({ error: validation.error });
+      // }
+
+      // Check if username or email already exists
+      const existingOrg = await Organizations.findOne({ name });     //Doubt syntax coloring not happening
+      if (existingOrg) {
+          return res.status(400).json({ error: 'Username or email already exists' });
+
+        
 /**
 * Send a reset password email.
 * @param {object} req - The request object.
@@ -232,5 +248,43 @@ const isTokenExpired = (timestamp) => {
 
 
 
+const orgLogin = async (req, res) => {
+  try {
+      const { name, password } = req.body;
 
+      // Find user by username
+      const org = await Organizations.findOne({ name });   // Doubt syntax coloring not happening
+
+      // Check if user exists
+      if (!user) {
+          return res.status(404).json({ error: 'Org not found' });
+      }
+
+      // Check password
+      const isPasswordValid = await bcrypt.compare(password, org.password);
+      if (!isPasswordValid) {
+          return res.status(401).json({ error: 'Invalid password' });
+      }
+
+      // Generate JWT token
+      const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
+
+      // Send success response with username and token
+      res.status(200).json({ message: 'Org signed in successfully', name: org.name, token });
+  } catch (error) {
+      console.error('Error during org login:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+
+
+
+
+
+
+
+
+export { userSignup,userLogin, orgSignup, orgLogin };
 export { userSignup,userLogin,forget_password,reset_password };
