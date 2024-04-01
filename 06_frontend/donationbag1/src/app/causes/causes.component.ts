@@ -1,12 +1,70 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-causes',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './causes.component.html',
-  styleUrl: './causes.component.css'
+  styleUrl: './causes.component.css',
 })
-export class CausesComponent {
+export class CausesComponent implements OnInit {
+  filteredCauses: any[] = [];
+  selectedCategories: string[] = [];
+  causes: any[] = [];
+  token: any;
 
+  constructor(private http: HttpClient, private router: Router) {}
+
+  takeToCauseDetailPage(causeId: string): void {
+    this.router.navigate(['/causeDetail'], {
+      queryParams: { _id: causeId },
+    });
+  }
+  ngOnInit(): void {
+    this.getAllCauses(); // Fetch only published pages
+  }
+
+  getAllCauses(): void {
+    const url = `http://localhost:3000/donor/causes`;
+    this.http.get<any[]>(url).subscribe({
+      next: (response) => {
+        this.causes = response;
+        console.log(this.causes);
+        this.applyFilter();
+      },
+      error: (error) => {
+        console.error('Error fetching causes:', error);
+        // Handle error gracefully, show a message to the user, or retry the request
+      },
+    });
+  }
+
+  applyFilter(): void {
+    if (this.selectedCategories.length === 0) {
+      // If no categories selected, display all causes
+      this.filteredCauses = this.causes;
+    } else {
+      // Filter causes based on selected categories
+      this.filteredCauses = this.causes.filter((cause) =>
+        this.selectedCategories.includes(cause.category)
+      );
+    }
+  }
+
+  onCheckboxChange(category: string): void {
+    if (this.selectedCategories.includes(category)) {
+      // If category already selected, remove it
+      this.selectedCategories = this.selectedCategories.filter(
+        (item) => item !== category
+      );
+    } else {
+      // If category not selected, add it
+      this.selectedCategories.push(category);
+    }
+    this.applyFilter(); // Apply filter when categories change
+  }
 }

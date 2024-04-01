@@ -17,6 +17,9 @@ import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
 import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-page.component';
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
+import { MyCausePageComponent } from './my-cause-page/my-cause-page.component';
+import { CauseCardComponent } from './cause-card/cause-card.component';
+import { CharityInfoComponent } from './charity-info/charity-info.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -41,6 +44,8 @@ export const routes: Routes = [
   { path: 'charityrequest', component: CharityRequestComponent },
   { path: 'donation', component: DonationComponent },
   { path: 'profile', component: DonorProfilePageComponent },
+  { path: 'causeCard', component: CauseCardComponent },
+  { path: 'causeDetail', component: CharityInfoComponent },
 ];
 
 @NgModule({
