@@ -4,12 +4,13 @@ import { AuthServiceService } from '../../services/authServices/auth-service.ser
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AddNewOrphanageComponent } from '../../add-new-orphanage/add-new-orphanage.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [NgClass,CommonModule,AddNewOrphanageComponent],
+  imports: [NgClass, CommonModule, AddNewOrphanageComponent, DropdownComponent],
   templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
@@ -18,30 +19,29 @@ export class NavbarComponent implements OnInit {
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
-  navToAdd(){
-    this.router.navigate(['/addNewOrphanage'])
+  navToAdd() {
+    this.router.navigate(['/profile']);
   }
-  constructor(private authService: AuthServiceService,private router:Router) {
-
-
-  }
+  constructor(
+    private authService: AuthServiceService,
+    private router: Router
+  ) {}
   ngOnInit() {
-    this.authService.loggedIn$.subscribe(loggedIn => {
+    this.authService.loggedIn$.subscribe((loggedIn) => {
       this.isSignedUp = loggedIn;
     });
   }
 
-  Login():void{
-    this.router.navigate(['/login'])
+  Login(): void {
+    this.router.navigate(['/login']);
   }
 
   //login Method
-  SignUp():void{
-  this.router.navigate(['/signup'])
+  SignUp(): void {
+    this.router.navigate(['/signup']);
   }
 
-   Logout(): void {
-
+  Logout(): void {
     const confirmation = confirm('Are you sure you want to log out?');
 
     // Check if the user confirmed the action

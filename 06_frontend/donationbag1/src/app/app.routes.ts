@@ -16,6 +16,7 @@ import { DonationComponent } from './AdminComponents/donation/donation.component
 import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
 import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-page.component';
+import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -24,23 +25,22 @@ export const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'signup', component: SignUpDonorComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
-  {path:'',component:LandingComponent},
-  {path:'aboutUs',component:AboutservicesComponent  },
-  {path:'services',component:ServicesComponent  },
-  {path:'gallery',component:GalleryComponent  },
-  {path:'addNewOrphanage',component:AddNewOrphanageComponent },
-  {path:'signin',component:SigninComponent},
-  {path:'signup',component:SignupComponent},
+  { path: '', component: LandingComponent },
+  { path: 'aboutUs', component: AboutservicesComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'gallery', component: GalleryComponent },
+  { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
   // {path:'admin',component:AdminPageComponent},
-  {path:'admin',component:AdminDashboardComponent},
-  {path:'charityrequest',component:CharityRequestComponent},
-  {path:'donation',component:DonationComponent},
-  {path:'profile',component:DonorProfilePageComponent},
-
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'charityrequest', component: CharityRequestComponent },
+  { path: 'donation', component: DonationComponent },
+  { path: 'profile', component: DonorProfilePageComponent },
 ];
 
 @NgModule({
