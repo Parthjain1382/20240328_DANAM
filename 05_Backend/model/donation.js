@@ -35,4 +35,4 @@ const DonationSchema = new Schema({
 
 // Create and export the Donation model
 const Donation = mongoose.model('Donation', DonationSchema);
-module.exports = Donation
+module.exports=Donation

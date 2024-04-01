@@ -5,7 +5,7 @@
 // Date, status: default: pending, descrption text, description image
 
 
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 // Define Cause Schema
@@ -55,4 +55,4 @@ const CauseSchema = new Schema({
 
 // Create and export the Cause model
 const Cause = mongoose.model('Cause', CauseSchema);
-module.exports = Cause;
+export default Cause;

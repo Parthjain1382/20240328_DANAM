@@ -5,6 +5,7 @@ import cors from 'cors';
 import { connectDatabase } from "./database.js";
 import authRoutes from './router/auth.js';
 import orgRoutes from './router/organization.js'
+import userRoutes from './router/users.js'
 
 // Connect to MongoDB
 connectDatabase();
@@ -21,6 +22,7 @@ app.use(express.json());
 // RoutesS
 app.use('/', authRoutes);
 app.use('/org',orgRoutes );
+app.use('/donor',userRoutes)
 
 
 

@@ -1,17 +1,20 @@
 import Cause from '../model/causes.js';
-import Organization from '../model/organization.js'
+import Organization from '../model/organization.js';
+import jwt from 'jsonwebtoken';
 
+// Controller function for creating a cause and associating it with an organization
 const createCause = async (req, res) => {
     try {
+        // Extract required data from request body
         const { title, fundsRequired, category, date, descriptionText } = req.body;
 
-        // Check if the organization exists and is authenticated
-        if (!req.user || !req.user.organizationId) {
-            return res.status(401).json({ error: 'Unauthorized' });
-        }
+        // Extract organization id from the authenticated user's token
+        const token = req.headers.authorization.split(' ')[1];
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const organizationId = decodedToken.organizationId;
 
-        // Retrieve organization from the database
-        const organization = await Organization.findById(req.user.organizationId);
+        // Check if the organization exists
+        const organization = await Organization.findById(organizationId);
         if (!organization) {
             return res.status(404).json({ error: 'Organization not found' });
         }
@@ -19,7 +22,7 @@ const createCause = async (req, res) => {
         // Create a new cause
         const newCause = new Cause({
             title,
-            organization: organization._id,
+            organization: organizationId,
             fundsRequired,
             category,
             date,
