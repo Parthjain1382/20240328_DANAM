@@ -7,7 +7,7 @@
 import Donation from "../model/donation.js";
 import Causes from "../model/causes.js";
 import Users from '../model/Users.js';
-
+import jwt from 'jsonwebtoken';
 
 
 
@@ -30,21 +30,28 @@ const donorList=async (req, res) => {
 // Controller function to get user profile details
 const getUserProfile = async (req, res) => {
   try {
-    // Get user ID from the request object (assuming it's attached by the authentication middleware)
-    const userId = req.user.id;
+    // Extract the token from the request headers
+    const token = req.headers.authorization;
+
+    // Decode the token to extract the user's ID
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decodedToken.userId;
 
     // Retrieve user profile details from the database based on user ID
-    const userProfile = await Users.findById(userId).select('username role phone_number email address numberOfDonations contributionAmmount');
+    const userProfile = await Users.findById(userId).select('username role phone_number email address');
 
     // Check if user profile exists
     if (!userProfile) {
       return res.status(404).json({ error: 'User profile not found' });
     }
+
+    // If user profile exists, send it in the response
+    res.status(200).json(userProfile);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-  catch(error){
-    console.log(error.message);
-  }
-}
+};
 
 
 /**
