@@ -16,6 +16,5 @@ const router = express.Router();
 //error here
 router.get('/requests',getAllPendingCauses);
 
-
 // Exporting the router
 export default adminRouter;

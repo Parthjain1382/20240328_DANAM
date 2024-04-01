@@ -10,10 +10,12 @@ import requireLogin from "../middleware/requireLogin.js";
 const router=express.Router()
 
 //Get all the User whose role is "CompanyUser"
-  router.get('/donorList', donorController.donorList)
+router.get('/donorList', donorController.donorList)
+
+router.get('/causes', donorController.getAllCauses);
 
 // API endpoint for donor to make a payment to an orphanage
-// router.post('/donate',requireLogin, donorController.donate)
+router.post('/donate',requireLogin, donorController.createDonation)
 
 router.get('/getprofile',requireLogin, donorController.getUserProfile)
 
