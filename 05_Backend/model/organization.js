@@ -24,7 +24,9 @@ const OrgSchema = new Schema({
         type: String,
         required: true
     },
-    // contact no 
+    contact_no :{
+    type:String,
+    }
 });
 
 // Create and export the Charity model
