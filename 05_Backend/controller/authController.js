@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import Users from '../model/Users.js';
+import Organization from '../model/organization.js';
 import signupValidation from '../dependencies/validations/signupValidation.js';
 import jwt from 'jsonwebtoken';
 import { passwordValidator } from '../dependencies/validations/userValidations.js';
@@ -97,7 +98,7 @@ const userLogin = async (req, res) => {
 //       // }
 
 //       // Check if username or email already exists
-//       const existingOrg = await Organizations.findOne({ name });     //Doubt syntax coloring not happening
+//       const existingOrg = await Organization.findOne({ name });     //Doubt syntax coloring not happening
 //       if (existingOrg) {
 //           return res.status(400).json({ error: 'Username or email already exists' });
 
@@ -112,13 +113,13 @@ const orgSignup = async (req, res) => {
       // }
 
       // Check if organization name already exists
-      const existingOrg = await Organizations.findOne({ name });
+      const existingOrg = await Organization.findOne({ name });
       if (existingOrg) {
           return res.status(400).json({ error: 'Organization name already exists' });
       }
 
       // Create a new organization
-      const newOrg = new Organizations({
+      const newOrg = new Organization({
           name,
           email,
           password, // Remember to hash the password before storing it in the database
@@ -291,7 +292,7 @@ const orgLogin = async (req, res) => {
       const { name, password } = req.body;
 
       // Find user by username
-      const org = await Organizations.findOne({ name });   // Doubt syntax coloring not happening
+      const org = await Organization.findOne({ name });   // Doubt syntax coloring not happening
 
       // Check if user exists
       if (!user) {

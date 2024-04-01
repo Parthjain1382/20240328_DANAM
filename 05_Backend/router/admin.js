@@ -7,6 +7,5 @@ import { Router } from "express";
 
 const adminRouter = express.Router();
 
-
 // Exporting the router
 export default adminRouter;
