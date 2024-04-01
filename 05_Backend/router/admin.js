@@ -1,7 +1,8 @@
 //import the controller
-// import { getAllPendingCauses } from '../controller/adminController.js';
-// import {getAllPendingCauses} from  "../controller/adminController.js"
 import getAllPendingCauses from "../controller/adminController.js"
+import requireLogin from "../middleware/requireLogin.js";
+
+//importing the middleware
 
 // Creating an Express Router
 import express from "express";
@@ -11,7 +12,7 @@ const router = express.Router();
 
 
 //error here
-// router.get('/requests', getAllPendingCauses);
+router.get('/requests',getAllPendingCauses);
 
 
 // Exporting the router
