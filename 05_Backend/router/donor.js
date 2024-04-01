@@ -1,5 +1,5 @@
 //import the donorController 
-import { getAllCauses, createDonation } from "../controller/donorController.js";
+import { getAllCauses, createDonation, getUserProfile } from "../controller/donorController.js";
 
 
 // Creating an Express Router
@@ -13,10 +13,7 @@ const router=express.Router()
 //Get all the User whose role is "CompanyUser"
 // router.get('/donorList', donorController.donorList)
 
-// API endpoint for donor to make a payment to an orphanage
-// router.post('/donate',requireLogin, donorController.donate)
-
-router.get('/getprofile',requireLogin, donorController.getUserProfile)
+router.get('/getprofile',requireLogin, getUserProfile)
 
 
 //Get all the User whose role is "CompanyUser"

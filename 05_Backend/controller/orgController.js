@@ -9,8 +9,8 @@ const createCause = async (req, res) => {
         const { title, fundsRequired, category, date, descriptionText } = req.body;
 
         // Extract organization id from the authenticated user's token
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        const token = req.headers.authorization;
+        const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
         const organizationId = decodedToken.organizationId;
 
         // Check if the organization exists

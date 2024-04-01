@@ -22,8 +22,7 @@ app.use(express.json());
 // RoutesS
 app.use('/', authRoutes);
 app.use('/org',orgRoutes );
-app.use('/donor',userRoutes)
-
+app.use('/donor',userRoutes);
 
 
 // Start server

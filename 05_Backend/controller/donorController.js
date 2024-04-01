@@ -1,12 +1,9 @@
 
 // Importing internal dependencies (Model, Validators)
 
-import requireLogin from "../middleware/requireLogin.js";
-import Orphanage from "../model/orphanage.js"
-import inventory from "../model/Inventory.js";
-import Donation from "../model/donation.js";
 import Causes from "../model/causes.js";
 import Users from '../model/Users.js';
+import jwt from 'jsonwebtoken';
 
 
 
@@ -30,8 +27,12 @@ import Users from '../model/Users.js';
 // Controller function to get user profile details
 const getUserProfile = async (req, res) => {
   try {
-    // Get user ID from the request object (assuming it's attached by the authentication middleware)
-    const userId = req.user.id;
+    // Get the token from the request headers
+    const token = req.headers.authorization;
+
+    // Verify the token and extract the user ID
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+    const userId = decodedToken.userId;
 
     // Retrieve user profile details from the database based on user ID
     const userProfile = await Users.findById(userId).select('username role phone_number email address numberOfDonations contributionAmmount');
@@ -40,9 +41,12 @@ const getUserProfile = async (req, res) => {
     if (!userProfile) {
       return res.status(404).json({ error: 'User profile not found' });
     }
-  }
-  catch(error){
-    console.log(error.message);
+
+    // Send the user profile details in the response
+    res.status(200).json({ userProfile });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 }
 
