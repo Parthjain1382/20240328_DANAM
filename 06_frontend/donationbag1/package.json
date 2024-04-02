@@ -23,6 +23,8 @@
     "angular-ui": "^1.0.0",
     "bootstrap": "^5.3.3",
     "jquery": "^3.7.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "ngx-owl-carousel": "^2.0.7",
     "ngx-owl-carousel-o": "^17.0.0",
     "ngx-slick-carousel": "^17.0.0",
