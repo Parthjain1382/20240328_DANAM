@@ -22,6 +22,8 @@ import { CreateCauseComponent } from './create-cause/create-cause.component';
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
 import { ChartyListComponent } from './AdminComponents/charty-list/charty-list.component';
 import { DonorListComponent } from './AdminComponents/donor-list/donor-list.component';
+import { SignUpOrganizationComponent } from './sign-up-organization/sign-up-organization.component';
+import { SignInOrganizationComponent } from './sign-in-organization/sign-in-organization.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -49,10 +51,14 @@ export const routes: Routes = [
   {path:'profile',component:DonorProfilePageComponent},
   {path:'createcause',component:CreateCauseComponent},
   {path:'charityList',component:ChartyListComponent},
+
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'charityrequest', component: CharityRequestComponent },
   { path: 'donation', component: DonationComponent },
   { path: 'profile', component: DonorProfilePageComponent },
+
+  { path: 'orgsignin', component: SignInOrganizationComponent },
+  { path: 'orgsignup', component: SignUpOrganizationComponent }
 
 ];
 
