@@ -130,7 +130,7 @@ export class ResetPasswordComponent {
           console.log('Response:', response);
 
           window.alert("Password Reset Sucessfully!");
-          this.router.navigate(['/auth']);
+          this.router.navigate(['']);
         },
         (error) => {
           // Handle any errors that occur during the request

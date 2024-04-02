@@ -109,6 +109,8 @@ export class ForgetPasswordComponent {
         console.log(this.email);
         window.alert("Password reset link sent to Email Successfully!!");
         console.log('Response:', response);
+        this.router.navigate(['']);
+
       },
       (error) => {
         // Handle any errors that occur during the request
