@@ -57,7 +57,6 @@ input[type="text"],  input[type="password"],  input[type="date"],  input[type="d
   color: red;
   margin: 0px;
   padding: 0px;
-  margin-left: 354px;
 }
 input[type="radio"],  input[type="checkbox"]  {
   margin:  0 4px 8px 0;
