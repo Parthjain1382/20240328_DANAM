@@ -1,0 +1,17 @@
+.inside-content{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.create-cause-page{
+    display: flex;
+    justify-content: center;
+    margin:30px 0px;
+}
+
+.form-details form{
+    margin: 50px 0px;
+    display: flex;
+    flex-direction: column;
+}
+
