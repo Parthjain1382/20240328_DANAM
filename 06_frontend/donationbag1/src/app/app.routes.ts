@@ -17,7 +17,7 @@ import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
 import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-page.component';
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
-
+import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
 import { ChartyListComponent } from './AdminComponents/charty-list/charty-list.component';
 import { DonorListComponent } from './AdminComponents/donor-list/donor-list.component';
 import { SignUpOrganizationComponent } from './sign-up-organization/sign-up-organization.component';
@@ -55,7 +55,9 @@ export const routes: Routes = [
   { path: 'causeDetail', component: CharityInfoComponent },
 
   { path: 'orgsignin', component: SignInOrganizationComponent },
-  { path: 'orgsignup', component: SignUpOrganizationComponent }
+  { path: 'orgsignup', component: SignUpOrganizationComponent },
+  { path: 'confirmationpage', component: ConfirmationPageComponent },
+  
 ];
 
 @NgModule({

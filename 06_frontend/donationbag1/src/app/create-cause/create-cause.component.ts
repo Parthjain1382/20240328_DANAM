@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormControl, Validators, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule ,FormControl, Validators, FormGroup} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { CreateCauseServiceService } from '../services/createCauseService/create-cause-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-cause',
@@ -34,7 +36,7 @@ export class CreateCauseComponent {
 
   categories = ['Health', 'Education', 'Environment', 'Social', 'Other'];
 
-  constructor(private createCauseService: CreateCauseServiceService) { }
+  constructor(private createCauseService: CreateCauseServiceService,private router: Router) { }
 
   onSubmit() {
     if (this.causeForm.valid) {
@@ -48,7 +50,8 @@ export class CreateCauseComponent {
       this.createCauseService.createCause(causeData).subscribe(
         (response) => {
           console.log('Cause created successfully:', response);
-          // Add any additional logic for success handling
+          this.router.navigateByUrl('/confirmationpage');
+          
         },
         (error) => {
           console.error('Error creating cause:', error);
