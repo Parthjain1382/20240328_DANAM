@@ -128,14 +128,16 @@ const orgSignup = async (req, res) => {
         .json({ error: "Organization name already exists" });
     }
 
+    // Encrypt password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new organization
     const newOrg = new Organization({
       name,
       email,
-      password, // Remember to hash the password before storing it in the database
+      password: hashedPassword, // Remember to hash the password before storing it in the database
       location,
+      contactNumber,
     });
 
     // Save the new organization to the database
@@ -312,7 +314,7 @@ const orgLogin = async (req, res) => {
     const { name, password } = req.body;
 
     // Find user by username
-    const org = await Organization.findOne({ name }); // Doubt syntax coloring not happening
+    const org = await Organization.findOne({ email }); // Doubt syntax coloring not happening
 
     // Check if user exists
     if (!org) {
@@ -331,9 +333,12 @@ const orgLogin = async (req, res) => {
     });
 
     // Send success response with username and token
-    res
-      .status(200)
-      .json({ message: "Org signed in successfully", name: org.name, token });
+    res.status(200).json({
+      message: "Org signed in successfully",
+      name: org.name,
+      token,
+      orgId: org._id,
+    });
   } catch (error) {
     console.error("Error during org login:", error);
     res.status(500).json({ error: "Internal server error" });

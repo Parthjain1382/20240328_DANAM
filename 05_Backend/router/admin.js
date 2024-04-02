@@ -10,11 +10,17 @@ import express from "express";
 import { Router } from "express";
 
 const router = express.Router();
-
-//error here
+//for charity-request page in frontend
 router.get('/requests', adminController.getAllPendingCauses);
 
 router.put('/update/request', adminController.updateCauseStatus);
 
+router.delete('/deleteCause',adminController.deleteCause)
+
+//for chariy list page in the the frontend
+router.get('/orgDetails',adminController.orgDetails)
+
+
+router.get('/donationList',adminController.donationList)
 // Exporting the router
 export default router;

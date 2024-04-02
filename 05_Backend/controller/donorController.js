@@ -17,7 +17,11 @@ import Organization from "../model/organization.js";
 const donorList = async (req, res) => {
   try {
     //Finding the role==="CompanyUser"
-    const companyUsers = await User.find({ role: "CompanyUser" });
+
+    const companyUsers = await Users.find({ role: 'donor' });
+
+   
+
     // Return the list of company users
     res.json(companyUsers);
   } catch (error) {

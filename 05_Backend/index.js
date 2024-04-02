@@ -24,8 +24,15 @@ app.use("/org", orgRoutes);
 app.use("/donor", userRoutes);
 app.use("/admin", adminRoutes);
 
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(` Server is running Listening on port ${PORT}`);
+
+    console.log("hello");
+    // Start server
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running. Listening on port ${PORT}`);
+    });
+}).catch(error => {
+    console.error("Error connecting to database:", error);
+    process.exit(1); // Exit the process with error status code
+
 });
