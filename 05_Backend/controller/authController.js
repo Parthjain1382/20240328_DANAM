@@ -112,7 +112,7 @@ const userLogin = async (req, res) => {
 
 const orgSignup = async (req, res) => {
   try {
-    const { name, email, password, location } = req.body;
+    let { name, email, password, location } = req.body;
 
     // Validate user input (You can uncomment this part if you have validation logic)
     // const validation = signupValidation({ name, email, password });
@@ -128,11 +128,14 @@ const orgSignup = async (req, res) => {
         .json({ error: "Organization name already exists" });
     }
 
+  // Encrypt password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new organization
     const newOrg = new Organization({
       name,
       email,
-      password, // Remember to hash the password before storing it in the database
+      password:hashedPassword, // Remember to hash the password before storing it in the database
       location,
     });
 
@@ -307,11 +310,10 @@ const isTokenExpired = (timestamp) => {
 
 const orgLogin = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
     // Find user by username
-    const org = await Organization.findOne({ name }); // Doubt syntax coloring not happening
-
+    const org = await Organization.findOne({ email }); // Doubt syntax coloring not happening
 
 
       // Check if user exists

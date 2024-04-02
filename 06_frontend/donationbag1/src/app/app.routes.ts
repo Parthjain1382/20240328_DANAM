@@ -45,7 +45,7 @@ export const routes: Routes = [
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
   {path:'profile',component:DonorProfilePageComponent},
-  {path:'createcause',component:CreateCauseComponent}
+  {path:'createcause',component:CreateCauseComponent},
 
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'charityrequest', component: CharityRequestComponent },
