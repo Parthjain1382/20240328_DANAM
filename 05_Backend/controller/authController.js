@@ -311,7 +311,7 @@ const isTokenExpired = (timestamp) => {
 
 const orgLogin = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
 
     // Find user by username
     const org = await Organization.findOne({ email }); // Doubt syntax coloring not happening

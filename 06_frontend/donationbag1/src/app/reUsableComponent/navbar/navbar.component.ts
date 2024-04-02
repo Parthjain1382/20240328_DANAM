@@ -41,8 +41,12 @@ export class NavbarComponent implements OnInit {
   }
 
   //login Method
-  SignUp(): void {
-    this.router.navigate(['/signup']);
+  DonorSignUp(): void {
+    this.router.navigate(['/donorsignup']);
+  }
+
+  OrgSignUp(): void {
+    this.router.navigate(['/orgsignup']);
   }
 
   Logout(): void {

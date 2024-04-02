@@ -34,8 +34,9 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignUpDonorComponent },
+  { path: 'donorsignin', component: SigninComponent },
+  // { path: 'signup', component: SignUpDonorComponent },
+  { path: 'donorsignup', component: SignUpDonorComponent},
   { path: 'admin', component: AdminPageComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
@@ -51,6 +52,9 @@ export const routes: Routes = [
   {path:'charityList',component:ChartyListComponent},
   { path: 'causeCard', component: CauseCardComponent },
   { path: 'causeDetail', component: CharityInfoComponent },
+
+  { path: 'orgsignin', component: SignInOrganizationComponent },
+  { path: 'orgsignup', component: SignUpOrganizationComponent }
 ];
 
 @NgModule({
