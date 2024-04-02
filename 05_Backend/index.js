@@ -21,6 +21,7 @@ connectDatabase().then(() => {
     app.use('/donor', userRoutes);
     app.use('/admin', adminRoutes);
 
+    console.log("hello");
     // Start server
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
