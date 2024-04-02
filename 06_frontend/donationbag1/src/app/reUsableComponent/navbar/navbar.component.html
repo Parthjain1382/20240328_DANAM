@@ -8,13 +8,29 @@
     class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav ms-auto mb-2 mb-lg-0"
   >
     <ng-container *ngIf="isSignedUp; else notSignedUpOptions">
+      <ng-container
+        *ngIf="userRole === 'donor'; then donarOptions; else notDonarOptions"
+      ></ng-container>
+    </ng-container>
+
+    <ng-template #donarOptions>
+      <!-- Content for donar -->
       <button class="btn btn-sm btn-success" (click)="navToAdd()">
         My Donations
       </button>
       <button class="btn btn-sm btn-default" (click)="Logout()">Logout</button>
-    </ng-container>
+    </ng-template>
+
+    <ng-template #notDonarOptions>
+      <!-- Content for not donar -->
+      <button class="btn btn-sm btn-success" (click)="navToAdd()">
+        Create Cause
+      </button>
+      <button class="btn btn-sm btn-default" (click)="Logout()">Logout</button>
+    </ng-template>
 
     <ng-template #notSignedUpOptions>
+      <!-- Content for not signed up -->
       <button class="btn btn-sm btn-dark btn-style" (click)="DonorSignUp()">
         SignUp as Donor
       </button>

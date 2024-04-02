@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
   navbarOpen = false;
   isSignedUp: boolean = false;
 
+  userRole = localStorage.getItem('role');
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
@@ -34,6 +36,12 @@ export class NavbarComponent implements OnInit {
     this.authService.loggedIn$.subscribe((loggedIn) => {
       this.isSignedUp = loggedIn;
     });
+    this.userRole = localStorage.getItem('role');
+    if (this.userRole === 'donor') {
+      this.userRole = 'donor';
+    } else {
+      this.userRole = null;
+    }
   }
 
   Login(): void {
