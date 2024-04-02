@@ -15,10 +15,10 @@
     </ng-container>
 
     <ng-template #notSignedUpOptions>
-      <button class="btn btn-sm btn-dark btn-style" (click)="SignUp()">
-        SignUp as Donar
+      <button class="btn btn-sm btn-dark btn-style" (click)="DonorSignUp()">
+        SignUp as Donor
       </button>
-      <button class="btn btn-sm btn-dark btn-style" (click)="SignUp()">
+      <button class="btn btn-sm btn-dark btn-style" (click)="OrgSignUp()">
         SignUp as Organization
       </button>
     </ng-template>
@@ -45,7 +45,7 @@
         <a class="nav-link" href="aboutUs">About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="services">Causes</a>
+        <a class="nav-link" (click)="takeToCausespage()">Causes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="gallery">Gallery</a>

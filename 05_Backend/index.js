@@ -1,7 +1,7 @@
 // External dependencies
 import express from "express";
-import 'dotenv/config';
-import cors from 'cors';
+import "dotenv/config";
+import cors from "cors";
 import { connectDatabase } from "./database.js";
 import authRoutes from './router/auth.js';
 import orgRoutes from './router/organization.js';
@@ -21,6 +21,7 @@ connectDatabase().then(() => {
     app.use('/donor', userRoutes);
     app.use('/admin', adminRoutes);
 
+    
     // Start server
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {

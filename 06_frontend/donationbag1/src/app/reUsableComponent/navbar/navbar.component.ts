@@ -22,6 +22,10 @@ export class NavbarComponent implements OnInit {
   navToAdd() {
     this.router.navigate(['/profile']);
   }
+
+  takeToCausespage() {
+    this.router.navigate(['/causes']);
+  }
   constructor(
     private authService: AuthServiceService,
     private router: Router
@@ -37,8 +41,12 @@ export class NavbarComponent implements OnInit {
   }
 
   //login Method
-  SignUp(): void {
-    this.router.navigate(['/signup']);
+  DonorSignUp(): void {
+    this.router.navigate(['/donorsignup']);
+  }
+
+  OrgSignUp(): void {
+    this.router.navigate(['/orgsignup']);
   }
 
   Logout(): void {

@@ -109,10 +109,11 @@
 
                                 </td>
                                 <td class="text-end">
-                                    <button><a href="#" class="btn btn-sm btn-neutral">Accept</a></button>
-                                    <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                    <button (click)="AcceptCause(item._id)"><a class="btn btn-sm btn-neutral" >Accept</a></button>
+                                    <button type="button" (click)="DeleteCause(item._id)" class="btn btn-sm btn-square btn-neutral text-danger-hover">
                                         <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
                             </tr>
                           }
+</tbody>
