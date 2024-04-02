@@ -8,27 +8,25 @@ import orgRoutes from './router/organization.js';
 import userRoutes from './router/users.js';
 import adminRoutes from './router/admin.js';
 
-// Connect to MongoDB
-connectDatabase();
-
 // Middleware
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Connect to MongoDB and start server if successful, otherwise log error
+connectDatabase().then(() => {
+    // Routes
+    app.use('/', authRoutes);
+    app.use('/org', orgRoutes);
+    app.use('/donor', userRoutes);
+    app.use('/admin', adminRoutes);
 
-// Internal dependencies
-
-
-// RoutesS
-app.use('/', authRoutes);
-app.use('/org',orgRoutes );
-app.use('/donor',userRoutes)
-app.use('/admin', adminRoutes);
-
-
-// Start server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(` Server is running Listening on port ${PORT}`);
+    // Start server
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+        console.log(`Server is running. Listening on port ${PORT}`);
+    });
+}).catch(error => {
+    console.error("Error connecting to database:", error);
+    process.exit(1); // Exit the process with error status code
 });
