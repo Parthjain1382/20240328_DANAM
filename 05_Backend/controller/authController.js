@@ -131,8 +131,6 @@ const orgSignup = async (req, res) => {
   // Encrypt password
   const hashedPassword = await bcrypt.hash(password, 10);
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
     // Create a new organization
     const newOrg = new Organization({
       name,
