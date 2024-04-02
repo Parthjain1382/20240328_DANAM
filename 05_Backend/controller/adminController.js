@@ -14,8 +14,7 @@ const getAllPendingCauses = async (req, res) => {
 
   //getting the user's data
   const userdata=await Users.findById(user._id)
-  console.log(userdata.role);
-
+ 
   if(userdata.role!=="admin"){
     res.status(404).json('User is not Admin')
   }
@@ -43,13 +42,12 @@ const getAllPendingCauses = async (req, res) => {
  * @param {*} res 
  * @returns  The new object where the status is updated 
  */
-const updateCauseStatus = async (req, res) => {
+const updateCauseStatus= async (req, res) => {
   //Getting the user credential from Middleware
   const user=req.user
-
   //getting the user's data
   const userdata=await Users.findById(user._id)
-  console.log(userdata.role);
+  
 
   if(userdata.role!=="admin"){
     res.status(404).json('User is not Admin')
@@ -91,7 +89,7 @@ const deleteCause = async (req, res) => {
 
   //getting the user's data
   const userdata=await Users.findById(user._id)
-  console.log(userdata.role);
+
 
   if(userdata.role!=="admin"){
     res.status(404).json('User is not Admin')
@@ -126,7 +124,7 @@ const user=req.user
 
 //getting the user's data
 const userdata=await Users.findById(user._id)
-console.log(userdata.role);
+
 
 if(userdata.role!=="admin"){
   res.status(404).json('User is not Admin')
@@ -154,7 +152,7 @@ const user=req.user
 
 //getting the user's data
 const userdata=await Users.findById(user._id)
-console.log(userdata.role);
+
 
 if(userdata.role!=="admin"){
   res.status(404).json('User is not Admin')

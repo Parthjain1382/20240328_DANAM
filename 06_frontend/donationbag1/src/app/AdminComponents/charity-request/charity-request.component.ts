@@ -124,18 +124,21 @@ this.router.navigate(['/charityList'])
       const apiUrl = `http://localhost:3000/admin/update/request`;
 
       //body param as status and id
-      const body = { id:_id,status: 'accepted' };
-       const jwt = localStorage.getItem("userToken");
+      const body = { "id":`${_id}`, "status":'accepted' };
+      console.log(body);
+
+      const jwt = localStorage.getItem("userToken");
+      console.log(jwt);
+
 
       // Prepare the headers, including the Authorization header with the JWT token
       const httpOptions = {
         headers: new HttpHeaders({
           'Authorization': `Bearer ${jwt}`
         }),
-        body: body
       };
 
-      this.http.put(apiUrl, httpOptions).subscribe({
+      this.http.put(apiUrl, body,httpOptions).subscribe({
         next: (response) => {
           console.log('Cause accepted successfully:', response);
           this.fetchData()
