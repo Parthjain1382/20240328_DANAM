@@ -89,7 +89,7 @@ export class SignUpOrganizationComponent {
 
   //If already have a account then nav to Login
   navToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/orgsignin']);
   }
 
   constructor(

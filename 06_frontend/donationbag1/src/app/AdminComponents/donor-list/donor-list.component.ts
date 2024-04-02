@@ -41,6 +41,20 @@ this.donorFetch();
 }
 
 
+//navigate to respective component
+navtoDonorList(){
+  this.router.navigate(['/donorList'])
+}
+navtoCharityRequest(){
+this.router.navigate(['/charityList'])
+}
+navtoDonation(){
+this.router.navigate(['/donation'])
+}
+navtoCharityList(){
+this.router.navigate(['/charityList'])
+}
+
 /**This is the method which get the charity details at the beginning
 *
 */

@@ -104,7 +104,7 @@ export class CharityRequestComponent implements OnInit{
       this.http.put(apiUrl, body).subscribe({
         next: (response) => {
           console.log('Cause accepted successfully:', response);
-          this.refreshPage();
+          this.fetchData()
        },
         error: (error) => {
           console.error('Error accepting cause:', error);
@@ -140,17 +140,12 @@ export class CharityRequestComponent implements OnInit{
       this.http.delete(apiUrl, { body: body }).subscribe({
         next: (response) => {
           console.log('Cause Delete successfully:', response);
-          this.refreshPage();
+          this.fetchData()
        },
         error: (error) => {
           console.error('Error deleting cause:', error);
 
         }
       });
-    }
-
-    //refresh the page
-    private refreshPage() {
-        this.router.navigate(['/charityrequest']); // Navigate back to the current component
     }
   }

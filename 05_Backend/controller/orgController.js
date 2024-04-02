@@ -19,7 +19,7 @@ const createCause = async (req, res) => {
     const { name, fundsRequired, category, descriptionText, descriptionImage } =
       req.body;
     const causeDetails = {
-      // organization: req.organization._id,
+      organization: userId,
       title: name,
       fundsRequired: fundsRequired,
       category: category,

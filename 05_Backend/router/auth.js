@@ -1,5 +1,5 @@
 import express from 'express';
-import { orgLogin,orgSignup, userSignup } from '../controller/authController.js';
+import { orgLogin, orgSignup, userSignup } from '../controller/authController.js';
 import { userLogin } from '../controller/authController.js';
 import { forget_password } from '../controller/authController.js';
 import { reset_password } from '../controller/authController.js';

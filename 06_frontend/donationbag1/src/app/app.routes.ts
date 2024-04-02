@@ -34,23 +34,28 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignUpDonorComponent },
-  { path: 'admin', component: AdminPageComponent },
+  { path: 'donorsignin', component: SigninComponent },
+  // { path: 'signup', component: SignUpDonorComponent },
+  { path: 'donorsignup', component: SignUpDonorComponent},
+  // { path: 'admin', component: AdminPageComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
   { path: '', component: LandingComponent },
   // {path:'admin',component:AdminPageComponent},
-  
+
   {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
   {path:'donorList',component:DonorListComponent},
+  {path:'charityList',component:ChartyListComponent},
+
   {path:'profile',component:DonorProfilePageComponent},
   {path:'createcause',component:CreateCauseComponent},
-  {path:'charityList',component:ChartyListComponent},
   { path: 'causeCard', component: CauseCardComponent },
   { path: 'causeDetail', component: CharityInfoComponent },
+
+  { path: 'orgsignin', component: SignInOrganizationComponent },
+  { path: 'orgsignup', component: SignUpOrganizationComponent }
 ];
 
 @NgModule({
