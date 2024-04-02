@@ -128,6 +128,8 @@ const orgSignup = async (req, res) => {
         .json({ error: "Organization name already exists" });
     }
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new organization
     const newOrg = new Organization({
       name,
@@ -312,13 +314,10 @@ const orgLogin = async (req, res) => {
     // Find user by username
     const org = await Organization.findOne({ name }); // Doubt syntax coloring not happening
 
-
-
-      // Check if user exists
-      if (!org) {
-          return res.status(404).json({ error: 'Org not found' });
-      }
-
+    // Check if user exists
+    if (!org) {
+      return res.status(404).json({ error: "Org not found" });
+    }
 
     // Check password
     const isPasswordValid = await bcrypt.compare(password, org.password);
@@ -326,10 +325,10 @@ const orgLogin = async (req, res) => {
       return res.status(401).json({ error: "Invalid password" });
     }
 
-
-      // Generate JWT token
-      const token = jwt.sign({ _id: org._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-
+    // Generate JWT token
+    const token = jwt.sign({ _id: org._id }, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
 
     // Send success response with username and token
     res
