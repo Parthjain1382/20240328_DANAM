@@ -22,6 +22,10 @@ export class NavbarComponent implements OnInit {
   navToAdd() {
     this.router.navigate(['/profile']);
   }
+
+  takeToCausespage() {
+    this.router.navigate(['/causes']);
+  }
   constructor(
     private authService: AuthServiceService,
     private router: Router

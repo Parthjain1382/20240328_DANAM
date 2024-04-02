@@ -16,7 +16,6 @@ const requireLogin = (req, res, next) => {
       if (err) {
           return res.status(401).json({ error: "You must be logged out" });
       }
-      console.log(payload);
       // If verification is successful, attach user data to the request object
       req.user = payload;
       // Call the next middleware or route handler

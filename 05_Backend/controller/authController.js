@@ -112,7 +112,7 @@ const userLogin = async (req, res) => {
 
 const orgSignup = async (req, res) => {
   try {
-    const { name, email, password, location, contactNumber } = req.body;
+    const { name, email, password, location } = req.body;
 
     // Validate user input (You can uncomment this part if you have validation logic)
     // const validation = signupValidation({ name, email, password });
@@ -128,16 +128,16 @@ const orgSignup = async (req, res) => {
         .json({ error: "Organization name already exists" });
     }
 
-  // Encrypt password
-  const hashedPassword = await bcrypt.hash(password, 10);
+    // Encrypt password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new organization
     const newOrg = new Organization({
       name,
       email,
-      password: hashedPassword,// Remember to hash the password before storing it in the database
+      password: hashedPassword, // Remember to hash the password before storing it in the database
       location,
-      contactNumber
+      contactNumber,
     });
 
     // Save the new organization to the database
@@ -311,18 +311,15 @@ const isTokenExpired = (timestamp) => {
 
 const orgLogin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, password } = req.body;
 
     // Find user by username
     const org = await Organization.findOne({ email }); // Doubt syntax coloring not happening
 
-
-
-      // Check if user exists
-      if (!org) {
-          return res.status(404).json({ error: 'Org not found' });
-      }
-
+    // Check if user exists
+    if (!org) {
+      return res.status(404).json({ error: "Org not found" });
+    }
 
     // Check password
     const isPasswordValid = await bcrypt.compare(password, org.password);
@@ -330,15 +327,18 @@ const orgLogin = async (req, res) => {
       return res.status(401).json({ error: "Invalid password" });
     }
 
-
-      // Generate JWT token
-      const token = jwt.sign({ _id: org._id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-
+    // Generate JWT token
+    const token = jwt.sign({ _id: org._id }, process.env.SECRET_KEY, {
+      expiresIn: "1h",
+    });
 
     // Send success response with username and token
-    res
-      .status(200)
-      .json({ message: "Org signed in successfully", name: org.name, token, orgId:org._id });
+    res.status(200).json({
+      message: "Org signed in successfully",
+      name: org.name,
+      token,
+      orgId: org._id,
+    });
   } catch (error) {
     console.error("Error during org login:", error);
     res.status(500).json({ error: "Internal server error" });
