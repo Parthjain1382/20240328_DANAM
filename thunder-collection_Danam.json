@@ -1,0 +1,190 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Danam",
+    "dateExported": "2024-04-02T02:46:09.887Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d7d39980-ba09-4d76-804b-58d8396a7566",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "UserSignup",
+            "url": "http://localhost:3000/signup",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-03-30T17:59:33.280Z",
+            "modified": "2024-04-01T16:34:12.162Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"Atharva_123\",\n  \"password\": \"abc123\",\n  \"phone_number\": \"9604364335\",\n  \"email\": \"atharvanhsm@gmail.com\",\n  \"address\": \"123 Main Street, Cityville\",\n  \"role\": \"donor\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "392d3734-f2d7-4c74-9ec0-f07c5f17929f",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "UserLogin",
+            "url": "http://localhost:3000/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-03-30T19:05:25.452Z",
+            "modified": "2024-04-01T16:41:16.187Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"StrongPassword123!\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9dc4200c-c2ff-45ca-8cf5-1b0422d2fc86",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "ForgotPassword",
+            "url": "http://localhost:3000/forgotpassword",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-30T19:25:52.647Z",
+            "modified": "2024-03-30T19:29:54.733Z",
+            "headers": [
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"john.doe@example.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "80902779-ab32-421c-be04-ae933298fa14",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "ResetPassword",
+            "url": "",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-03-30T19:25:59.929Z",
+            "modified": "2024-03-30T19:25:59.929Z",
+            "headers": []
+        },
+        {
+            "_id": "5035f76d-d79d-4a40-8fd5-983a415ea21e",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "CreateCause",
+            "url": "http://localhost:3000/org/cause",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-03-31T14:03:24.176Z",
+            "modified": "2024-04-01T18:45:16.471Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjA4NjA1NjE2OTc4YzJmNzBlOThkZDAiLCJpYXQiOjE3MTE5OTY1NDAsImV4cCI6MTcxMjAwMDE0MH0.STPth2cbER-3kE4Lo0-ZX84xIr6bLw6nf1UyvEzsaFQ"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"title\": \"Support for child labour\",\n    \"fundsRequired\": 5000,\n    \"category\": \"Education\",\n    \"descriptionText\": \"Help fund our education program to provide better educational opportunities for underprivileged children.\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "519f198d-cd88-437e-a942-463633d15fa3",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "getprofiledetails",
+            "url": "http://localhost:3000/donor/getprofile",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-03-31T18:12:42.348Z",
+            "modified": "2024-04-01T12:10:56.473Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjA4NjA1NjE2OTc4YzJmNzBlOThkZDAiLCJpYXQiOjE3MTE5NzM0NDcsImV4cCI6MTcxMTk3NzA0N30.qhNxxnAwpppl7HD059msiLZS7tVBOKWPIQH8f9UPzM4"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "780e269f-5412-460e-8ed0-5d9383cb47b4",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "Org_Signup",
+            "url": "http://localhost:3000/org/signup",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-04-01T16:48:01.915Z",
+            "modified": "2024-04-01T18:22:19.827Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"Jyoti Foundation\",\n  \"email\":\"jyoti123@gmail.com\",\n  \"password\":\"Abcd@123\",\n  \"location\":\"Hyderabad\",\n  \"contactNumber\":\"1234567890\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "7d3c2ddb-c4b0-481f-b0dd-886dbc7f472d",
+            "colId": "d7f702d2-8c32-40a5-9e48-fb3be6f15f04",
+            "containerId": "",
+            "name": "Org_Login",
+            "url": "http://localhost:3000/org/login",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2024-04-01T16:52:40.149Z",
+            "modified": "2024-04-01T18:41:49.059Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"jyoti123@gmail.com\",\n  \"password\":\"Abcd@123\"\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}

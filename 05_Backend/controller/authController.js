@@ -112,7 +112,7 @@ const userLogin = async (req, res) => {
 
 const orgSignup = async (req, res) => {
   try {
-    let { name, email, password, location } = req.body;
+    const { name, email, password, location, contactNumber } = req.body;
 
     // Validate user input (You can uncomment this part if you have validation logic)
     // const validation = signupValidation({ name, email, password });
@@ -131,12 +131,15 @@ const orgSignup = async (req, res) => {
   // Encrypt password
   const hashedPassword = await bcrypt.hash(password, 10);
 
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     // Create a new organization
     const newOrg = new Organization({
       name,
       email,
-      password:hashedPassword, // Remember to hash the password before storing it in the database
+      password: hashedPassword,// Remember to hash the password before storing it in the database
       location,
+      contactNumber
     });
 
     // Save the new organization to the database
@@ -316,6 +319,7 @@ const orgLogin = async (req, res) => {
     const org = await Organization.findOne({ email }); // Doubt syntax coloring not happening
 
 
+
       // Check if user exists
       if (!org) {
           return res.status(404).json({ error: 'Org not found' });
@@ -336,7 +340,7 @@ const orgLogin = async (req, res) => {
     // Send success response with username and token
     res
       .status(200)
-      .json({ message: "Org signed in successfully", name: org.name, token });
+      .json({ message: "Org signed in successfully", name: org.name, token, orgId:org._id });
   } catch (error) {
     console.error("Error during org login:", error);
     res.status(500).json({ error: "Internal server error" });

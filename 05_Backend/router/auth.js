@@ -18,5 +18,6 @@ router.post('/resetpassword',reset_password)
 
 router.post('/org/signup',orgSignup)
 router.post('/org/login', orgLogin);
+router.post('/org/signup', orgSignup);
 
 export default router;
