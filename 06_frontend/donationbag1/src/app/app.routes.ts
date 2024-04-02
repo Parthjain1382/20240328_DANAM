@@ -20,6 +20,7 @@ import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
 import { MyCausePageComponent } from './my-cause-page/my-cause-page.component';
 import { CauseCardComponent } from './cause-card/cause-card.component';
 import { CharityInfoComponent } from './charity-info/charity-info.component';
+import { CreateCauseComponent } from './create-cause/create-cause.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -40,6 +41,13 @@ export const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   // {path:'admin',component:AdminPageComponent},
+
+  { path: 'admin', component: AdminDashboardComponent },
+  { path: 'charityrequest', component: CharityRequestComponent },
+  { path: 'donation', component: DonationComponent },
+  { path: 'profile', component: DonorProfilePageComponent },
+  { path: 'createcause', component: CreateCauseComponent },
+
   { path: 'admin', component: AdminDashboardComponent },
   { path: 'charityrequest', component: CharityRequestComponent },
   { path: 'donation', component: DonationComponent },
