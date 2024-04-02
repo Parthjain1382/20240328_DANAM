@@ -19,5 +19,6 @@ router.post("/donate", requireLogin, donorController.createDonation);
 
 router.get("/getprofile", requireLogin, donorController.getUserProfile);
 router.get("/getCause", donorController.getCauseById);
+router.get("/getOrganization", donorController.organizationById);
 
 export default router;

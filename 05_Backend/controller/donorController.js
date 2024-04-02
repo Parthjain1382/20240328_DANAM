@@ -10,6 +10,7 @@ import requireLogin from "../middleware/requireLogin.js";
 import Donation from "../model/donation.js";
 import Causes from "../model/causes.js";
 import Users from "../model/Users.js";
+import Organization from "../model/organization.js";
 
 // /**To Get the List of all Donors
 //  * */
@@ -89,10 +90,24 @@ const createDonation = async (req, res) => {
   }
 };
 
+const organizationById = async (req, res) => {
+  const id = req.query._id;
+  try {
+    const cause = await Organization.findById(id);
+    if (!cause) {
+      return res.status(404).json({ message: "Organization not found" });
+    }
+    res.json(cause);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
 export default {
   getUserProfile,
   getAllCauses,
   donorList,
   createDonation,
   getCauseById,
+  organizationById,
 };
