@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
   },
   contributionAmmount: {
     type: Number
+  },
+  token:{
+    type:String, 
+    default:''
   }
 });
 
