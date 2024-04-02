@@ -128,6 +128,9 @@ const orgSignup = async (req, res) => {
         .json({ error: "Organization name already exists" });
     }
 
+  // Encrypt password
+  const hashedPassword = await bcrypt.hash(password, 10);
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new organization
