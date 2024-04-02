@@ -62,5 +62,8 @@ function phoneNumberValidation(){
 }
 
 
+function userRole(){
+    
+}
 
 export {passwordValidator,emailValidator,usernameValidator,phoneNumberValidation,locationValidator}

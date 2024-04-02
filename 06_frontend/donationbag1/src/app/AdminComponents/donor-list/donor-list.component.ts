@@ -46,7 +46,7 @@ navtoDonorList(){
   this.router.navigate(['/donorList'])
 }
 navtoCharityRequest(){
-this.router.navigate(['/charityList'])
+this.router.navigate(['/charityrequest'])
 }
 navtoDonation(){
 this.router.navigate(['/donation'])

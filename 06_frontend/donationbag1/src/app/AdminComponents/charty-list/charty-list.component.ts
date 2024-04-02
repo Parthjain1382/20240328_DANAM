@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -42,7 +42,7 @@ navtoDonorList(){
   this.router.navigate(['/donorList'])
 }
 navtoCharityRequest(){
-this.router.navigate(['/charityList'])
+this.router.navigate(['/charityrequest'])
 }
 navtoDonation(){
 this.router.navigate(['/donation'])
@@ -56,7 +56,17 @@ this.router.navigate(['/charityList'])
  */
 fetchData(){
   const apiUrl = 'http://localhost:3000/admin/orgDetails';
-  this.http.get<any[]>(apiUrl).subscribe(
+  const jwt = localStorage.getItem("userToken");
+  console.log("jwt: " + jwt);
+
+  // Prepare the headers, including the Authorization header with the JWT token
+  const headers = {
+    headers: new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    })
+  };
+  this.http.get<any[]>(apiUrl,headers).subscribe(
+
     (data) => {
 
       //to get the number of charity
