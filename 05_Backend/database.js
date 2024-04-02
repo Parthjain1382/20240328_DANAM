@@ -3,11 +3,12 @@
 import mongoose from "mongoose";
 
 export function connectDatabase() {
-    mongoose.connect(process.env.MONGO_URI)
+    return mongoose.connect(process.env.MONGO_URI)
         .then(() => {
-            console.log(" Connected to Database Successfully ");
+            console.log("Database connected successfully");
         })
         .catch(error => {
             console.error("Error connecting to database:", error);
+            throw error; // Re-throw the error to be caught by the caller
         });
 }

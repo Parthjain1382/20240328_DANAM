@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CreateCauseServiceService {
   private apiUrl = 'http://localhost:3000/org/cause';
-  private bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjBiNzU1ZGExODFlM2JiMTE3YWI5NDgiLCJpYXQiOjE3MTIwMjY5ODgsImV4cCI6MTcxMjAzMDU4OH0.Zl1jp9aLTzxqILJ-UUtzaPg-lPYbWNmKEbHsChduIgA';
+  private bearerToken = localStorage.getItem('orgToken');
 
   constructor(private http: HttpClient) { }
 
