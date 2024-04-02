@@ -16,14 +16,17 @@ import { DonationComponent } from './AdminComponents/donation/donation.component
 import { BlogComponent } from './blog/blog.component';
 import { CausesComponent } from './causes/causes.component';
 import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-page.component';
-
-import { CreateCauseComponent } from './create-cause/create-cause.component';
-
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
+
 import { ChartyListComponent } from './AdminComponents/charty-list/charty-list.component';
 import { DonorListComponent } from './AdminComponents/donor-list/donor-list.component';
 import { SignUpOrganizationComponent } from './sign-up-organization/sign-up-organization.component';
 import { SignInOrganizationComponent } from './sign-in-organization/sign-in-organization.component';
+
+import { MyCausePageComponent } from './my-cause-page/my-cause-page.component';
+import { CauseCardComponent } from './cause-card/cause-card.component';
+import { CharityInfoComponent } from './charity-info/charity-info.component';
+import { CreateCauseComponent } from './create-cause/create-cause.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -37,13 +40,8 @@ export const routes: Routes = [
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
   { path: '', component: LandingComponent },
-  { path: 'aboutUs', component: AboutservicesComponent },
-  { path: 'services', component: ServicesComponent },
-  { path: 'gallery', component: GalleryComponent },
-  { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
   // {path:'admin',component:AdminPageComponent},
+  
   {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
@@ -51,15 +49,8 @@ export const routes: Routes = [
   {path:'profile',component:DonorProfilePageComponent},
   {path:'createcause',component:CreateCauseComponent},
   {path:'charityList',component:ChartyListComponent},
-
-  { path: 'admin', component: AdminDashboardComponent },
-  { path: 'charityrequest', component: CharityRequestComponent },
-  { path: 'donation', component: DonationComponent },
-  { path: 'profile', component: DonorProfilePageComponent },
-
-  { path: 'orgsignin', component: SignInOrganizationComponent },
-  { path: 'orgsignup', component: SignUpOrganizationComponent }
-
+  { path: 'causeCard', component: CauseCardComponent },
+  { path: 'causeDetail', component: CharityInfoComponent },
 ];
 
 @NgModule({
