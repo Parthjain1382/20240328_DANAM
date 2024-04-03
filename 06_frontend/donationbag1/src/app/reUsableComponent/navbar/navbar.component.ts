@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
-  navToAdd() {
+  navToProfile() {
     this.router.navigate(['/profile']);
   }
 

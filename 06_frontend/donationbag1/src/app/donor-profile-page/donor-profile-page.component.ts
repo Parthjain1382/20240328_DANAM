@@ -9,6 +9,17 @@ import { TableComponentComponent } from '../table-component/table-component.comp
   styleUrl: './donor-profile-page.component.css'
 })
 export class DonorProfilePageComponent {
-  amount=500;
-  causes=50;
+  amount: number = 0;
+  totalAmountFromChild: number = 0;
+  totalDonationsDonated: number = 0;
+
+  onTotalAmountChanged(totalAmount: number): void {
+    this.totalAmountFromChild = totalAmount;
+    console.log('Total amount donated:', this.totalAmountFromChild);
+    this.amount = this.totalAmountFromChild;
+  }
+
+  onCalculatingTotalDonations(totalDonations: number): void {
+    this.totalDonationsDonated = totalDonations;
+  }
 }
