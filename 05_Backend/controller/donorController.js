@@ -20,8 +20,6 @@ const donorList = async (req, res) => {
 
     const companyUsers = await Users.find({ role: 'donor' });
 
-   
-
     // Return the list of company users
     res.json(companyUsers);
   } catch (error) {
@@ -30,6 +28,28 @@ const donorList = async (req, res) => {
   }
 };
 
+
+/**Get the User Data  
+ * @param {*} req The user from the require Login
+ * @param {*} res the userdata that is found in the database
+ */
+const getDonor=async (req,res)=>{
+  const id=req.query.id
+  
+  try{
+    const userData=await Users.findById(id)
+    if(!userData){
+      res.status(401).json("User not found")
+    }
+    console.log(userData);
+    res.status(200).json(userData)
+  }
+  catch{
+    res.status(500).send("Server Error");
+  }
+}
+
+
 // Controller function to get user profile details
 const getUserProfile = async (req, res) => {
   try {
@@ -37,13 +57,18 @@ const getUserProfile = async (req, res) => {
     const userId = req.user.id;
 
     // Retrieve user profile details from the database based on user ID
-    const userProfile = await Users.findById(userId).select(
-      "username role phone_number email address numberOfDonations contributionAmmount"
-    );
-
+    // const userProfile = await Users.findById(userId).select(
+    //   "username role phone_number email address numberOfDonations contributionAmmount"
+    // );
+    const userDonations = await Donation.find({ Donor: userId });
+    console.log(userDonations);
+    res.json(userDonations)
     // Check if user profile exists
-    if (!userProfile) {
-      return res.status(404).json({ error: "User profile not found" });
+    // if (!userProfile) {
+    //   return res.status(404).json({ error: "User profile not found" });
+    // }
+    if (!userDonations) {
+      return res.status(404).json({ error: "You have made no donations yet"});
     }
   } catch (error) {
     console.log(error.message);
@@ -114,4 +139,5 @@ export default {
   createDonation,
   getCauseById,
   organizationById,
+  getDonor
 };

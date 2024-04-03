@@ -21,4 +21,5 @@ router.get("/getprofile", requireLogin, donorController.getUserProfile);
 router.get("/getCause", donorController.getCauseById);
 router.get("/getOrganization", donorController.organizationById);
 
+router.get('/getDonor',requireLogin,donorController.getDonor)
 export default router;

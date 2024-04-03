@@ -1,21 +1,22 @@
 <div class="donor-profile">
   <div class="content-profile">
-    <div class="row">
-      <div class="column">
-        <div class="card">
-          <h3>Total Amount</h3>
-          <p>{{amount}}</p>
-        </div>
-      </div>
+   <div class="row">
+       <div class="column">
+         <div class="card">
+           <h3>Total Amount</h3>
+           <p>{{amount}}</p>
+         </div>
+       </div>
 
-      <div class="column">
-        <div class="card">
-          <h3>Total</h3>
-          <p>{{causes}}</p>
-        </div>
-      </div>
+       <div class="column">
+         <div class="card">
+           <h3>Total Donations</h3>
+           <p>{{totalDonationsDonated}}</p>
+         </div>
+       </div>
+       </div>
 
-      <div class="container" style="display: flex; align-items:center">
+       <div class="container" style="display: flex; align-items:center">
         <div>
           <p>Click here on button to download the PDF file.</p>
           <button style="border-radius :12px;" (click)="generatePDF()"> <a class="btn btn-primary">
@@ -25,11 +26,12 @@
           </button>
         </div>
       </div>
+      
 
-      <div class="my-cause">
-        <h1>My Causes</h1>
-        <app-table-component></app-table-component>
-      </div>
-    </div>
-
+       <div class="my-cause">
+           <h1>My Causes</h1>
+           <app-table-component (totalAmountChanged)="onTotalAmountChanged($event)" (allDonations)="onCalculatingTotalDonations($event)"></app-table-component>
+       </div>
   </div>
+
+</div>

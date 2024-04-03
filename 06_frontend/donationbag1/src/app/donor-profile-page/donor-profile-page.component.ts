@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TableComponentComponent } from '../table-component/table-component.component';
 import {jsPDF} from 'jspdf';
-
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-donor-profile-page',
   standalone: true,
@@ -9,10 +10,55 @@ import {jsPDF} from 'jspdf';
   templateUrl: './donor-profile-page.component.html',
   styleUrl: './donor-profile-page.component.css'
 })
-export class DonorProfilePageComponent {
-  amount=500;
-  causes=50;
-  donorName:string="Pranay"
+export class DonorProfilePageComponent implements OnInit{
+  amount: number = 0;
+  totalAmountFromChild: number = 0;
+  totalDonationsDonated: number = 0;
+  userprofile:any;
+
+  onTotalAmountChanged(totalAmount: number): void {
+    this.totalAmountFromChild = totalAmount;
+    console.log('Total amount donated:', this.totalAmountFromChild);
+    this.amount = this.totalAmountFromChild;
+  }
+
+  onCalculatingTotalDonations(totalDonations: number): void {
+    this.totalDonationsDonated = totalDonations;
+  }
+
+  constructor(private http: HttpClient) {}
+
+
+  ngOnInit(): void {
+    this.getProfile()
+  }
+
+  getProfile(){
+    const jwt=localStorage.getItem('userToken')
+    console.log(jwt);
+    const id=localStorage.getItem('donarId')
+    console.log(id);
+
+    const url =`http://localhost:3000/donor/getDonor?id=${id}`;
+
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${jwt}`
+      })
+    };
+
+    // HTTP GET request to fetch organization details
+    this.http.get<any>(url,headers).subscribe({
+      next: (response) => {
+       this.userprofile= response;
+        console.log(response);
+      },
+      error: (error) => {
+        console.error('Error fetching organization details:', error);
+      },
+    });
+  }
+
 
 
   generatePDF(){
@@ -54,12 +100,6 @@ export class DonorProfilePageComponent {
     doc.setFont('helvetica', 'Bold');
     doc.setFontSize(22); // Adjust the font size as needed for the subheading
 
-    // Calculate the position for the subheading "of donation" to center it
-    // let subheading = "of donation";
-    // let subheadingWidth = doc.getStringUnitWidth(subheading) * doc.getFontSize() / doc.internal.scaleFactor;
-    // let subheadingOffset = (doc.internal.pageSize.getWidth() - subheadingWidth) / 2;
-    // doc.text(subheading, subheadingOffset, 120); // Adjust the Y position as needed
-
     // Set the font and size for "Daanam"
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(30); // Adjust the font size as needed
@@ -72,7 +112,7 @@ export class DonorProfilePageComponent {
 
     doc.setFont('helvetica', 'cursive');
     doc.setFontSize(16);
-    let text = `This is To Certify that the user ${this.donorName} has successfully donated to our Charities`;
+    let text = `This is To Certify that the ${this.userprofile.username}  has successfully donated to our Charities`;
     // Calculate the text's width (in points) and the center position
     const textWidth = doc.getStringUnitWidth(text) * doc.getFontSize() / doc.internal.scaleFactor;
     const textOffset = (doc.internal.pageSize.getWidth() - textWidth) / 2; // Calculate the x offset to center the text
@@ -88,12 +128,8 @@ export class DonorProfilePageComponent {
     doc.setLineWidth(3); // Adjust the line width as needed
 
     doc.rect(10, 10, doc.internal.pageSize.getWidth() - 20, doc.internal.pageSize.getHeight() - 20);
-
-
-
   // Save the document
   doc.save('DonationCertificate.pdf');
-    })
-  }
+  })
 }
-
+}
