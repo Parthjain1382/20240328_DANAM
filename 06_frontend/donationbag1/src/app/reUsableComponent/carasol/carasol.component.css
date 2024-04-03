@@ -4,6 +4,10 @@
 
 }
 
+.slick-track{
+  height: 100vh;
+}
+
 .slider-captions {
   position: absolute;
   bottom: 132px;
@@ -65,7 +69,9 @@
   position: relative;
   z-index: -1;
 }
-
+img{
+  height: 88vh;
+}
 .slider .owl-nav .owl-prev,
 .slider .owl-nav .owl-next {
   color: #fff;
