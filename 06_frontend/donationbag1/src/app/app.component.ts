@@ -9,6 +9,7 @@ import { ServicesComponent } from './reUsableComponent/services/services.compone
 import { FooterComponent } from './reUsableComponent/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { PeriodicElement } from './constants';
  
 @Component({
   selector: 'app-root',
