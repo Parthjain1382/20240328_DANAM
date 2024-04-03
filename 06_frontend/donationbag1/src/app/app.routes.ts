@@ -30,6 +30,7 @@ import { MyCausePageComponent } from './my-cause-page/my-cause-page.component';
 import { CauseCardComponent } from './cause-card/cause-card.component';
 import { CharityInfoComponent } from './charity-info/charity-info.component';
 import { CreateCauseComponent } from './create-cause/create-cause.component';
+import { Error404Component } from './error404/error404.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -38,14 +39,13 @@ export const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
   { path: 'donorsignin', component: SigninComponent },
-  // { path: 'signup', component: SignUpDonorComponent },
+
   { path: 'donorsignup', component: SignUpDonorComponent},
-  // { path: 'admin', component: AdminPageComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
   { path: '', component: LandingComponent },
-  // {path:'admin',component:AdminPageComponent},
 
+  //path for admin
   {path:'admin',component:AdminDashboardComponent},
   {path:'charityrequest',component:CharityRequestComponent},
   {path:'donation',component:DonationComponent},
@@ -62,7 +62,10 @@ export const routes: Routes = [
   { path: 'forgotpassword', component: ForgetPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent},
   { path: 'confirmationpage', component: ConfirmationPageComponent },
-  
+
+  //error page
+  {path:'**',component:Error404Component}
+
 ];
 
 @NgModule({

@@ -29,6 +29,7 @@
     "ngx-owl-carousel-o": "^17.0.0",
     "ngx-slick-carousel": "^17.0.0",
     "owl.carousel": "^2.3.4",
+    "razorpay": "^2.9.2",
     "rxjs": "~7.8.0",
     "slick-carousel": "^1.8.1",
     "tslib": "^2.3.0",

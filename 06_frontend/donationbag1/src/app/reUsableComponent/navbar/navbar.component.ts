@@ -15,7 +15,7 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
   isSignedUp: boolean = false;
-
+  userRole: any;
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
@@ -34,6 +34,9 @@ export class NavbarComponent implements OnInit {
     this.authService.loggedIn$.subscribe((loggedIn) => {
       this.isSignedUp = loggedIn;
     });
+
+    this.userRole = localStorage.getItem('role') || 'organization';
+    console.log(this.userRole);
   }
 
   Login(): void {
@@ -56,9 +59,7 @@ export class NavbarComponent implements OnInit {
     if (confirmation) {
       this.isSignedUp = false;
       // clearing the token from the local Storage
-      localStorage.removeItem('userToken');
-      localStorage.removeItem('role');
-      localStorage.removeItem('donarId');
+      localStorage.clear();
       this.refreshPage()
       // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
 
@@ -66,7 +67,6 @@ export class NavbarComponent implements OnInit {
       // this.clearSessionTimer();
     }
   }
-
   refreshPage() {
     window.location.reload();
   }
