@@ -14,14 +14,7 @@ import { Router } from '@angular/router';
 export class CharityRequestComponent implements OnInit{
 
   //Intialization of the charity array
-  charity_array: { _id:string,orphanage_name: string, date: string, category: string, amount: number, title: string }[] = [{
-    _id:"45464",
-    orphanage_name: 'Pranay orphanage',
-    date: '2024-03-12',
-    category: 'health',
-    amount: 5000,
-    title: "title",
-  }];
+  charity_array: { _id:string,orphanage_name: string, date: string, category: string, amount: number, title: string }[] = [];
 
   //Constructor
   constructor(private http: HttpClient,private router:Router) {

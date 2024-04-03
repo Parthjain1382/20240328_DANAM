@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
 export class DonationComponent implements OnInit {
 
   //donor_array storing all the data in
-  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string }[] = [{
-    _id: '',
-    organization: '',
-    donor: '',
-    amount: 0,
-    causeTitle: '',
-    date: ''
-  }]
+  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string }[] = []
 
   //number of charity
   charityCount: number = 0

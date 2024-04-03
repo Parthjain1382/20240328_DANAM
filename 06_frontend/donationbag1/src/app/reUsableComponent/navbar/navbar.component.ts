@@ -56,7 +56,8 @@ export class NavbarComponent implements OnInit {
     if (confirmation) {
       this.isSignedUp = false;
       // clearing the token from the local Storage
-      localStorage.removeItem('jwtToken');
+      localStorage.removeItem('userToken');
+
       // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
 
       this.router.navigate(['/login']);
