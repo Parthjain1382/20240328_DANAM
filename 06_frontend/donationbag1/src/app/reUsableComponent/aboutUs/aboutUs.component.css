@@ -1,4 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 .about-us {
     background-color: #edf1f5;
     @include big-padding();
@@ -61,4 +70,14 @@
             }
         }
     }
+}
+
+.about-us{
+    padding: 50px;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    margin: 0px 0px 40px 0px;
 }

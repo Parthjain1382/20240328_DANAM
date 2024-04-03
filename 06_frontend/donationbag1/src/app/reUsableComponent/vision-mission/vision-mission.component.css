@@ -1,3 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Merriweather', serif;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .mission-vission-text {
   margin-top: 15px;
 }
+
+
+.mission-div{
+  display: flex;
+  height: fit-content;
+  margin: 30px 0px 80px 0px;
+  
+}
+.mission-div h1{
+  display: flex;
+  justify-content: center;
+}
+
+.mission-div p{
+  /* height: 60%; */
+  margin-top: 5%;
+  font-size: large;
+  display: flex;
+  align-items: center;
+}
+
+.vission-div{
+  display: flex;
+  height: fit-content;
+}
+.vission-div h1{
+  display: flex;
+  justify-content: center;
+}
+
+.vission-div p{
+  font-size: large;
+  /* height: 60%; */
+  margin-top: 6%;
+  display: flex;
+  align-items: center;
+}
+
