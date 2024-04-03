@@ -39,7 +39,7 @@ export class TableComponentComponent implements OnInit {
   dataSource: PeriodicElement[] = [];
   totalAmount: number = 0;
   totalDonations: number = 0;
-  srno = 0;
+  srno: number = 0;
 
   @Output() totalAmountChanged = new EventEmitter<number>();
   @Output() allDonations = new EventEmitter<number>();
@@ -60,8 +60,8 @@ export class TableComponentComponent implements OnInit {
       for (let i = 0; i < this.dataSource.length; i++){
         let temp = 0;
         temp += this.dataSource[i].amount
-        this.totalAmount=temp
-        this.srno += 1
+        this.totalAmount += temp
+        this.srno = i+1
         this.totalDonations += 1
       }
       console.log(this.totalAmount);
