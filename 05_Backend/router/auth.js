@@ -12,7 +12,7 @@ router.post('/signup', userSignup);
 
 router.post('/login', userLogin);
 
-router.post('/forgotpassword',forget_password)
+router.post('/forgot_password',forget_password)
 router.post('/resetpassword',reset_password)
 
 
