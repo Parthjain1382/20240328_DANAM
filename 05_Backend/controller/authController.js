@@ -150,7 +150,6 @@ const forget_password = async (req, res) => {
       { email: email },
       { username: 1, email: 1 }
     );
-    const userData = await Users.findOne({ email: email }, { username: 1, email: 1 });
 
     // If user data is found
     if (userData) {
