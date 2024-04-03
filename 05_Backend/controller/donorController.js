@@ -54,8 +54,8 @@ const getDonor=async (req,res)=>{
 const getUserProfile = async (req, res) => {
   try {
     // Get user ID from the request object (assuming it's attached by the authentication middleware)
-    const userId = req.user.id;
-
+    const userId = req.user._id;
+    console.log(userId);
     // Retrieve user profile details from the database based on user ID
     // const userProfile = await Users.findById(userId).select(
     //   "username role phone_number email address numberOfDonations contributionAmmount"
