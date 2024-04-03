@@ -57,11 +57,17 @@ export class NavbarComponent implements OnInit {
       this.isSignedUp = false;
       // clearing the token from the local Storage
       localStorage.removeItem('userToken');
-
+      localStorage.removeItem('role');
+      localStorage.removeItem('donarId');
+      this.refreshPage()
       // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
 
       this.router.navigate(['/login']);
       // this.clearSessionTimer();
     }
+  }
+
+  refreshPage() {
+    window.location.reload();
   }
 }

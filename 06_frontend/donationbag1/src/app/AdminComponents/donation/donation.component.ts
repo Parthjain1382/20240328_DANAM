@@ -98,7 +98,7 @@ this.router.navigate(['/charityList'])
    *
    */
   donorFetch() {
-    const apiUrl = 'http://localhost:3000/donor/donorList';
+    const apiUrl = 'http://localhost:3000/admin/donationList';
 
     this.http.get<any[]>(apiUrl).subscribe(
 
