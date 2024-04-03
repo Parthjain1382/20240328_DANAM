@@ -108,7 +108,7 @@ export class SignUpOrganizationComponent {
       companyName: this.companyName,
     };
 
-    this.http.post('http://localhost:3000/signup', userData).subscribe({
+    this.http.post('http://localhost:3000/org/signup', userData).subscribe({
       next: (response: any) => {
         console.log('User registered successfully');
 

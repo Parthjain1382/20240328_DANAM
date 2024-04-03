@@ -30,6 +30,8 @@ import { MyCausePageComponent } from './my-cause-page/my-cause-page.component';
 import { CauseCardComponent } from './cause-card/cause-card.component';
 import { CharityInfoComponent } from './charity-info/charity-info.component';
 import { CreateCauseComponent } from './create-cause/create-cause.component';
+import { ForgotOrgPasswordComponent } from './forgot-org-password/forgot-org-password.component';
+import { ResetOrgPasswordComponent } from './reset-org-password/reset-org-password.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -60,8 +62,9 @@ export const routes: Routes = [
   { path: 'orgsignup', component: SignUpOrganizationComponent },
   { path: 'forgotpassword', component: ForgetPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent},
+  { path: 'forgotorgpassword', component: ForgotOrgPasswordComponent},
+  { path: 'resetorgpassword', component: ResetOrgPasswordComponent},
   { path: 'confirmationpage', component: ConfirmationPageComponent },
-  
 ];
 
 @NgModule({

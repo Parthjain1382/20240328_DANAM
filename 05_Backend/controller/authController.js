@@ -113,7 +113,7 @@ const userLogin = async (req, res) => {
 
 const orgSignup = async (req, res) => {
   try {
-    const { name, email, password, location } = req.body;
+    const { name, email, password, location, contactNumber} = req.body;
 
     // Validate user input (You can uncomment this part if you have validation logic)
     // const validation = signupValidation({ name, email, password });
