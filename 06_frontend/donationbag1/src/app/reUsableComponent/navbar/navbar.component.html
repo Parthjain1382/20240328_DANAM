@@ -2,14 +2,14 @@
   class="navbar navbar-expand-lg navbar-light bg-light"
   style="padding-left: 50px"
 >
-  <a class="navbar-brand" href="#"> adminname | contactInfo </a>
+  <a class="navbar-brand" href="#"> </a>
 
   <div
     class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav ms-auto mb-2 mb-lg-0"
   >
     <ng-container *ngIf="isSignedUp; else notSignedUpOptions">
       <ng-container
-        *ngIf="userRole === 'donor'; then donarOptions; else notDonarOptions"
+        *ngIf="userRole == 'donor'; then donarOptions; else notDonarOptions"
       ></ng-container>
     </ng-container>
 

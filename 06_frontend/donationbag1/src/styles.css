@@ -1,11 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 * {
   margin: 0px;
   padding: 0px;
   list-style: none;
-
 }
 img {
   max-width: 100%;
@@ -33,19 +31,20 @@ textarea {
   text-decoration: none;
   outline: none;
 }
-.center{
+.center {
   text-align: center;
 }
-.left{
+.left {
   text-align: left;
 }
-.right{
+.right {
   text-align: right;
 }
 .cp {
-  cursor: pointer
+  cursor: pointer;
 }
-html,body{
+html,
+body {
   height: 100%;
 }
 p {
@@ -58,207 +57,208 @@ p {
 
 .no-margin {
   margin: 0px;
-
 }
-.hid{
+.hid {
   display: none;
 }
-.top-mar{
+.top-mar {
   margin-top: 15px;
 }
-.h-100{
-  height: 100%;;
+.h-100 {
+  height: 100%;
 }
 ::placeholder {
   color: #747f8a !important;
   font-size: 13px;
-  opacity: .5 !important;
+  opacity: 0.5 !important;
 }
-.container-fluid{
+.container-fluid {
   padding: 0px;
 }
-h1,h2,h3,h4,h5,h6{
-
-    color: #545454;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #545454;
 }
-strong{
-
-
+strong {
 }
-body{
-  background-color:#f1f1f145 !important;
+body {
+  background-color: #f1f1f145 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  color: #6A6A6A;
+  color: #6a6a6a;
   overflow-x: hidden;
-
-
 }
 
-.session-title{
-padding: 30px;
-margin: 0px;
-  margin-bottom:20px;
+.session-title {
+  padding: 30px;
+  margin: 0px;
+  margin-bottom: 20px;
   @media screen and (max-width: 767px) {
-      padding: 5px;
+    padding: 5px;
   }
-h2{
-  width: 100%;
-  text-align: center;
-      font-weight: 600;
-      margin-bottom: 0px;
+  h2 {
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 0px;
+  }
+  p {
+    max-width: 850px;
+    text-align: center;
+    float: none;
+    margin: auto;
+    font-size: 0.9rem;
+    margin-top: 6px;
+  }
+  span {
+    float: right;
+    font-style: italic;
+  }
 }
-p{
-  max-width: 850px;
-  text-align: center;
-  float: none;
-  margin: auto;
-      font-size: .9rem;
-      margin-top: 6px;
-
-}
-span{
-  float: right;
-  font-style: italic;
-}
-}
-.inner-title{
-padding: 20px;
-padding-left: 0px;
+.inner-title {
+  padding: 20px;
+  padding-left: 0px;
   margin: 0px;
   margin-bottom: 10px;
   padding-bottom: 0px;
   border-bottom: 1px solid #ccccccc4;
   display: block;
   padding-right: 0px;
-h2{
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-      font-weight: 600;
-      text-align: left;
-      border-bottom: 1px solid #863dd9;
-      padding-bottom: 10px;
-      margin-bottom: 0px;
-      width: 300px;
-}
-p{
-  width: 100%;
-  text-align: center;
+  h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    border-bottom: 1px solid #863dd9;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    width: 300px;
   }
-  .btn{
-      float: right;
-      margin-top: -38px;
-      font-weight: 600;
-      font-size: .8rem;
+  p {
+    width: 100%;
+    text-align: center;
+  }
+  .btn {
+    float: right;
+    margin-top: -38px;
+    font-weight: 600;
+    font-size: 0.8rem;
   }
 }
-.page-nav{
+.page-nav {
   background-size: 100%;
   padding: 68px;
   text-align: center;
 
   background-color: #eaeaea;
-  ul{float: none;margin: auto;}
-  @media screen and (max-width: 992px){
-     background-size: auto;
+  ul {
+    float: none;
+    margin: auto;
+  }
+  @media screen and (max-width: 992px) {
+    background-size: auto;
   }
 
-   @media screen and (max-width: 767px){
-      padding-top: 200px;
-       padding-bottom: 40px;
+  @media screen and (max-width: 767px) {
+    padding-top: 200px;
+    padding-bottom: 40px;
   }
-  @media screen and (max-width: 356px){
-       padding-top: 200px;
-       padding-bottom: 40px;
+  @media screen and (max-width: 356px) {
+    padding-top: 200px;
+    padding-bottom: 40px;
   }
-  h2{
-      font-size: 28px;
-      width: 100%;
-      font-weight: 700;
+  h2 {
+    font-size: 28px;
+    width: 100%;
+    font-weight: 700;
+    color: #444;
+    @media screen and (max-width: 600px) {
+      font-size: 26px;
+    }
+  }
+  ul li {
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: #444;
+    i {
+      width: 30px;
+      text-align: center;
       color: #444;
-      @media screen and (max-width: 600px){
-          font-size: 26px;
-      }
-  }
-  ul li{
-      float: left;
-      margin-right: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      font-size: .93rem;
+    }
+    a {
+      color: #444;
+      font-size: 0.93rem;
       font-weight: 600;
-      color: #444;
-      i{
-          width: 30px;
-          text-align: center;
-          color: #444;
-
-
-      }
-      a{
-          color: #444;
-          font-size: .93rem;
-          font-weight: 600;
-      }
+    }
   }
 }
-.btn-success{
-background-color: #51be78;
-border-color: #51be78;
-&:hover{
-  background-color: #51be78 !important;
-  border-color: #51be78 !important;
-}
-&:active{
-  background-color: #51be78 !important;
-  border-color: #51be78 !important;
-}
-&:focus{
-  background-color: #51be78 !important;
-  border-color: #51be78 !important;
-  box-shadow: none !important;
-}
-}
-
-
-.form-control{
-&:focus{
-  box-shadow: none !important;
-  border: 1px solid #CCC;
+.btn-success {
+  background-color: #51be78;
+  border-color: #51be78;
+  &:hover {
+    background-color: #51be78 !important;
+    border-color: #51be78 !important;
+  }
+  &:active {
+    background-color: #51be78 !important;
+    border-color: #51be78 !important;
+  }
+  &:focus {
+    background-color: #51be78 !important;
+    border-color: #51be78 !important;
+    box-shadow: none !important;
+  }
 }
 
+.form-control {
+  &:focus {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+  }
 }
-.btn-light{
-background-color: #FFF;
-color: #3F3F3F;
+.btn-light {
+  background-color: #fff;
+  color: #3f3f3f;
 }
 
 .collapse.show {
-
   display: block !important;
-
 }
 
-.form-control:focus{
-box-shadow: none;
-border: 1px solid #CCC;
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid #ccc;
 }
-.form-control{
-background-color: #F8F8F8;
-margin-bottom: 20px;
-&:focus{
-  background-color: #FFF;
-  border-color: #CCC;
+.form-control {
+  background-color: #f8f8f8;
+  margin-bottom: 20px;
+  &:focus {
+    background-color: #fff;
+    border-color: #ccc;
+  }
 }
-}
-.container{
+.container {
   max-width: 1170px;
-  @media screen and (max-width: 575px){
-      padding: 10px 15px;
+  @media screen and (max-width: 575px) {
+    padding: 10px 15px;
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

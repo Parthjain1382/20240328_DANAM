@@ -15,9 +15,7 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
   isSignedUp: boolean = false;
-
-  userRole = localStorage.getItem('role');
-
+  userRole: any;
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
@@ -36,11 +34,11 @@ export class NavbarComponent implements OnInit {
     this.authService.loggedIn$.subscribe((loggedIn) => {
       this.isSignedUp = loggedIn;
     });
+
     this.userRole = localStorage.getItem('role');
-    if (this.userRole === 'donor') {
-      this.userRole = 'donor';
-    } else {
-      this.userRole = null;
+
+    if (!this.userRole) {
+      this.userRole = 'organization';
     }
   }
 
