@@ -18,7 +18,6 @@ export class DonorProfilePageComponent {
   generatePDF(){
     // Creating a jsPDF instance in landscape orientation.
     const doc = new jsPDF('l', 'pt', 'a4');
-
     const imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqavmFBs4lC3DVDcv4LaU32KBmrY2B_WVQcwWsHViEog&s'
     // Load the image from the URL
     const loadImage = (url: string, callback: (img: HTMLImageElement) => void) => {
