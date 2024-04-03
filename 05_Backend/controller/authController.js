@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 import { passwordValidator } from "../dependencies/validations/userValidations.js";
 import nodemailer from "nodemailer";
 import randomstring from "randomstring";
+import config from "../config/config.js";
 
 // Controller function for user signup
 const userSignup = async (req, res) => {
@@ -163,42 +164,39 @@ const orgSignup = async (req, res) => {
  * @param {object} res - The response object.
  * @returns {object} The response object.
  */
-const forget_password = async (email) => {
-  // Modified to accept email as a parameter
+const forget_password = async (req, res) => {
   try {
+    // Extracting the email from the request body
+    const email = req.body.email;
+    
     // Finding user data based on the provided email
-    const userData = await Users.findOne(
-      { email: email },
-      { username: 1, email: 1 }
-    );
+    const userData = await Users.findOne({ email: email }, { username: 1, email: 1 });
 
     // If user data is found
     if (userData) {
       // Generating a random string
       const randomString = randomstring.generate();
-
+      
       // Updating the user's record with the generated token
-      await Users.updateOne(
+      const data = await Users.updateOne(
         { email: email },
         { $set: { token: randomString } }
       );
 
+    
+
       // Sending the reset password email
-      await sendResetPasswordMail(
-        userData.username,
-        userData.email,
-        randomString
-      );
+      sendResetPasswordMail(userData.username, userData.email, randomString);
 
       // Sending a success response
-      return { success: true, msg: "Check mail and reset password!" };
+      res.status(200).send({ success: true, msg: "Check mail and reset password!" });
     } else {
       // Sending a success response if email does not exist
-      return { success: false, msg: "Email does not exist" };
+      res.status(200).send({ success: true, msg: "Email does not exist" });
     }
   } catch (error) {
-    // Handling errors and returning an error response if an exception occurs
-    return { success: false, msg: error.message };
+    // Handling errors and sending an error response if an exception occurs
+    res.status(400).send({ success: false, msg: error.message });
   }
 };
 
@@ -267,7 +265,7 @@ const reset_password = async (req, res) => {
     console.log(token);
 
     // Finding user data based on the provided token
-    const tokenData = await User.findOne({ token: token });
+    const tokenData = await Users.findOne({ token: token });
     console.log(tokenData);
 
     // If token data is found and it's not expired
@@ -279,7 +277,7 @@ const reset_password = async (req, res) => {
       const newPass = await bcrypt.hash(password, 10);
 
       // Updating the user's record with the new password and clearing the token
-      const userdata = await User.findByIdAndUpdate(
+      const userdata = await Users.findByIdAndUpdate(
         { _id: tokenData._id },
         { $set: { password: newPass, token: "" } },
         { new: true }

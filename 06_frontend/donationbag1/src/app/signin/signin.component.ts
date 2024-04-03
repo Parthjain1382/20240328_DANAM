@@ -157,7 +157,9 @@ export class SigninComponent {
       }
     }
   }
-
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgotpassword']);
+  }
   ngOnInit(): void {}
 
   fetchjwt() {
