@@ -2,13 +2,23 @@
 import Cause from "../model/causes.js";
 import donation from "../model/donation.js";
 import organization from "../model/organization.js"
-
+import Users from "../model/Users.js";
 
 /** API to get all the causes based on status pending 
  * @param {*} req 
  * @param {*} res 
  */
 const getAllPendingCauses = async (req, res) => {
+  //Getting the user credential from Middleware
+  const user=req.user
+
+  //getting the user's data
+  const userdata=await Users.findById(user._id)
+ 
+  if(userdata.role!=="admin"){
+    res.status(404).json('User is not Admin')
+  }
+
   let stat = req.query.status
   try {
     const allCauses = await Cause.find({ status: 'pending' })
@@ -32,7 +42,16 @@ const getAllPendingCauses = async (req, res) => {
  * @param {*} res 
  * @returns  The new object where the status is updated 
  */
-const updateCauseStatus = async (req, res) => {
+const updateCauseStatus= async (req, res) => {
+  //Getting the user credential from Middleware
+  const user=req.user
+  //getting the user's data
+  const userdata=await Users.findById(user._id)
+  
+
+  if(userdata.role!=="admin"){
+    res.status(404).json('User is not Admin')
+  }
   const { id, status } = req.body;
   try {
     // Find the cause by its title
@@ -65,6 +84,17 @@ const updateCauseStatus = async (req, res) => {
  * @returns deleteCause the cause that is deleted
  */
 const deleteCause = async (req, res) => {
+  //Getting the user credential from Middleware
+  const user=req.user
+
+  //getting the user's data
+  const userdata=await Users.findById(user._id)
+
+
+  if(userdata.role!=="admin"){
+    res.status(404).json('User is not Admin')
+  }
+  
   const  id = req.body.id;
   try {
     // If cause not found, return 404
@@ -89,6 +119,16 @@ const deleteCause = async (req, res) => {
  * @param {*} res 
  */
 const orgDetails=async(req,res)=>{
+//Getting the user credential from Middleware
+const user=req.user
+
+//getting the user's data
+const userdata=await Users.findById(user._id)
+
+
+if(userdata.role!=="admin"){
+  res.status(404).json('User is not Admin')
+}
 
   try {
     const documents = await organization.find();
@@ -106,7 +146,19 @@ const orgDetails=async(req,res)=>{
  * 
  */
 const donationList=async(req,res)=>{
-  try{
+
+//Getting the user credential from Middleware
+const user=req.user
+
+//getting the user's data
+const userdata=await Users.findById(user._id)
+
+
+if(userdata.role!=="admin"){
+  res.status(404).json('User is not Admin')
+}
+  
+try{
     const documents = await donation.find();
     console.log(documents);
     // This will be an array of all documents in the Organization collection

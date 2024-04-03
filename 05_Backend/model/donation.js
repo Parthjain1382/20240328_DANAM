@@ -22,7 +22,6 @@ const DonationSchema = new Schema({
     },
     causeTitle: {
         type: String,
-        
         required: true
     },
     date: {

@@ -1,5 +1,5 @@
 import { Component,  OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
@@ -14,14 +14,7 @@ import { Router } from '@angular/router';
 export class CharityRequestComponent implements OnInit{
 
   //Intialization of the charity array
-  charity_array: { _id:string,orphanage_name: string, date: string, category: string, amount: number, title: string }[] = [{
-    _id:"45464",
-    orphanage_name: 'Pranay orphanage',
-    date: '2024-03-12',
-    category: 'health',
-    amount: 5000,
-    title: "title",
-  }];
+  charity_array: { _id:string,orphanage_name: string, date: string, category: string, amount: number, title: string }[] = [];
 
   //Constructor
   constructor(private http: HttpClient,private router:Router) {
@@ -33,6 +26,20 @@ export class CharityRequestComponent implements OnInit{
   }
 
 
+//navigate to respective component
+navtoDonorList(){
+  this.router.navigate(['/donorList'])
+}
+navtoCharityRequest(){
+this.router.navigate(['/charityrequest'])
+}
+navtoDonation(){
+this.router.navigate(['/donation'])
+}
+navtoCharityList(){
+this.router.navigate(['/charityList'])
+}
+
 
   /**This is method when the component refreshes the page is loaded
    * with status = "pending"
@@ -40,7 +47,17 @@ export class CharityRequestComponent implements OnInit{
    */
     fetchData() {
       const apiUrl = 'http://localhost:3000/admin/requests?status=pending';
-      this.http.get<any[]>(apiUrl).subscribe(
+
+      const jwt = localStorage.getItem("userToken");
+
+      // Prepare the headers, including the Authorization header with the JWT token
+      const headers = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${jwt}`
+        })
+      };
+
+      this.http.get<any[]>(apiUrl,headers).subscribe(
         (data) => {
           // Transform the fetched data
           this.charity_array = data.map(item => ({
@@ -80,7 +97,7 @@ export class CharityRequestComponent implements OnInit{
      * @param _id To search with the unique id
      */
     AcceptCause(_id:string){
-      console.log(_id);
+
 
        // Show a confirmation dialog
        if (confirm('Are you sure you want to Accept this cause?')) {
@@ -100,11 +117,24 @@ export class CharityRequestComponent implements OnInit{
       const apiUrl = `http://localhost:3000/admin/update/request`;
 
       //body param as status and id
-      const body = { id:_id,status: 'accepted' };
-      this.http.put(apiUrl, body).subscribe({
+      const body = { "id":`${_id}`, "status":'accepted' };
+      console.log(body);
+
+      const jwt = localStorage.getItem("userToken");
+      console.log(jwt);
+
+
+      // Prepare the headers, including the Authorization header with the JWT token
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${jwt}`
+        }),
+      };
+
+      this.http.put(apiUrl, body,httpOptions).subscribe({
         next: (response) => {
           console.log('Cause accepted successfully:', response);
-          this.refreshPage();
+          this.fetchData()
        },
         error: (error) => {
           console.error('Error accepting cause:', error);
@@ -132,25 +162,29 @@ export class CharityRequestComponent implements OnInit{
      */
     private calldeleteCauseApi(_id: string) {
       const apiUrl = `http://localhost:3000/admin/deleteCause`;
-      console.log(_id);
+      const jwt = localStorage.getItem("userToken");
+
 
       //body param as status and id
       const body = { id:_id };
 
-      this.http.delete(apiUrl, { body: body }).subscribe({
+      // Prepare the headers, including the Authorization header with the JWT token
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${jwt}`
+        }),
+        body: body
+      };
+
+      this.http.delete(apiUrl,httpOptions).subscribe({
         next: (response) => {
           console.log('Cause Delete successfully:', response);
-          this.refreshPage();
+          this.fetchData()
        },
         error: (error) => {
           console.error('Error deleting cause:', error);
 
         }
       });
-    }
-
-    //refresh the page
-    private refreshPage() {
-        this.router.navigate(['/charityrequest']); // Navigate back to the current component
     }
   }

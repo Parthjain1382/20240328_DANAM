@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -41,12 +41,33 @@ this.donorFetch();
 }
 
 
+//navigate to respective component
+navtoDonorList(){
+  this.router.navigate(['/donorList'])
+}
+navtoCharityRequest(){
+this.router.navigate(['/charityrequest'])
+}
+navtoDonation(){
+this.router.navigate(['/donation'])
+}
+navtoCharityList(){
+this.router.navigate(['/charityList'])
+}
+
 /**This is the method which get the charity details at the beginning
 *
 */
 fetchData(){
 const apiUrl = 'http://localhost:3000/admin/orgDetails';
-this.http.get<any[]>(apiUrl).subscribe(
+
+const jwt = localStorage.getItem("userToken");
+const headers = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${jwt}`
+  })
+};
+this.http.get<any[]>(apiUrl,headers).subscribe(
   (data) => {
      //to get the number of charity
     this.charityCount=data.length;
@@ -63,8 +84,13 @@ this.http.get<any[]>(apiUrl).subscribe(
 */
 charityFetch(){
 const apiUrl='http://localhost:3000/donor/causes';
-
-this.http.get<any[]>(apiUrl).subscribe(
+const jwt = localStorage.getItem("userToken");
+const headers = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${jwt}`
+  })
+};
+this.http.get<any[]>(apiUrl,headers).subscribe(
   (data) => {
     //to get the number of Causes
     this.causesCount=data.length;
@@ -80,9 +106,14 @@ this.http.get<any[]>(apiUrl).subscribe(
 *
 */
 donorFetch(){
-const apiUrl='http://localhost:3000/donor/donorList';
-
-this.http.get<any[]>(apiUrl).subscribe(
+const apiUrl='http://localhost:3000/admin/donationList';
+const jwt = localStorage.getItem("userToken");
+const headers = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${jwt}`
+  })
+};
+this.http.get<any[]>(apiUrl,headers).subscribe(
 
   (data) => {
     //to get the number of Causes

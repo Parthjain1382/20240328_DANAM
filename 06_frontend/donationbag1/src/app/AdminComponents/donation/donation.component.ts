@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
 export class DonationComponent implements OnInit {
 
   //donor_array storing all the data in
-  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string }[] = [{
-    _id: '',
-    organization: '',
-    donor: '',
-    amount: 0,
-    causeTitle: '',
-    date: ''
-  }]
+  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string }[] = []
 
   //number of charity
   charityCount: number = 0
@@ -41,12 +34,36 @@ export class DonationComponent implements OnInit {
   }
 
 
+
+//navigate to respective component
+navtoDonorList(){
+  this.router.navigate(['/donorList'])
+}
+navtoCharityRequest(){
+this.router.navigate(['/charityrequest'])
+}
+navtoDonation(){
+this.router.navigate(['/donation'])
+}
+navtoCharityList(){
+this.router.navigate(['/charityList'])
+}
+
   /**This is the method which get the charity details at the beginning
    *
    */
   fetchData() {
     const apiUrl = 'http://localhost:3000/admin/orgDetails';
-    this.http.get<any[]>(apiUrl).subscribe(
+    const jwt = localStorage.getItem("userToken");
+    console.log("jwt: " + jwt);
+
+    // Prepare the headers, including the Authorization header with the JWT token
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${jwt}`
+      })
+    };
+    this.http.get<any[]>(apiUrl,headers).subscribe(
       (data) => {
         //to get the number of charity
         this.charityCount = data.length;
@@ -64,6 +81,7 @@ export class DonationComponent implements OnInit {
   charityFetch() {
     const apiUrl = 'http://localhost:3000/donor/causes';
 
+
     this.http.get<any[]>(apiUrl).subscribe(
       (data) => {
         //to get the number of Causes
@@ -80,7 +98,7 @@ export class DonationComponent implements OnInit {
    *
    */
   donorFetch() {
-    const apiUrl = 'http://localhost:3000/donor/donorList';
+    const apiUrl = 'http://localhost:3000/admin/donationList';
 
     this.http.get<any[]>(apiUrl).subscribe(
 
@@ -99,10 +117,22 @@ export class DonationComponent implements OnInit {
  */
   donationFetch() {
     const apiUrl = 'http://localhost:3000/admin/donationList';
+    // Get the JWT token from local storage
+    const jwt = localStorage.getItem("userToken");
+    console.log("jwt: " + jwt);
 
-    this.http.get<any[]>(apiUrl).subscribe(
+    // Prepare the headers, including the Authorization header with the JWT token
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${jwt}`
+      })
+    };
+
+
+    this.http.get<any[]>(apiUrl,headers).subscribe(
 
       (data) => {
+        console.log(data);
         // Transform the fetched data
         this.donation_array = data.map(item => ({
           _id: item._id,

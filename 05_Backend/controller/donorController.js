@@ -20,8 +20,6 @@ const donorList = async (req, res) => {
 
     const companyUsers = await Users.find({ role: 'donor' });
 
-   
-
     // Return the list of company users
     res.json(companyUsers);
   } catch (error) {
@@ -29,6 +27,28 @@ const donorList = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+
+/**Get the User Data  
+ * @param {*} req The user from the require Login
+ * @param {*} res the userdata that is found in the database
+ */
+const getDonor=async (req,res)=>{
+  const id=req.query.id
+  
+  try{
+    const userData=await Users.findById(id)
+    if(!userData){
+      res.status(401).json("User not found")
+    }
+    console.log(userData);
+    res.status(200).json(userData)
+  }
+  catch{
+    res.status(500).send("Server Error");
+  }
+}
+
 
 // Controller function to get user profile details
 const getUserProfile = async (req, res) => {
@@ -119,4 +139,5 @@ export default {
   createDonation,
   getCauseById,
   organizationById,
+  getDonor
 };

@@ -186,6 +186,7 @@ export class SigninComponent {
             this.authService.logIn();
             // Navigate to the home page if the token is present
             if (role == 'donar') this.router.navigate(['/']);
+            else if(role=='admin')this.router.navigate(['/admin'])
             else {
               this.router.navigate(['/']);
             }
