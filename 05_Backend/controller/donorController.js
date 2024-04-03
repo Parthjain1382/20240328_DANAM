@@ -37,13 +37,18 @@ const getUserProfile = async (req, res) => {
     const userId = req.user.id;
 
     // Retrieve user profile details from the database based on user ID
-    const userProfile = await Users.findById(userId).select(
-      "username role phone_number email address numberOfDonations contributionAmmount"
-    );
-
+    // const userProfile = await Users.findById(userId).select(
+    //   "username role phone_number email address numberOfDonations contributionAmmount"
+    // );
+    const userDonations = await Donation.find({ Donor: userId });
+    console.log(userDonations);
+    res.json(userDonations)
     // Check if user profile exists
-    if (!userProfile) {
-      return res.status(404).json({ error: "User profile not found" });
+    // if (!userProfile) {
+    //   return res.status(404).json({ error: "User profile not found" });
+    // }
+    if (!userDonations) {
+      return res.status(404).json({ error: "You have made no donations yet"});
     }
   } catch (error) {
     console.log(error.message);
