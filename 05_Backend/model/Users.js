@@ -31,10 +31,12 @@ const userSchema = new mongoose.Schema({
   },
   numberOfDonations: {
     type: Number,
+    default:0
     // required: false 
   },
   contributionAmmount: {
-    type: Number
+    type: Number,
+    default:0
   },
   token:{
     type:String, 

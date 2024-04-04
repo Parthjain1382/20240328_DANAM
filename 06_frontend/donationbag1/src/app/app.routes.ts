@@ -38,7 +38,6 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
-  { path: 'donorsignin', component: SigninComponent },
 
   { path: 'donorsignup', component: SignUpDonorComponent},
   { path: 'blog', component: BlogComponent },
@@ -52,18 +51,25 @@ export const routes: Routes = [
   {path:'donorList',component:DonorListComponent},
   {path:'charityList',component:ChartyListComponent},
 
+
   {path:'profile',component:DonorProfilePageComponent},
   {path:'createcause',component:CreateCauseComponent},
   { path: 'causeCard', component: CauseCardComponent },
   { path: 'causeDetail', component: CharityInfoComponent },
 
+  //signin and signup for Donor and admin
+  { path: 'donorsignin', component: SigninComponent },
+  {path:'donorsignup',component:SigninComponent},
+
+   //signin and signup for Organization
   { path: 'orgsignin', component: SignInOrganizationComponent },
   { path: 'orgsignup', component: SignUpOrganizationComponent },
   { path: 'forgotpassword', component: ForgetPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent},
-  { path: 'confirmationpage', component: ConfirmationPageComponent },
 
-  //error page
+
+  //error & confirmation  page
+  { path: 'confirmationpage', component: ConfirmationPageComponent },
   {path:'**',component:Error404Component}
 
 ];

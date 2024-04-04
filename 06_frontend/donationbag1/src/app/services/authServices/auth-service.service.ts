@@ -8,12 +8,14 @@ export class AuthServiceService {
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   loggedIn$ = this.loggedIn.asObservable();
-
+  jwt:string|null=localStorage.getItem('userToken')
   constructor() {}
 
   // Method to call when user logs in
   logIn() {
-    this.loggedIn.next(true);
+    if(!this.jwt){
+      this.loggedIn.next(true);
+    }
   }
 
   // Method to call when user logs out

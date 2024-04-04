@@ -14,6 +14,8 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 })
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
+  jwt:string|null=localStorage.getItem('userTokesn')
+
   isSignedUp: boolean = false;
   userRole: any;
   toggleNavbar() {
@@ -33,9 +35,17 @@ export class NavbarComponent implements OnInit {
     private router: Router
   ) {}
   ngOnInit() {
-    this.authService.loggedIn$.subscribe((loggedIn) => {
-      this.isSignedUp = loggedIn;
-    });
+    this.jwt=localStorage.getItem('userToken')
+
+    if(this.jwt){
+      this.isSignedUp=true
+    }
+    else
+    this.isSignedUp=false
+    
+    // this.authService.loggedIn$.subscribe((loggedIn) => {
+    //   this.isSignedUp = loggedIn;
+    // });
 
     this.userRole = localStorage.getItem('role') || 'organization';
     console.log(this.userRole);

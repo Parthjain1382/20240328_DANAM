@@ -18,8 +18,16 @@ router.get("/causes", donorController.getAllCauses);
 router.post("/donate", requireLogin, donorController.createDonation);
 
 router.get("/getprofile", requireLogin, donorController.getUserProfile);
+
 router.get("/getCause", donorController.getCauseById);
+
 router.get("/getOrganization", donorController.organizationById);
+
+//To change the Funds Raised and FundsNeeded in the Cause Database
+router.put('/CauseDataChange',requireLogin,donorController.putCause)
+
+//To change the numberofDonates and contribution Amount 
+router.put('/userDonate',requireLogin,donorController.userDonate)
 
 router.get('/getDonor',requireLogin,donorController.getDonor)
 export default router;

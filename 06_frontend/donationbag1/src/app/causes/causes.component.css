@@ -7,7 +7,7 @@
 h2 {
   text-align: center;
   color: var(--main-purple-color);
-  background-color: #71b61b;
+  background-color: #51BE78;
   padding: 15px;
 }
 .boxes {
@@ -70,7 +70,7 @@ input[type="checkbox"]:not(:checked) + label::after {
   border-radius: 5px;
 }
 input[type="checkbox"]:checked + label::after {
-  background-color: #71b61b;
+  background-color: #51BE78;
 }
 input[type="checkbox"]:not(:checked):hover + label::after {
   background-color: var(--main-purple-color);
