@@ -33,22 +33,19 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthServiceService,
     private router: Router
-  ) {}
-  ngOnInit() {
-    this.jwt=localStorage.getItem('userToken')
+  ) {
+    this.isAuthTokenPresent();
+  }
 
-    if(this.jwt){
-      this.isSignedUp=true
-    }
-    else
-    this.isSignedUp=false
-    
-    // this.authService.loggedIn$.subscribe((loggedIn) => {
-    //   this.isSignedUp = loggedIn;
-    // });
-
+  isAuthTokenPresent(){
     this.userRole = localStorage.getItem('role') || 'organization';
-    console.log(this.userRole);
+
+
+    return !!localStorage.getItem('userToken')
+  }
+
+
+  ngOnInit() {
   }
 
   Login(): void {
@@ -71,7 +68,7 @@ export class NavbarComponent implements OnInit {
     if (confirmation) {
       this.isSignedUp = false;
       // clearing the token from the local Storage
-      localStorage.clear();
+      localStorage.clear();   
       this.refreshPage()
       // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
 

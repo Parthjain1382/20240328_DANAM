@@ -31,6 +31,7 @@ import { CauseCardComponent } from './cause-card/cause-card.component';
 import { CharityInfoComponent } from './charity-info/charity-info.component';
 import { CreateCauseComponent } from './create-cause/create-cause.component';
 import { Error404Component } from './error404/error404.component';
+import { AuthGuardService } from './services/authServices/auth-guard.service';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },

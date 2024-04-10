@@ -17,8 +17,8 @@ body {
 .mission-div{
   display: flex;
   height: fit-content;
-  margin: 30px 0px 80px 0px;
-  
+
+
 }
 .mission-div h1{
   display: flex;
@@ -50,3 +50,18 @@ body {
   align-items: center;
 }
 
+
+.mission-vision {
+  background-color: #FFF; }
+  .mission-vision .mission {
+    padding: 50px; }
+    @media screen and (max-width: 940px) {
+      .mission-vision .mission {
+        padding: 30px 10px; } }
+  .mission-vision .vision {
+    padding: 50px; }
+    @media screen and (max-width: 940px) {
+      .mission-vision .vision {
+        padding: 30px 10px; } }
+  .mission-vision .mv-det {
+    margin: auto; }

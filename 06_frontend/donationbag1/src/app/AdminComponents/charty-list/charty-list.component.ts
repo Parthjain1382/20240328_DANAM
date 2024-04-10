@@ -57,7 +57,7 @@ this.router.navigate(['/charityList'])
 fetchData(){
   const apiUrl = 'http://localhost:3000/admin/orgDetails';
   const jwt = localStorage.getItem("userToken");
-  console.log("jwt: " + jwt);
+
 
   // Prepare the headers, including the Authorization header with the JWT token
   const headers = {
@@ -116,7 +116,6 @@ donorFetch(){
     (data) => {
       //to get the number of Causes
       this.donorCount = data.length;
-      console.log(this.donorCount);
     },
     (error) => {
       console.error('Error fetching data:', error);

@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class DonationComponent implements OnInit {
 
   //donor_array storing all the data in
-  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string }[] = []
+  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string,organization_Name:any }[] = []
 
   //number of charity
   charityCount: number = 0
@@ -31,6 +31,7 @@ export class DonationComponent implements OnInit {
     this.fetchData();
     this.charityFetch();
     this.donorFetch();
+    this.donationFetch()
   }
 
 
@@ -55,7 +56,7 @@ this.router.navigate(['/charityList'])
   fetchData() {
     const apiUrl = 'http://localhost:3000/admin/orgDetails';
     const jwt = localStorage.getItem("userToken");
-    console.log("jwt: " + jwt);
+
 
     // Prepare the headers, including the Authorization header with the JWT token
     const headers = {
@@ -119,7 +120,7 @@ this.router.navigate(['/charityList'])
     const apiUrl = 'http://localhost:3000/admin/donationList';
     // Get the JWT token from local storage
     const jwt = localStorage.getItem("userToken");
-    console.log("jwt: " + jwt);
+
 
     // Prepare the headers, including the Authorization header with the JWT token
     const headers = {
@@ -132,7 +133,6 @@ this.router.navigate(['/charityList'])
     this.http.get<any[]>(apiUrl,headers).subscribe(
 
       (data) => {
-        console.log(data);
         // Transform the fetched data
         this.donation_array = data.map(item => ({
           _id: item._id,
@@ -140,14 +140,36 @@ this.router.navigate(['/charityList'])
           donor: item.organization,
           amount: item.amount,
           causeTitle: item.causeTitle,
-          date: this.formatDate(new Date(item.date))
-        }));
+          date: this.formatDate(new Date(item.date)),
+          organization_Name:this.getOrganizationName(item.organization)
+
+        })
+        );
+
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
   }
+
+
+ //Getting the Organization Name
+ getOrganizationName(organizationId: string): void {
+  const url = `http://localhost:3000/donor/getOrganization?_id=${organizationId}`;
+
+  // HTTP GET request to fetch organization details
+  this.http.get<any>(url).subscribe({
+    next: (response) => {
+
+     
+    return response.name
+    },
+    error: (error) => {
+      console.error('Error fetching organization details:', error);
+    },
+  });
+}
 
     /**This is the method to make the date formated
      * @param {Date} date It take the date that needs formating

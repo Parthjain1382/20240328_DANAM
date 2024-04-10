@@ -18,20 +18,9 @@ export class CharityInfoComponent implements OnInit {
   token: any;
   content: any;
   organization_name: string = '';
+  progressBar:number=0;
 
-  // organization: {
-  //   _id: string,
-  //   title: string,
-  //    organization :string,
-  //    fundsRaised : number,
-  //    fundsRequired : number,
-  //    numberOfDonors : number,
-  //    category :  string ,
-  //    status :  string ,
-  //    descriptionText : string ,
-  //    descriptionImage :  string ,
-  //    date : Date,
-  // }[]=[]
+
 
   organization: any
   AmountDonation: number = 0
@@ -102,7 +91,7 @@ export class CharityInfoComponent implements OnInit {
 
 
   addNewDonation(options: any) {
-
+    console.log("hello");
     //getting the jwt and donorID
     const jwt = localStorage.getItem('userToken');
     const donorId = localStorage.getItem('donarId');
@@ -113,6 +102,9 @@ export class CharityInfoComponent implements OnInit {
     const fundsRequired = this.content.fundsRequired
     //Required More Amount
     const difference = fundsRequired - fundsRaised
+
+    this.progressBar=Math.floor((fundsRaised / fundsRequired) * 100)
+    console.log("progressbarincharityinfo",this.progressBar);
 
     //If the difference is greater than the user is paying He can Donate
     if (difference >= (options.amount) / 100) {
@@ -182,6 +174,7 @@ export class CharityInfoComponent implements OnInit {
  */
   addNewDonationObject(jwt:string|null,donorId:string|null,options:any,httpOptions:any){
 
+
     const body = {
       organization: this.content.organization,
       amount: options.amount/100,
@@ -205,7 +198,6 @@ export class CharityInfoComponent implements OnInit {
   ngOnInit(): void {
 
     this.token = localStorage.getItem('userToken');
-
     this.route.queryParams.subscribe((params) => {
       this.causeId = params['_id'];
       if (this.causeId) {

@@ -10,7 +10,6 @@ body {
 }
 .about-us {
     background-color: #edf1f5;
-    @include big-padding();
 
     .natur-row {
         margin-top: 20px;

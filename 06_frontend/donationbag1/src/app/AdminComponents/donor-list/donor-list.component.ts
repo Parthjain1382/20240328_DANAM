@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
 export class DonorListComponent implements OnInit{
 
 //donor_array storing all the data in
-donor_array: {_id:string,donor_name:string,email: string, address: string, phone_number: string,numberOfDonation:number}[]=[{
-  _id:'',
-  donor_name:'',
-  email:'',
-  address:'',
-  phone_number:'',
-  numberOfDonation:0
-}]
+donor_array: {_id:string,donor_name:string,email: string, address: string, phone_number: string,numberOfDonation:number}[]=[]
 
 //number of charity
 charityCount:number=0
@@ -106,16 +99,20 @@ this.http.get<any[]>(apiUrl,headers).subscribe(
 *
 */
 donorFetch(){
-const apiUrl='http://localhost:3000/admin/donationList';
+const apiUrl='http://localhost:3000/donor/donorList';
 const jwt = localStorage.getItem("userToken");
+
 const headers = {
   headers: new HttpHeaders({
     'Authorization': `Bearer ${jwt}`
   })
 };
+
 this.http.get<any[]>(apiUrl,headers).subscribe(
 
   (data) => {
+    console.log(data);
+
     //to get the number of Causes
     this.donorCount = data.length;
       // Transform the fetched data
@@ -125,9 +122,8 @@ this.http.get<any[]>(apiUrl,headers).subscribe(
         email:item.email,
         address:item.address,
         phone_number:item.phone_number,
-        numberOfDonation:item.numberOfDonations?item.numberOfDonations:0
+        numberOfDonation:item.numberOfDonations
       }));
-      console.log(this.donor_array);
 
   },
   (error) => {
