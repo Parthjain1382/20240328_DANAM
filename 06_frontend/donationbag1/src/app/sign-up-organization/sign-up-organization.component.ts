@@ -17,12 +17,11 @@ export class SignUpOrganizationComponent {
   usernameErrorVisibility:Boolean = false
   emailErrorVisibility:Boolean = false
   passwordErrorVisibility:Boolean = false
-  username:string = ''
+  companyName:string = ''
   email:string= ''
+  contactNumber:string=''
+  address:string= ''
   password:string=''
-  phonenumber:string=''
-  address:string=''
-  companyName:string=''
   usernameErrorMessage: string = '';
   emailErrorMessage: string = '';
   passwordErrorMessage: string = '';
@@ -33,17 +32,17 @@ export class SignUpOrganizationComponent {
 
   }
 
-  validateUsername(): void {
-    // Example validation: Username should not be empty
-    if (this.username.trim().length === 0) {
-      this.usernameErrorMessage = 'Username cannot be empty';
-      this.usernameErrorVisibility = true;
+  // validateUsername(): void {
+  //   // Example validation: Username should not be empty
+  //   if (this.username.trim().length === 0) {
+  //     this.usernameErrorMessage = 'Username cannot be empty';
+  //     this.usernameErrorVisibility = true;
 
-    } else {
-      this.usernameErrorVisibility = false;
+  //   } else {
+  //     this.usernameErrorVisibility = false;
 
-    }
-  }
+  //   }
+  // }
 
   validateEmail(): void {
     // Simple email regex for demonstration
@@ -84,12 +83,12 @@ export class SignUpOrganizationComponent {
 
   checkAllValidations(): void {
     // Check if all validations pass
-    const isUsernameValid = !this.usernameErrorVisibility && this.username.trim().length > 0;
+    // const isUsernameValid = !this.usernameErrorVisibility && this.username.trim().length > 0;
     const isEmailValid = !this.emailErrorVisibility && this.email.trim().length>0;
     const isPasswordValid = !this.passwordErrorVisibility && this.password.trim().length>0;
 
     // Update submitDisabled based on validations
-    this.submitDisabled = !(isUsernameValid && isEmailValid && isPasswordValid);
+    this.submitDisabled = !(isEmailValid && isPasswordValid);
   }
 
   //If already have a account then nav to Login
@@ -104,26 +103,22 @@ export class SignUpOrganizationComponent {
   ) { }
 
 
-  storeUserCred() {
-    const userData = {
+  storeUserCred(): void {
+    const orgData = {
+      name: this.companyName,
       email: this.email,
       password: this.password,
-      username: this.username,
-      phone_number: this.phonenumber,
-      address: this.address,
-      companyName: this.companyName
-
+      location: this.address,
+      contactNumber: this.contactNumber
     };
 
-    this.http.post('http://localhost:3000/signup', userData).subscribe({
+    this.http.post('http://localhost:3000/org/signup', orgData).subscribe({
       next: (response: any) => {
         console.log('User registered successfully');
-
-        this.router.navigate(['signin']);
+        this.router.navigate(['/orgsignin']);
       },
       error: (error) => {
         console.error('Registration error:', error);
-
       }
     });
   }

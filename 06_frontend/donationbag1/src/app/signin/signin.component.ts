@@ -11,22 +11,20 @@ import { timer, Subscription } from 'rxjs';
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [NgStyle,FormsModule],
+  imports: [NgStyle, FormsModule],
   templateUrl: './signin.component.html',
-  styleUrl: './signin.component.css'
+  styleUrl: './signin.component.css',
 })
 export class SigninComponent {
-  email:string=''
-  password:string = ''
+  email: string = '';
+  password: string = '';
 
-
-    constructor(
-      private route: ActivatedRoute,
-      private http: HttpClient,
-      private router: Router,
-      private authService: AuthServiceService
-    ) { }
-
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private authService: AuthServiceService
+  ) {}
 
   /** visibility of email
    */
@@ -39,11 +37,10 @@ export class SigninComponent {
   submitDisabled: boolean = true;
   /**email error message
    */
-  emailError: { errorMsg: string }[] = [{ errorMsg: "" }];
+  emailError: { errorMsg: string }[] = [{ errorMsg: '' }];
   /**password error message
    */
-  passwordError: { errorMsg: string }[] = [{ errorMsg: "" }];
-
+  passwordError: { errorMsg: string }[] = [{ errorMsg: '' }];
 
   /** To validate email field
    *
@@ -69,9 +66,9 @@ export class SigninComponent {
    *
    * @param {String} email input password
    * @returns {String|undefined} error string or undefined
-  */
- validatePassword(password: string): string | undefined {
-   // Check if the password is at least 8 characters long
+   */
+  validatePassword(password: string): string | undefined {
+    // Check if the password is at least 8 characters long
     if (password.length < 8) {
       return 'Password must be at least 8 characters long';
     }
@@ -112,18 +109,14 @@ export class SigninComponent {
     this.emailError = error ? [{ errorMsg: error }] : [];
     // if error then make error visible
     if (this.emailError.length > 0) {
-      this.emailErrorVisible = true
+      this.emailErrorVisible = true;
     }
-
-
   }
   /** make errormessage disabled on focus
    *
    */
   onEmailFocus() {
-    this.emailErrorVisible = false
-
-
+    this.emailErrorVisible = false;
   }
   /**To handel onblue event and show error if required on password
    *
@@ -134,9 +127,7 @@ export class SigninComponent {
     const error = this.validatePassword(password);
     this.passwordError = error ? [{ errorMsg: error }] : [];
     if (this.passwordError.length > 0) {
-      this.passwordErrorVisible = true
-
-
+      this.passwordErrorVisible = true;
     }
   }
 
@@ -145,59 +136,71 @@ export class SigninComponent {
    *
    */
   onPasswordFocus() {
-    this.passwordErrorVisible = false
+    this.passwordErrorVisible = false;
   }
 
-
-  handelOnchange(event: any) { }
-  handelOnmouseenter() { }
+  handelOnchange(event: any) {}
+  handelOnmouseenter() {}
   /**to handel submit button visibility and make error msg disabled
    *
    * @param {event }
    */
   handelPasswordChange(event: any) {
-    this.passwordErrorVisible = false
-    const password = event.target.value
+    this.passwordErrorVisible = false;
+    const password = event.target.value;
 
-
-    const error = this.validatePassword(password)
+    const error = this.validatePassword(password);
 
     if (typeof error == 'undefined') {
       if (this.emailErrorVisible == false) {
         this.submitDisabled = false;
       }
-
-
     }
   }
-
-  ngOnInit(): void {
-
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgotpassword']);
   }
+  ngOnInit(): void {}
 
-
-  //This is the function call to the ApI
-  //It will generate an API and store it in the local storage
   fetchjwt() {
     const loginData = {
       email: this.email,
-      password: this.password
+      password: this.password,
     };
     console.log(loginData);
-      this.http.post('http://localhost:3000/signin',loginData).subscribe({
+
+    if (this.email && this.password) {
+      this.http.post('http://localhost:3000/login', loginData).subscribe({
         next: (response: any) => {
-          console.log('JWT Token:', response.token);
-          // Handle the response, such as storing the JWT token or redirecting the user
-           // Store the JWT token in local storage
-             localStorage.setItem('jwtToken', response.token);
-              //after sucessfull login
-             this.authService.logIn();
-             this.router.navigate(['/']);
+          console.log('Signin successful', response);
+          const token = response.token;
+          const role = response.role;
+          const donarId = response.donarId;
+
+          if (token && role) {
+            console.log(token);
+            localStorage.setItem('userToken', token);
+            localStorage.setItem('role', role);
+            localStorage.setItem('donarId', donarId);
+
+            this.authService.logIn();
+            // Navigate to the home page if the token is present
+            if (role == 'donar') this.router.navigate(['/']);
+            else {
+              this.router.navigate(['/']);
+            }
+          } else {
+            // Optionally handle the case where there's no token in the response
+            console.log('No token received');
+          }
         },
         error: (error) => {
-          console.error('Error:', error);
-          // Handle any errors, such as displaying a message to the user
-        }
-      })
+          console.error('Signin failed', error);
+          alert('Enter correct email or password');
+        },
+      });
+    } else {
+      console.log('Form is invalid. Please fix the errors.');
+    }
   }
 }

@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     // required: true
+    unique: true
   },
   phone_number: {
     type: String,
@@ -34,6 +35,10 @@ const userSchema = new mongoose.Schema({
   },
   contributionAmmount: {
     type: Number
+  },
+  token:{
+    type:String, 
+    default:''
   }
 });
 

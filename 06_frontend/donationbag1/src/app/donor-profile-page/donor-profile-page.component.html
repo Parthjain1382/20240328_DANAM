@@ -10,15 +10,15 @@
       
         <div class="column">
           <div class="card">
-            <h3>Total</h3>
-            <p>{{causes}}</p>
+            <h3>Total Donations</h3>
+            <p>{{totalDonationsDonated}}</p>
           </div>
         </div>
         </div>
     
         <div class="my-cause">
             <h1>My Causes</h1>
-            <app-table-component></app-table-component>
+            <app-table-component (totalAmountChanged)="onTotalAmountChanged($event)" (allDonations)="onCalculatingTotalDonations($event)"></app-table-component>
         </div>
    </div>
     
