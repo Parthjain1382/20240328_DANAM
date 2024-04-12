@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
 export class DonationComponent implements OnInit {
 
   //donor_array storing all the data in
-  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string }[] = [{
-    _id: '',
-    organization: '',
-    donor: '',
-    amount: 0,
-    causeTitle: '',
-    date: ''
-  }]
+  donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string,organization_Name:any }[] = []
 
   //number of charity
   charityCount: number = 0
@@ -38,15 +31,40 @@ export class DonationComponent implements OnInit {
     this.fetchData();
     this.charityFetch();
     this.donorFetch();
+    this.donationFetch()
   }
 
+
+
+//navigate to respective component
+navtoDonorList(){
+  this.router.navigate(['/donorList'])
+}
+navtoCharityRequest(){
+this.router.navigate(['/charityrequest'])
+}
+navtoDonation(){
+this.router.navigate(['/donation'])
+}
+navtoCharityList(){
+this.router.navigate(['/charityList'])
+}
 
   /**This is the method which get the charity details at the beginning
    *
    */
   fetchData() {
     const apiUrl = 'http://localhost:3000/admin/orgDetails';
-    this.http.get<any[]>(apiUrl).subscribe(
+    const jwt = localStorage.getItem("userToken");
+
+
+    // Prepare the headers, including the Authorization header with the JWT token
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${jwt}`
+      })
+    };
+    this.http.get<any[]>(apiUrl,headers).subscribe(
       (data) => {
         //to get the number of charity
         this.charityCount = data.length;
@@ -64,6 +82,7 @@ export class DonationComponent implements OnInit {
   charityFetch() {
     const apiUrl = 'http://localhost:3000/donor/causes';
 
+
     this.http.get<any[]>(apiUrl).subscribe(
       (data) => {
         //to get the number of Causes
@@ -80,7 +99,7 @@ export class DonationComponent implements OnInit {
    *
    */
   donorFetch() {
-    const apiUrl = 'http://localhost:3000/donor/donorList';
+    const apiUrl = 'http://localhost:3000/admin/donationList';
 
     this.http.get<any[]>(apiUrl).subscribe(
 
@@ -99,8 +118,19 @@ export class DonationComponent implements OnInit {
  */
   donationFetch() {
     const apiUrl = 'http://localhost:3000/admin/donationList';
+    // Get the JWT token from local storage
+    const jwt = localStorage.getItem("userToken");
 
-    this.http.get<any[]>(apiUrl).subscribe(
+
+    // Prepare the headers, including the Authorization header with the JWT token
+    const headers = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${jwt}`
+      })
+    };
+
+
+    this.http.get<any[]>(apiUrl,headers).subscribe(
 
       (data) => {
         // Transform the fetched data
@@ -110,14 +140,36 @@ export class DonationComponent implements OnInit {
           donor: item.organization,
           amount: item.amount,
           causeTitle: item.causeTitle,
-          date: this.formatDate(new Date(item.date))
-        }));
+          date: this.formatDate(new Date(item.date)),
+          organization_Name:this.getOrganizationName(item.organization)
+
+        })
+        );
+
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
   }
+
+
+ //Getting the Organization Name
+ getOrganizationName(organizationId: string): void {
+  const url = `http://localhost:3000/donor/getOrganization?_id=${organizationId}`;
+
+  // HTTP GET request to fetch organization details
+  this.http.get<any>(url).subscribe({
+    next: (response) => {
+
+     
+    return response.name
+    },
+    error: (error) => {
+      console.error('Error fetching organization details:', error);
+    },
+  });
+}
 
     /**This is the method to make the date formated
      * @param {Date} date It take the date that needs formating

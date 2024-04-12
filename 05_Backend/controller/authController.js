@@ -7,6 +7,8 @@ import { passwordValidator } from "../dependencies/validations/userValidations.j
 import nodemailer from "nodemailer";
 import randomstring from "randomstring";
 import config from "../config/config.js";
+
+
 // Controller function for user signup
 const userSignup = async (req, res) => {
   try {
@@ -267,11 +269,14 @@ const reset_password = async (req, res) => {
     res.status(400).send({ success: false, msg: error.message });
   }
 };
+
+
 const isTokenExpired = (timestamp) => {
   const expirationTime = 86400000;
   const currentTime = new Date().getTime();
   return currentTime - timestamp > expirationTime;
 };
+
 const orgLogin = async (req, res) => {
   try {
     const { email, password } = req.body;

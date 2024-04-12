@@ -11,16 +11,16 @@ import { Router } from "express";
 
 const router = express.Router();
 //for charity-request page in frontend
-router.get('/requests', adminController.getAllPendingCauses);
+router.get('/requests',requireLogin,adminController.getAllPendingCauses);
 
-router.put('/update/request', adminController.updateCauseStatus);
+router.put('/update/request', requireLogin,adminController.updateCauseStatus);
 
-router.delete('/deleteCause',adminController.deleteCause)
+router.delete('/deleteCause',requireLogin,adminController.deleteCause)
 
 //for chariy list page in the the frontend
-router.get('/orgDetails',adminController.orgDetails)
+router.get('/orgDetails',requireLogin,adminController.orgDetails)
 
 
-router.get('/donationList',adminController.donationList)
+router.get('/donationList',requireLogin,adminController.donationList)
 // Exporting the router
 export default router;

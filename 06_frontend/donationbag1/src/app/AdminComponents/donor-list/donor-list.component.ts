@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,14 +12,7 @@ import { Router } from '@angular/router';
 export class DonorListComponent implements OnInit{
 
 //donor_array storing all the data in
-donor_array: {_id:string,donor_name:string,email: string, address: string, phone_number: string,numberOfDonation:number}[]=[{
-  _id:'',
-  donor_name:'',
-  email:'',
-  address:'',
-  phone_number:'',
-  numberOfDonation:0
-}]
+donor_array: {_id:string,donor_name:string,email: string, address: string, phone_number: string,numberOfDonation:number}[]=[]
 
 //number of charity
 charityCount:number=0
@@ -41,12 +34,33 @@ this.donorFetch();
 }
 
 
+//navigate to respective component
+navtoDonorList(){
+  this.router.navigate(['/donorList'])
+}
+navtoCharityRequest(){
+this.router.navigate(['/charityrequest'])
+}
+navtoDonation(){
+this.router.navigate(['/donation'])
+}
+navtoCharityList(){
+this.router.navigate(['/charityList'])
+}
+
 /**This is the method which get the charity details at the beginning
 *
 */
 fetchData(){
 const apiUrl = 'http://localhost:3000/admin/orgDetails';
-this.http.get<any[]>(apiUrl).subscribe(
+
+const jwt = localStorage.getItem("userToken");
+const headers = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${jwt}`
+  })
+};
+this.http.get<any[]>(apiUrl,headers).subscribe(
   (data) => {
      //to get the number of charity
     this.charityCount=data.length;
@@ -63,8 +77,13 @@ this.http.get<any[]>(apiUrl).subscribe(
 */
 charityFetch(){
 const apiUrl='http://localhost:3000/donor/causes';
-
-this.http.get<any[]>(apiUrl).subscribe(
+const jwt = localStorage.getItem("userToken");
+const headers = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${jwt}`
+  })
+};
+this.http.get<any[]>(apiUrl,headers).subscribe(
   (data) => {
     //to get the number of Causes
     this.causesCount=data.length;
@@ -81,10 +100,19 @@ this.http.get<any[]>(apiUrl).subscribe(
 */
 donorFetch(){
 const apiUrl='http://localhost:3000/donor/donorList';
+const jwt = localStorage.getItem("userToken");
 
-this.http.get<any[]>(apiUrl).subscribe(
+const headers = {
+  headers: new HttpHeaders({
+    'Authorization': `Bearer ${jwt}`
+  })
+};
+
+this.http.get<any[]>(apiUrl,headers).subscribe(
 
   (data) => {
+    console.log(data);
+
     //to get the number of Causes
     this.donorCount = data.length;
       // Transform the fetched data
@@ -94,9 +122,8 @@ this.http.get<any[]>(apiUrl).subscribe(
         email:item.email,
         address:item.address,
         phone_number:item.phone_number,
-        numberOfDonation:item.numberOfDonations?item.numberOfDonations:0
+        numberOfDonation:item.numberOfDonations
       }));
-      console.log(this.donor_array);
 
   },
   (error) => {

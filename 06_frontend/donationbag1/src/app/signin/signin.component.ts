@@ -178,14 +178,17 @@ export class SigninComponent {
           const donarId = response.donarId;
 
           if (token && role) {
-            console.log(token);
+
             localStorage.setItem('userToken', token);
             localStorage.setItem('role', role);
             localStorage.setItem('donarId', donarId);
 
             this.authService.logIn();
             // Navigate to the home page if the token is present
-            if (role == 'donar') this.router.navigate(['/']);
+            if (role == 'donar'){
+              this.router.navigate(['/']);
+            }
+            else if(role=='admin')this.router.navigate(['/admin'])
             else {
               this.router.navigate(['/']);
             }

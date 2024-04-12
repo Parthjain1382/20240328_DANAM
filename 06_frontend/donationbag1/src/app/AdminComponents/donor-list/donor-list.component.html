@@ -20,25 +20,25 @@
                   </li>
                   <br>
                   <li class="nav-item">
-                      <a class="nav-link">
-                          <i class="bi bi-bar-chart"></i> Donor List
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">
-                          <i class="bi bi-chat"></i> Charity requests
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">
-                          <i class="bi bi-bookmarks"></i> Donations
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#">
-                          <i class="bi bi-people"></i> Charity List
-                      </a>
-                  </li>
+                    <a class="nav-link" (click)="navtoDonorList()">
+                        <i class="bi bi-bar-chart"></i> Donor List
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="navtoCharityRequest()">
+                        <i class="bi bi-chat"></i> Charity requests
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="navtoDonation()">
+                        <i class="bi bi-bookmarks"></i> Donations
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="navtoCharityList()">
+                        <i class="bi bi-people"></i> Charity List
+                    </a>
+                </li>
               </ul>
               <!-- Divider -->
               <hr class="navbar-divider my-5 opacity-20">

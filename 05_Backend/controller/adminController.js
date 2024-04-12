@@ -1,24 +1,35 @@
 //importing nesscary models
 import Cause from "../model/causes.js";
 import donation from "../model/donation.js";
+import Organization from "../model/organization.js";
 import organization from "../model/organization.js"
-
+import Users from "../model/Users.js";
 
 /** API to get all the causes based on status pending 
  * @param {*} req 
  * @param {*} res 
  */
 const getAllPendingCauses = async (req, res) => {
+  //Getting the user credential from Middleware
+  const user = req.user
+
+  //getting the user's data
+  const userdata = await Users.findById(user._id)
+
+  if (userdata.role !== "admin") {
+    res.status(404).json('User is not Admin')
+  }
+
   let stat = req.query.status
   try {
     const allCauses = await Cause.find({ status: 'pending' })
-    .populate({
-      path: 'organization',
-      select: 'name' 
-    })
-    .exec();
-  
-  // console.log(allCauses);
+      .populate({
+        path: 'organization',
+        select: 'name'
+      })
+      .exec();
+
+    // console.log(allCauses);
     res.json(allCauses);
   } catch (err) {
     console.log(err.message);
@@ -33,11 +44,20 @@ const getAllPendingCauses = async (req, res) => {
  * @returns  The new object where the status is updated 
  */
 const updateCauseStatus = async (req, res) => {
+  //Getting the user credential from Middleware
+  const user = req.user
+  //getting the user's data
+  const userdata = await Users.findById(user._id)
+
+
+  if (userdata.role !== "admin") {
+    res.status(404).json('User is not Admin')
+  }
   const { id, status } = req.body;
   try {
     // Find the cause by its title
     const foundCause = await Cause.findOne({ _id: id });
-    
+
     // If cause not found, return 404
     if (!foundCause) {
       return res.status(404).json({ message: "Cause not found" });
@@ -45,13 +65,13 @@ const updateCauseStatus = async (req, res) => {
 
     // Update the status of the found cause
     foundCause.status = status;
-    
+
     // Save the updated cause
     await foundCause.save();
-    
+
     // Return the updated cause
     res.json(foundCause);
-  } 
+  }
   catch (err) {
     console.log(err.message);
     res.status(500).send('Internal server error');
@@ -65,11 +85,22 @@ const updateCauseStatus = async (req, res) => {
  * @returns deleteCause the cause that is deleted
  */
 const deleteCause = async (req, res) => {
-  const  id = req.body.id;
+  //Getting the user credential from Middleware
+  const user = req.user
+
+  //getting the user's data
+  const userdata = await Users.findById(user._id)
+
+
+  if (userdata.role !== "admin") {
+    res.status(404).json('User is not Admin')
+  }
+
+  const id = req.body.id;
   try {
     // If cause not found, return 404
-    const cause=await Cause.findOne({_id: id});
-  
+    const cause = await Cause.findOne({ _id: id });
+
     //if cause is not present in the database
     if (!cause) {
       return res.status(404).json({ message: "Cause not found" });
@@ -88,33 +119,50 @@ const deleteCause = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const orgDetails=async(req,res)=>{
+const orgDetails = async (req, res) => {
+  //Getting the user credential from Middleware
+  const user = req.user
+
+  //getting the user's data
+  const userdata = await Users.findById(user._id)
+
+
+  if (userdata.role !== "admin") {
+    res.status(404).json('User is not Admin')
+  }
 
   try {
     const documents = await organization.find();
     console.log(documents);
     // This will be an array of all documents in the Organization collection
-    res.status(200).json(documents); 
-  } 
+    res.status(200).json(documents);
+  }
   catch (err) {
     console.error('Error retrieving documents:', err);
   }
 }
 
-
 /**This function is responsible for getting the donation List 
- * 
+ * @param {*} req  The user details from require Login
+ * @param {*} res The 
  */
-const donationList=async(req,res)=>{
-  try{
-    const documents = await donation.find();
-    console.log(documents);
-    // This will be an array of all documents in the Organization collection
-    res.status(200).json(documents); 
-  } 
-  catch (err) {
-    console.error('Error retrieving documents:', err);
+const donationList = async (req, res) => {
+  //Getting the user credential from Middleware
+  const user = req.user
+  //getting the user's data
+  const userdata = await Users.findById(user._id)
+  if (userdata.role !== "admin") {
+    res.status(404).json('User is not Admin')
   }
+  try {
+    const documents = await donation.find();
+    // This will be an array of all documents in the Organization collection
+    res.status(200).json(documents);
+  }
+    // This will be an arra y of all documents in the Organization collection
+  catch (err) {
+  console.error('Error retrieving documents:', err);
+}
 }
 
 
@@ -124,5 +172,5 @@ export default {
   deleteCause,
   orgDetails,
   donationList
-  
+
 }
