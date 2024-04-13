@@ -56,6 +56,8 @@ export class TableComponentComponent implements OnInit {
     this.dataService.getTableData().subscribe(data => {
       this.dataSource = data
 
+      // this.dataSource.push(data)
+
       //looping through the element of the dataSource
       for (let i = 0; i < this.dataSource.length; i++){
         let temp = 0

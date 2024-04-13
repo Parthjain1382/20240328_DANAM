@@ -32,8 +32,20 @@ export class CausesComponent implements OnInit {
     const url = `http://localhost:3000/donor/causes`;
     this.http.get<any[]>(url).subscribe({
       next: (response) => {
+        
         this.causes = response;
-        console.log(this.causes);
+
+      // Assuming this.causes is an array of objects where each object has a descriptionText property
+      for (let i = 0; i < this.causes.length; i++) {
+      if (this.causes[i].descriptionText && this.causes[i].descriptionText.length > 32) {
+      this.causes[i].descriptionText = this.causes[i].descriptionText.slice(0, 32)+'...';
+
+      //Rounding off the required and raised Funds
+      this.causes[i].fundsRaised=Math.floor(response[i].fundsRaised)
+      this.causes[i].fundsRequired =Math.floor(response[i].fundsRequired)
+      }
+      }
+
         this.applyFilter();
       },
       error: (error) => {

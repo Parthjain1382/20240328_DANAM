@@ -149,18 +149,20 @@ const putCause= async(req,res)=>{
         if (!cause) {
             return res.status(404).send('Cause not found');
         }
+        
+        if(amountDonated+cause.fundsRaised>cause.fundsRequired){
+          return res.status(200).send("The donation Amount is greater than required");
+        }
 
         // Update fundsRaised and numberOfDonors
         cause.fundsRaised += amountDonated;
         cause.numberOfDonors += 1;
         // Check if fundsRaised equals or exceeds fundsRequired
+      
         if (cause.fundsRaised == cause.fundsRequired) {
             cause.status = 'completed';
         }
-        //substracting the required minus raised
-        else{
-          cause.fundsRequired=cause.fundsRequired-cause.fundsRaised
-        }
+      
         // Save the updated cause
         await cause.save();
         res.status(200).json({ message: 'Cause updated successfully', cause });

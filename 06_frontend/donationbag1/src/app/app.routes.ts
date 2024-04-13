@@ -7,9 +7,6 @@ import { AboutservicesComponent } from './aboutservices/aboutservices.component'
 import { ServicesComponent } from './reUsableComponent/services/services.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
-import { AddNewOrphanageComponent } from './add-new-orphanage/add-new-orphanage.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
 import { AdminDashboardComponent } from './AdminComponents/admin-dashboard/admin-dashboard.component';
 import { CharityRequestComponent } from './AdminComponents/charity-request/charity-request.component';
 import { DonationComponent } from './AdminComponents/donation/donation.component';
@@ -31,16 +28,14 @@ import { CauseCardComponent } from './cause-card/cause-card.component';
 import { CharityInfoComponent } from './charity-info/charity-info.component';
 import { CreateCauseComponent } from './create-cause/create-cause.component';
 import { Error404Component } from './error404/error404.component';
-import { AuthGuardService } from './services/authServices/auth-guard.service';
+import { AuthGuard } from './services/authServices/auth-guard.service';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'aboutUs', component: AboutservicesComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'gallery', component: GalleryComponent },
-  { path: 'addNewOrphanage', component: AddNewOrphanageComponent },
 
-  { path: 'donorsignup', component: SignUpDonorComponent},
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
   { path: '', component: LandingComponent },
@@ -59,12 +54,15 @@ export const routes: Routes = [
   { path: 'causeDetail', component: CharityInfoComponent },
 
   //signin and signup for Donor and admin
+  { path: 'donorsignup', component: SignUpDonorComponent},
   { path: 'donorsignin', component: SigninComponent },
-  {path:'donorsignup',component:SigninComponent},
+
 
    //signin and signup for Organization
   { path: 'orgsignin', component: SignInOrganizationComponent },
   { path: 'orgsignup', component: SignUpOrganizationComponent },
+
+  //forgot and reset path
   { path: 'forgotpassword', component: ForgetPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent},
 

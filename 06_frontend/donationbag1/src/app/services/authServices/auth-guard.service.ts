@@ -1,25 +1,30 @@
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { Observable } from "rxjs";
-import { AuthServiceService } from "./auth-service.service";
-import { Injectable } from "@angular/core";
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuardService implements CanActivate {
-  isLoggedIn:boolean = false
-    constructor(private authService:AuthServiceService,private router:Router){
-        this.authService.loggedIn$.subscribe(loggedIn=>{
-            this.isLoggedIn = loggedIn
-        })
-    }
+import { Injectable } from '@angular/core';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
+import { AuthServiceService } from './auth-service.service';
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if(this.isLoggedIn){
-            return true
-        }
-        else{
-            this.router.navigate(['/'])
-            return false
-        }
+@Injectable()
+export class AuthGuard implements CanActivate {
+  constructor(public authservice: AuthServiceService, public router: Router) { }
+
+  /**
+   * Checks if the user is authenticated before allowing access to a route.
+   * If not authenticated, redirects the user to the Landing page.
+   * @param route The route being activated.
+   * @param state The current router state snapshot.
+   * @returns True if the user is authenticated, false otherwise.
+   */
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    let isAuth = this.authservice.getIsAuth();
+    console.log('AuthGuard#canActivate called, isAuth:', isAuth); // Debugging line
+    if (!isAuth) {
+      this.router.navigate(['/login']); // Ensure this redirects to your login route
+      return false;
     }
+    return true;
+  }
 }

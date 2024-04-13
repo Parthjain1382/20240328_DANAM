@@ -12,9 +12,10 @@ body {
 .footer {
   padding: 50px;
   padding-bottom: 50px;
-  background-color: #1e2436;
+  background-color: #051f1f;
   color: #FFF;
 }
+
 
 li a{
   text-decoration: none;
@@ -72,7 +73,7 @@ li a{
 
 .copy {
   padding: 20px;
- background: #1a202f;
+ background: #040D12;
   color: #FFF;
 }
 

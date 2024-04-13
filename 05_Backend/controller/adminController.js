@@ -144,7 +144,7 @@ const orgDetails = async (req, res) => {
 
 /**This function is responsible for getting the donation List 
  * @param {*} req  The user details from require Login
- * @param {*} res The 
+ * @param {*} res 
  */
 const donationList = async (req, res) => {
   //Getting the user credential from Middleware

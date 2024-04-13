@@ -13,6 +13,7 @@
       placeholder="Enter Your Username"
       type="text"
       required
+      style="margin-bottom: 0px;"
     />
     <span
       class="error usernameError"
@@ -20,7 +21,7 @@
       >{{ usernameErrorMessage }}</span
     >
 
-    <label><b>Email</b></label>
+    <label style="margin-top: 20px; "><b>Email</b></label>
     <input
       type="text"
       name="email"
@@ -29,6 +30,7 @@
       [(ngModel)]="email"
       placeholder="Enter Your Email"
       type="text"
+      style="margin-bottom:0px"
       required
     />
     <span
@@ -37,7 +39,7 @@
       >{{ emailErrorMessage }}</span
     >
 
-    <label><b>Password</b></label>
+    <label  style="margin-top: 20px; "><b>Password</b></label>
     <input
       type="password"
       name="password"
@@ -45,6 +47,7 @@
       (focus)="hidePasswordError()"
       [(ngModel)]="password"
       placeholder="Enter Your Password"
+      style="margin-bottom:0px"
       type="text"
       required
     />
@@ -54,7 +57,7 @@
       >{{ passwordErrorMessage }}</span
     >
 
-    <label><b>Address </b></label>
+    <label   style="margin-top: 20px; "><b>Address </b></label>
     <input
       type="text"
       name="address"
@@ -63,21 +66,14 @@
       required
     />
 
-    <label for="phoneNumber"><b>Phone Number</b></label>
-    <input
-      type="number"
-      type="phone"
-      [(ngModel)]="phonenumber"
-      min="10"
-      name="phone"
-      placeholder="915XXXXXXX"
-      required
-    />
+    <label style="margin-top: 10px;"><b>Contact Number </b></label>
+    <input type="text" name="ContactNumber" placeholder="Enter Contact Number" [(ngModel)]="phonenumber" required>
+
 
     <br />
     <span class="already-have-an">Already have an account?</span>&nbsp;
     <span class="login2" style="font-size: 2em"
-      ><a (click)="navToLogin()" style="color: blue"
+      ><a (click)="navToLogin()"   style="color:#3CC88F; font-size:20px; cursor:pointer"
         >Login</a
       ></span
     >

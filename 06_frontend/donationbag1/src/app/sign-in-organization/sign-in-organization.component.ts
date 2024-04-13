@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../services/authServices/auth-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in-organization',
@@ -95,6 +96,11 @@ export class SignInOrganizationComponent {
     return undefined;
   }
 
+  //When the forgot password is clicked
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgotpassword']);
+  }
+
   /** To handel onblue event and show error if required on email
    *
    * @param {event}
@@ -158,40 +164,9 @@ export class SignInOrganizationComponent {
 
   ngOnInit(): void {}
 
+  //calling the function for signin for organization
   fetchjwt() {
-    const loginData = {
-      email: this.email,
-      password: this.password,
-    };
-    console.log(loginData);
-
-    if (this.email && this.password) {
-      this.http.post('http://localhost:3000/org/login', loginData).subscribe({
-        next: (response: any) => {
-          console.log('Signin successful', response);
-          const token = response.token;
-          const orgId = response.orgId;
-
-          if (token) {
-            console.log(token);
-            localStorage.setItem('orgToken', token);
-            localStorage.setItem('orgId', orgId);
-
-            this.authService.logIn();
-            // Navigate to the home page if the token is present
-            this.router.navigate(['/']);
-          } else {
-            // Optionally handle the case where there's no token in the response
-            console.log('No token received');
-          }
-        },
-        error: (error) => {
-          console.error('Signin failed', error);
-          alert('Enter correct email or password');
-        },
-      });
-    } else {
-      console.log('Form is invalid. Please fix the errors.');
-    }
+    this.authService.loginOrganization(this.email, this.password);
   }
+
 }

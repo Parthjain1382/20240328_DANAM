@@ -62,6 +62,7 @@ export class SigninComponent {
 
     return undefined;
   }
+
   /** To validate password field
    *
    * @param {String} email input password
@@ -98,7 +99,6 @@ export class SigninComponent {
   }
 
   /** To handel onblue event and show error if required on email
-   *
    * @param {event}
    */
   handleEmailBlur(event: any) {
@@ -112,12 +112,15 @@ export class SigninComponent {
       this.emailErrorVisible = true;
     }
   }
+
   /** make errormessage disabled on focus
    *
    */
   onEmailFocus() {
     this.emailErrorVisible = false;
   }
+
+
   /**To handel onblue event and show error if required on password
    *
    * @param {event}
@@ -132,8 +135,6 @@ export class SigninComponent {
   }
 
   /**make errormessage disabled on focus
-   *
-   *
    */
   onPasswordFocus() {
     this.passwordErrorVisible = false;
@@ -157,53 +158,15 @@ export class SigninComponent {
       }
     }
   }
+  //Navigate to ForgotPassword
   navigateToForgotPassword() {
     this.router.navigate(['/forgotpassword']);
   }
   ngOnInit(): void {}
 
+  //Signin the Donor or the Admin or Donor
   fetchjwt() {
-    const loginData = {
-      email: this.email,
-      password: this.password,
-    };
-    console.log(loginData);
-
-    if (this.email && this.password) {
-      this.http.post('http://localhost:3000/login', loginData).subscribe({
-        next: (response: any) => {
-          console.log('Signin successful', response);
-          const token = response.token;
-          const role = response.role;
-          const donarId = response.donarId;
-
-          if (token && role) {
-
-            localStorage.setItem('userToken', token);
-            localStorage.setItem('role', role);
-            localStorage.setItem('donarId', donarId);
-
-            this.authService.logIn();
-            // Navigate to the home page if the token is present
-            if (role == 'donar'){
-              this.router.navigate(['/']);
-            }
-            else if(role=='admin')this.router.navigate(['/admin'])
-            else {
-              this.router.navigate(['/']);
-            }
-          } else {
-            // Optionally handle the case where there's no token in the response
-            console.log('No token received');
-          }
-        },
-        error: (error) => {
-          console.error('Signin failed', error);
-          alert('Enter correct email or password');
-        },
-      });
-    } else {
-      console.log('Form is invalid. Please fix the errors.');
-    }
+      this.authService.loginDonor(this.email, this.password);
   }
+
 }

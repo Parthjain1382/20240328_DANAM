@@ -1,27 +1,20 @@
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-light"
-  style="padding-left: 50px"
->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#"> </a>
 
-  <div
-    class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav ms-auto mb-2 mb-lg-0"
-  >
+  <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav ms-auto mb-2 mb-lg-0">
     <ng-container *ngIf="isAuthTokenPresent(); else notSignedUpOptions">
-      <ng-container
-        *ngIf="userRole === 'donor'; then donorOptions"
-      ></ng-container>
-      <ng-container
-        *ngIf="userRole === 'admin'; then adminOptions"
-      ></ng-container>
-      <ng-container
-        *ngIf="userRole === 'organization'; then notDonorOptions"
-      ></ng-container>
+      <ng-container *ngIf="userRole === 'donor'; then donorOptions"></ng-container>
+      <ng-container *ngIf="userRole === 'admin'; then adminOptions"></ng-container>
+      <ng-container *ngIf="userRole === 'organization'; then notDonorOptions"></ng-container>
     </ng-container>
 
     <ng-template #adminOptions>
       <!-- Content for admin -->
-      <button class="btn btn-sm btn-success" (click)="Logout()">Logout</button>
+      <div style="display: flex; justify-content:space-around">
+
+        <a class="navbar-brand" href="#">Danam</a>
+        <button class="btn btn-sm btn-success" (click)="Logout()">Logout</button>
+      </div>
     </ng-template>
 
     <ng-template #donorOptions>
@@ -37,10 +30,10 @@
       <button class="btn btn-sm btn-success" (click)="navToAddCause()">
         Create Cause
       </button>
-      <button class="btn btn-sm btn-default" (click)="Logout()">Logout</button>
+      <button class="btn btn-sm btn-default" style="cursor: pointer;" (click)="Logout()">Logout</button>
     </ng-template>
 
-    <ng-template #notSignedUpOptions>
+    <ng-template #notSignedUpOptions >
       <!-- Content for not signed up -->
       <button class="btn btn-sm btn-dark btn-style" (click)="DonorSignUp()">
         Sign Up as Donor
@@ -52,11 +45,8 @@
   </div>
 </nav>
 
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-light"
-  style="padding-left: 50px"
->
-  <a class="navbar-brand" href="#"> DONATION BAG </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 50px">
+  <a class="navbar-brand" href="#">DANAM</a>
 
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
@@ -72,7 +62,7 @@
         <a class="nav-link" href="aboutUs">About Us</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="takeToCausespage()">Causes</a>
+        <a class="nav-link" (click)="takeToCausespage()" style="cursor: pointer;">Causes</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="gallery">Gallery</a>

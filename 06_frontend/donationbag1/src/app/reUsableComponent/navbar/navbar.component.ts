@@ -3,12 +3,12 @@ import { NgClass } from '@angular/common';
 import { AuthServiceService } from '../../services/authServices/auth-service.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AddNewOrphanageComponent } from '../../add-new-orphanage/add-new-orphanage.component';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [NgClass, CommonModule, AddNewOrphanageComponent, DropdownComponent],
+  imports: [NgClass, CommonModule, DropdownComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -18,9 +18,14 @@ export class NavbarComponent implements OnInit {
 
   isSignedUp: boolean = false;
   userRole: any;
+
+  isLoggedIn: boolean = false;
+
+
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
+  //Navigation Links
   navToProfile() {
     this.router.navigate(['/profile']);
   }
@@ -30,26 +35,27 @@ export class NavbarComponent implements OnInit {
   takeToCausespage() {
     this.router.navigate(['/causes']);
   }
+
   constructor(
-    private authService: AuthServiceService,
+    private authservice: AuthServiceService,
     private router: Router
   ) {
     this.isAuthTokenPresent();
   }
 
-  isAuthTokenPresent(){
-    this.userRole = localStorage.getItem('role') || 'organization';
-
-
-    return !!localStorage.getItem('userToken')
-  }
-
+    isAuthTokenPresent():boolean{
+      // this.userRole = localStorage.getItem('role') || 'organization';
+      // return !!(localStorage.getItem('userToken') ||localStorage.getItem('orgToken'))
+      this.isLoggedIn = this.authservice.isAuthTokenPresent();
+      this.userRole = this.authservice.getUserRole();
+      return this.isLoggedIn
+   }
 
   ngOnInit() {
   }
 
   Login(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/donorsignin']);
   }
 
   //login Method
@@ -61,20 +67,28 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/orgsignup']);
   }
 
+  /**Logout Function
+   *@returns void It returns Nothing
+   */
   Logout(): void {
-    const confirmation = confirm('Are you sure you want to log out?');
+    //if the user confirms to logout
+    Swal.fire({
+      title: "Do you want to LogOut",
+      showDenyButton: true,
+      confirmButtonText: "Yes",
+      denyButtonText: "No"
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire("Logged Out!", "", "success");
 
-    // Check if the user confirmed the action
-    if (confirmation) {
-      this.isSignedUp = false;
-      // clearing the token from the local Storage
-      localStorage.clear();   
-      this.refreshPage()
-      // For example, to redirect to a login page, you might use Angular's Router (assuming it's injected in your constructor)
+        // clearing the token from the local Storage
+        this.authservice.onLogout();
+        // localStorage.clear();
+        this.refreshPage()
+     }
+    });
 
-      this.router.navigate(['/login']);
-      // this.clearSessionTimer();
-    }
   }
   refreshPage() {
     window.location.reload();

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule,NgModel } from '@angular/forms';
 import { NgStyle } from '@angular/common';
-
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { NgModule } from '@angular/core';
 
+import Swal from 'sweetalert2'
+import { AuthServiceService } from '../services/authServices/auth-service.service';
 @Component({
   selector: 'app-sign-up-organization',
   standalone: true,
@@ -28,22 +30,10 @@ export class SignUpOrganizationComponent {
   submitDisabled:Boolean = true
 
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  // validateUsername(): void {
-  //   // Example validation: Username should not be empty
-  //   if (this.username.trim().length === 0) {
-  //     this.usernameErrorMessage = 'Username cannot be empty';
-  //     this.usernameErrorVisibility = true;
-
-  //   } else {
-  //     this.usernameErrorVisibility = false;
-
-  //   }
-  // }
-
+  /** validate Function for email to follow the regular Expression
+   */
   validateEmail(): void {
     // Simple email regex for demonstration
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -56,12 +46,18 @@ export class SignUpOrganizationComponent {
 
     }
   }
+
+  /**This is function for validating the password
+   */
   validatePassword(): void {
+    //checking the length to be greater than 8
     if (this.password.length < 8) {
       this.passwordErrorMessage = 'Password must be greater than 8 characters';
       this.passwordErrorVisibility = true;
 
-    } else if (!/[A-Z]/.test(this.password)) {
+    }
+    //one capital
+    else if (!/[A-Z]/.test(this.password)) {
       this.passwordErrorMessage = 'Password must contain at least one capital letter';
       this.passwordErrorVisibility = true;
 
@@ -91,36 +87,23 @@ export class SignUpOrganizationComponent {
     this.submitDisabled = !(isEmailValid && isPasswordValid);
   }
 
+
   //If already have a account then nav to Login
   navToLogin(){
-    this.router.navigate(['/login'])
+    this.router.navigate(['/orgsignin'])
   }
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router // Inject Router here
+    private router: Router,
+    private authService:AuthServiceService
   ) { }
 
 
+  //function for Signup of organization 
   storeUserCred(): void {
-    const orgData = {
-      name: this.companyName,
-      email: this.email,
-      password: this.password,
-      location: this.address,
-      contactNumber: this.contactNumber
-    };
-
-    this.http.post('http://localhost:3000/org/signup', orgData).subscribe({
-      next: (response: any) => {
-        console.log('User registered successfully');
-        this.router.navigate(['/orgsignin']);
-      },
-      error: (error) => {
-        console.error('Registration error:', error);
-      }
-    });
+    this.authService.storeUserCredOraganization(this.companyName, this.email, this.password, this.address, this.contactNumber);
   }
 
 }

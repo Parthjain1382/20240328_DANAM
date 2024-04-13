@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 declare var Razorpay: any;
 
 @Component({
@@ -20,36 +22,70 @@ export class CharityInfoComponent implements OnInit {
   organization_name: string = '';
   progressBar:number=0;
 
-
+  userToken:string|null=""
 
   organization: any
   AmountDonation: number = 0
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute,private router:Router) { }
 
 
   /**Razor Pay integration
    *
   */
-  payNow() {
-    // Assuming there's a minimum required amount (in rupees)
-    const minimumRequiredAmount = 10; // Example minimum amount
+  async payNow() {
 
-    // Validate if the donation amount meets the minimum requirement
-    if (this.AmountDonation < minimumRequiredAmount) {
-      alert(`The minimum donation amount is ${minimumRequiredAmount} INR.`);
-      return; // Exit the function if the amount is less than required
+    this.userToken=localStorage.getItem('userToken')
+
+
+     //Funds Raised
+     const fundsRaised = this.content.fundsRaised
+     //Funds Required
+     const fundsRequired = this.content.fundsRequired
+     //Required More Amount
+     const difference = fundsRequired - fundsRaised
+
+
+    if(!this.userToken){
+      alert("You are  not Logged In")
+      this.router.navigate(['/'])
     }
+    else{
+
+    // Assuming there's a minimum required amount (in rupees)
+    // const minimumRequiredAmount = 10; // Example minimum amount
+
+    // // Validate if the donation amount meets the minimum requirement
+    // if (this.AmountDonation < minimumRequiredAmount) {
+    //   alert(`The minimum donation amount is ${minimumRequiredAmount} INR.`);
+    //   return; // Exit the function if the amount is less than required
+    // }
+
 
     const taxRate = 0.03;
     const taxAmount = this.AmountDonation * taxRate;
 
     // Calculate the net amount after deducting tax
     const netAmount = this.AmountDonation - taxAmount;
-
     // Inform the user about the net amount after tax deduction
-    alert(`The net donation amount after deducting tax is ${netAmount} INR.`);
 
+    await Swal.fire({
+      title: "Net Amount",
+      text: `The net donation amount after deducting tax is ${netAmount} INR.`,
+      icon: "success"
+    }
+  );
+
+    //If the amount required is already raised
+    if(difference<=netAmount){
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'The Donation is More than Needed, Thank You.',
+        });
+    }
+
+    else{
     // Convert the net amount to the smallest currency unit (paise)
     const netAmountInPaise = Math.floor(netAmount * 100);
 
@@ -73,25 +109,33 @@ export class CharityInfoComponent implements OnInit {
           console.log('Payment dismissed');
         },
       },
-
     };
 
+    //on Success Callback
     const successCallback = (paymentId: any) => {
+      this.addNewDonation(options)
       console.log('Payment successful with ID:', paymentId);
     };
 
     const failureCallback = (error: any) => {
+      Swal.fire({
+        title: "transcation Error",
+        text: `Can't Complete the Transcation, Sorry`,
+        icon: "error"
+      });
       console.error('Payment failed with error:', error);
     };
 
     Razorpay.open(options, successCallback, failureCallback);
-
     this.addNewDonation(options)
+  }
+
+  }
   }
 
 
   addNewDonation(options: any) {
-    console.log("hello");
+
     //getting the jwt and donorID
     const jwt = localStorage.getItem('userToken');
     const donorId = localStorage.getItem('donarId');
@@ -103,8 +147,6 @@ export class CharityInfoComponent implements OnInit {
     //Required More Amount
     const difference = fundsRequired - fundsRaised
 
-    this.progressBar=Math.floor((fundsRaised / fundsRequired) * 100)
-    console.log("progressbarincharityinfo",this.progressBar);
 
     //If the difference is greater than the user is paying He can Donate
     if (difference >= (options.amount) / 100) {
@@ -125,6 +167,7 @@ export class CharityInfoComponent implements OnInit {
       this.putChangeUser(donorId,options,httpOptions)
 
     }
+
   }
 
   /**To change the Cause Database When Donor Donates to that Specific Cause
@@ -133,7 +176,6 @@ export class CharityInfoComponent implements OnInit {
    */
   putChangeInCause(options:any,httpOptions:any){
     const url = `http://localhost:3000/donor/CauseDataChange?causeId=${this.causeId}`;
-
     const body={
         amountDonated:options.amount/100
     }
@@ -173,8 +215,6 @@ export class CharityInfoComponent implements OnInit {
  * @param httpOptions The authorization Token
  */
   addNewDonationObject(jwt:string|null,donorId:string|null,options:any,httpOptions:any){
-
-
     const body = {
       organization: this.content.organization,
       amount: options.amount/100,
@@ -196,7 +236,6 @@ export class CharityInfoComponent implements OnInit {
 
   //ngOnInit
   ngOnInit(): void {
-
     this.token = localStorage.getItem('userToken');
     this.route.queryParams.subscribe((params) => {
       this.causeId = params['_id'];
@@ -215,6 +254,11 @@ export class CharityInfoComponent implements OnInit {
     this.http.get<any>(url).subscribe({
       next: (response) => {
         this.content = response;
+
+        //Rounding off the required and raised Funds
+        this.content.fundsRaised=Math.floor(response.fundsRaised)
+        this.content.fundsRequired =Math.floor(response.fundsRequired)
+
         const organizationId = response.organization;
         if (organizationId) {
           this.getOrganizationName(organizationId);

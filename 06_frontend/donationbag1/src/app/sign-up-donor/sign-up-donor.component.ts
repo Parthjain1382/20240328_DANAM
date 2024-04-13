@@ -5,6 +5,8 @@ import { NgStyle } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
+import { AuthServiceService } from '../services/authServices/auth-service.service';
 @Component({
   selector: 'app-sign-up-donor',
   standalone: true,
@@ -100,30 +102,16 @@ export class SignUpDonorComponent {
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private router: Router // Inject Router here
+    private router: Router,
+    private authService:AuthServiceService
   ) { }
 
-
+/**
+ * Store user credentials in the authentication service.
+ */
   storeUserCred() {
-    const userData = {
-      email: this.email,
-      password: this.password,
-      username: this.username,
-      phone_number: this.phonenumber,
-      address: this.address,
-    };
-
-    this.http.post('http://localhost:3000/signup', userData).subscribe({
-      next: (response: any) => {
-        console.log('User registered successfully');
-
-        this.router.navigate(['signin']);
-      },
-      error: (error) => {
-        console.error('Registration error:', error);
-
-      }
-    });
+    this.authService.storeUserCredDonor(this.email, this.password, this.username, this.  phonenumber, this.address);
   }
+
 
 }
