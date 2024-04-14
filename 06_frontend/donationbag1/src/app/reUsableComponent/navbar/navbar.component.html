@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color:#E1F0DA;">
   <a class="navbar-brand" href="#"> </a>
 
-  <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav ms-auto mb-2 mb-lg-0">
+  <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav collapse ms-auto mb-2 mb-lg-0" [ngClass]="{ show: navbarOpen }" >
     <ng-container *ngIf="isAuthTokenPresent(); else notSignedUpOptions">
       <ng-container *ngIf="userRole === 'donor'; then donorOptions"></ng-container>
       <ng-container *ngIf="userRole === 'admin'; then adminOptions"></ng-container>
@@ -10,11 +10,10 @@
 
     <ng-template #adminOptions>
       <!-- Content for admin -->
-      <div style="display: flex; justify-content:space-around">
 
-        <a class="navbar-brand" href="#">Danam</a>
+        
         <button class="btn btn-sm btn-success" (click)="Logout()">Logout</button>
-      </div>
+
     </ng-template>
 
     <ng-template #donorOptions>
@@ -35,26 +34,27 @@
 
     <ng-template #notSignedUpOptions >
       <!-- Content for not signed up -->
-      <button class="btn btn-sm btn-dark btn-style" (click)="DonorSignUp()">
+      <button class="btn btn-sm  btn-style" style="background-color: rgb(8, 62, 8);" (click)="DonorSignUp()">
         Sign Up as Donor
       </button>
-      <button class="btn btn-sm btn-dark btn-style" (click)="OrgSignUp()">
+      <button class="btn btn-sm  btn-style" style="background-color: rgb(8, 62, 8);" (click)="OrgSignUp()">
         Sign Up as Organization
       </button>
     </ng-template>
   </div>
+
 </nav>
 
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding-left: 50px">
-  <a class="navbar-brand" href="#">DANAM</a>
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color:#FEFDED">
+  <a class="navbar-brand" href="#"  style="padding-left: 50px"><img src="../../../assets/logo.png" alt="" style="height:50px;width:180px"></a>
 
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" [ngClass]="{ show: navbarOpen }">
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0" >
+  <div class="collapse navbar-collapse" style="padding-right: 50px" [ngClass]="{ show: navbarOpen }">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"style="padding-right: 50px" >
       <li class="nav-item">
         <a class="nav-link" href="#">Home</a>
       </li>

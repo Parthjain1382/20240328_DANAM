@@ -4,6 +4,8 @@ import { AuthServiceService } from '../../services/authServices/auth-service.ser
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+
+
 import Swal from 'sweetalert2';
 @Component({
   selector: 'app-navbar',
@@ -14,6 +16,7 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
   navbarOpen = false;
+  navbarOpen1 = false;
   jwt:string|null=localStorage.getItem('userTokesn')
 
   isSignedUp: boolean = false;
@@ -25,6 +28,8 @@ export class NavbarComponent implements OnInit {
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
+
+
   //Navigation Links
   navToProfile() {
     this.router.navigate(['/profile']);

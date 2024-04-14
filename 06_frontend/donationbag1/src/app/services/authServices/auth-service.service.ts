@@ -16,11 +16,19 @@
     private expireTokenTime: any;
     private userid: any;
 
+    // isOffline: boolean = !navigator.onLine;
     constructor(
       public http: HttpClient,
       public router: Router
-    ) { }
+    ) {
+      // window.addEventListener('offline', () => this.updateOnlineStatus());
+      // window.addEventListener('online', () => this.updateOnlineStatus());
+     }
 
+
+    //  updateOnlineStatus() {
+    //   this.isOffline = !navigator.onLine;
+    // }
   /**
      * Checks if the user is logged in by verifying the presence of a token.
      * Updates the isAuthenticated BehaviorSubject based on the token's presence.
@@ -36,8 +44,6 @@
    * @returns Authentication status.
    */
     getIsAuth():boolean {
-      console.log(this.isAuth);
-
       return this.isAuth;
     }
 
@@ -67,7 +73,7 @@
      */
     loginDonor(email: string, password: string): void {
       const loginData = { email, password };
- 
+
       if (email && password) {
         this.http.post('http://localhost:3000/login', loginData).subscribe({
           next: (response: any) => {
@@ -82,7 +88,7 @@
 
               this.isAuth=true
               this.isAuthenticated.next(true); // Update the authentication state
-
+this.showSuccessAlert("Signin Succesfull")
               // Navigate based on the role
               if (role === 'donar') {
                 this.router.navigate(['/']);
@@ -142,17 +148,17 @@
      */
     loginOrganization(email: string, password: string): void {
       const loginData = { email, password };
-      console.log(loginData);
+
 
       if (email && password) {
         this.http.post('http://localhost:3000/org/login', loginData).subscribe({
           next: (response: any) => {
-            console.log('Signin successful', response);
+            console.log('Signin successful');
             const token = response.token;
             const orgId = response.orgId;
 
             if (token) {
-              console.log(token);
+
               localStorage.setItem('orgToken', token);
               localStorage.setItem('orgId', orgId);
 

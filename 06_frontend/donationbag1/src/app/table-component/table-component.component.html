@@ -34,7 +34,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="buttons" >
       <th mat-header-cell *matHeaderCellDef> View Details</th>
-      <td mat-cell *matCellDef="let element"> <button mat-flat-button color="primary">View Details</button> </td>
+      <td mat-cell *matCellDef="let element"> <button mat-flat-button color="primary" (click)="fetchCause(element.name)">View Details</button> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

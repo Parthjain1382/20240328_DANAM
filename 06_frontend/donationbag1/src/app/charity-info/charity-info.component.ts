@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import swal from 'sweetalert';
 
 declare var Razorpay: any;
 
@@ -45,25 +46,29 @@ export class CharityInfoComponent implements OnInit {
      //Required More Amount
      const difference = fundsRequired - fundsRaised
 
+  console.log(typeof(this.role));
 
-    if(this.role=='donor'){
+    if(this.role=='Donor'){
       await Swal.fire({
         title:"Not Donor",
         text: `You are not Logged In as Donor`,
-        icon: "success"
+        icon: "error"
       })
       this.router.navigate(['/'])
     }
     else{
-
     // Assuming there's a minimum required amount (in rupees)
-    // const minimumRequiredAmount = 10; // Example minimum amount
+    const minimumRequiredAmount = 10; // Example minimum amount
 
     // // Validate if the donation amount meets the minimum requirement
-    // if (this.AmountDonation < minimumRequiredAmount) {
-    //   alert(`The minimum donation amount is ${minimumRequiredAmount} INR.`);
-    //   return; // Exit the function if the amount is less than required
-    // }
+    if (this.AmountDonation < minimumRequiredAmount) {
+
+      await Swal.fire({
+        title:"Amount Donation",
+        text: `The minimum donation amount is ${minimumRequiredAmount} INR.`
+      })
+      return; // Exit the function if the amount is less than required
+    }
 
 
     const taxRate = 0.03;

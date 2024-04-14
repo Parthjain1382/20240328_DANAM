@@ -10,8 +10,7 @@ import { AuthServiceService } from '../services/authServices/auth-service.servic
 @Component({
   selector: 'app-sign-up-donor',
   standalone: true,
-  imports: [NgStyle,FormsModule
-  ],
+  imports: [NgStyle,FormsModule],
   templateUrl: './sign-up-donor.component.html',
   styleUrl: './sign-up-donor.component.css'
 })
