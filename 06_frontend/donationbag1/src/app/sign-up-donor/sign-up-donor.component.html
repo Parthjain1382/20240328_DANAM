@@ -1,7 +1,7 @@
 <form>
   <div class="container" style="top: 450px">
-    <h1>Sign Up</h1>
-    <p>Please fill in this form to create an account as a Donor.</p>
+    <h1><b>Sign Up</b></h1>
+    <p>Please fill in this form to create an account as a <b style="color:#3CC88F">Donor</b>.</p>
 
     <label><b>Username</b></label>
     <input
@@ -67,11 +67,26 @@
     />
 
     <label style="margin-top: 10px;"><b>Contact Number </b></label>
-    <input type="text" name="ContactNumber" placeholder="Enter Contact Number" [(ngModel)]="phonenumber" required>
+    <input
+    type="phoneNumber"
+    name="phoneNumber"
+    (change)="validatePhoneNumber()"
+    (focus)="hidePhoneError()"
+    [(ngModel)]="phonenumber"
+    placeholder="Enter Your Phone Number"
+    style="margin-bottom:0px"
+    type="text"
+    required
+  />
+    <span
+    class="error phoneNumberError"
+    [ngStyle]="{ display: phoneNumberErrorVisibility ? '' : 'none' }"
+    >{{ phonenumberErrorMessage }}</span
+    >
 
-
-    <br />
-    <span class="already-have-an">Already have an account?</span>&nbsp;
+    <br>
+    <br>
+    <span class="already-have-an" style="margin-top: 15px;">Already have an account?</span>&nbsp;
     <span class="login2" style="font-size: 2em"
       ><a (click)="navToLogin()"   style="color:#3CC88F; font-size:20px; cursor:pointer"
         >Login</a

@@ -16,7 +16,6 @@ import { DonorProfilePageComponent } from './donor-profile-page/donor-profile-pa
 import { SignUpDonorComponent } from './sign-up-donor/sign-up-donor.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
 
 import { ChartyListComponent } from './AdminComponents/charty-list/charty-list.component';
 import { DonorListComponent } from './AdminComponents/donor-list/donor-list.component';
@@ -41,15 +40,15 @@ export const routes: Routes = [
   { path: '', component: LandingComponent },
 
   //path for admin
-  {path:'admin',component:AdminDashboardComponent},
-  {path:'charityrequest',component:CharityRequestComponent},
-  {path:'donation',component:DonationComponent},
-  {path:'donorList',component:DonorListComponent},
-  {path:'charityList',component:ChartyListComponent},
+  {path:'admin',canActivate: [AuthGuard],component:AdminDashboardComponent},
+  {path:'charityrequest',canActivate: [AuthGuard],component:CharityRequestComponent},
+  {path:'donation',canActivate: [AuthGuard],component:DonationComponent},
+  {path:'donorList',canActivate: [AuthGuard],component:DonorListComponent},
+  {path:'charityList',canActivate: [AuthGuard],component:ChartyListComponent},
 
 
-  {path:'profile',component:DonorProfilePageComponent},
-  {path:'createcause',component:CreateCauseComponent},
+  {path:'profile',canActivate: [AuthGuard],component:DonorProfilePageComponent},
+  {path:'createcause',canActivate: [AuthGuard],component:CreateCauseComponent},
   { path: 'causeCard', component: CauseCardComponent },
   { path: 'causeDetail', component: CharityInfoComponent },
 
@@ -68,7 +67,6 @@ export const routes: Routes = [
 
 
   //error & confirmation  page
-  { path: 'confirmationpage', component: ConfirmationPageComponent },
   {path:'**',component:Error404Component}
 
 ];

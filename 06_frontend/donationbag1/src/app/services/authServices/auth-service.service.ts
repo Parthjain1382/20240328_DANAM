@@ -35,7 +35,9 @@
    * Retrieves the authentication status.
    * @returns Authentication status.
    */
-    getIsAuth() {
+    getIsAuth():boolean {
+      console.log(this.isAuth);
+
       return this.isAuth;
     }
 
@@ -65,12 +67,10 @@
      */
     loginDonor(email: string, password: string): void {
       const loginData = { email, password };
-      console.log(loginData);
-
+ 
       if (email && password) {
         this.http.post('http://localhost:3000/login', loginData).subscribe({
           next: (response: any) => {
-            console.log('Signin successful');
             const token = response.token;
             const role = response.role;
             const donarId = response.donarId;
@@ -96,9 +96,7 @@
             }
           },
           error: (error) => {
-            console.error('Signin failed', error);
             this.showErrorAlert(error.error.error)
-            alert('Enter correct email or password');
           },
         });
       } else {

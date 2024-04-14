@@ -19,11 +19,15 @@ export class SignUpOrganizationComponent {
   usernameErrorVisibility:Boolean = false
   emailErrorVisibility:Boolean = false
   passwordErrorVisibility:Boolean = false
+  phoneNumberErrorVisibility:Boolean=false
+
   companyName:string = ''
   email:string= ''
-  contactNumber:string=''
+  phonenumber:string=''
   address:string= ''
   password:string=''
+
+  phonenumberErrorMessage:string=''
   usernameErrorMessage: string = '';
   emailErrorMessage: string = '';
   passwordErrorMessage: string = '';
@@ -67,6 +71,27 @@ export class SignUpOrganizationComponent {
     }
     this.checkAllValidations();
   }
+
+  /**
+ * Validates the phone number format.
+ * If the phone number does not match the specified pattern, an error message is displayed.
+ * Otherwise, the error message is hidden.
+ * Finally, the checkAllValidations() method is called.
+*/
+validatePhoneNumber(): void {
+  const pattern = /^(0|91)?[6-9][0-9]{9}$/
+  if (!pattern.test(this.phonenumber)) {
+    this.phonenumberErrorMessage = 'Invalid phone number format';
+    this.phoneNumberErrorVisibility = true;
+  } else {
+    this.phoneNumberErrorVisibility = false;
+  }
+  this.checkAllValidations();
+}
+
+/**
+ * Hides the error message for the  email, password, contact number field.
+ */
   hideUsernameError(){
     this.usernameErrorVisibility = false
   }
@@ -76,15 +101,23 @@ export class SignUpOrganizationComponent {
   hidePasswordError(){
     this.passwordErrorVisibility = false
   }
+  hidePhoneError(){
+    this.phoneNumberErrorVisibility= false
+  }
 
+/**
+ * Checks all validations for the form.
+ * If all validations pass, the submit button is enabled.
+ * Otherwise, the submit button is disabled.
+*/
   checkAllValidations(): void {
     // Check if all validations pass
-    // const isUsernameValid = !this.usernameErrorVisibility && this.username.trim().length > 0;
     const isEmailValid = !this.emailErrorVisibility && this.email.trim().length>0;
     const isPasswordValid = !this.passwordErrorVisibility && this.password.trim().length>0;
+    const isPhoneNumberValid = !this.phoneNumberErrorVisibility && this.phonenumber.trim().length > 0;
 
     // Update submitDisabled based on validations
-    this.submitDisabled = !(isEmailValid && isPasswordValid);
+    this.submitDisabled = !(isEmailValid && isPasswordValid && isPhoneNumberValid);
   }
 
 
@@ -101,9 +134,9 @@ export class SignUpOrganizationComponent {
   ) { }
 
 
-  //function for Signup of organization 
+  //function for Signup of organization
   storeUserCred(): void {
-    this.authService.storeUserCredOraganization(this.companyName, this.email, this.password, this.address, this.contactNumber);
+    this.authService.storeUserCredOraganization(this.companyName, this.email, this.password, this.address, this.phonenumber);
   }
 
 }

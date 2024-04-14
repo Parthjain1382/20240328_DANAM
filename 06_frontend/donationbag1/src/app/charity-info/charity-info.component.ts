@@ -23,7 +23,7 @@ export class CharityInfoComponent implements OnInit {
   progressBar:number=0;
 
   userToken:string|null=""
-
+  role:string|null=''
   organization: any
   AmountDonation: number = 0
 
@@ -36,7 +36,7 @@ export class CharityInfoComponent implements OnInit {
   async payNow() {
 
     this.userToken=localStorage.getItem('userToken')
-
+    this.role=localStorage.getItem('role')
 
      //Funds Raised
      const fundsRaised = this.content.fundsRaised
@@ -46,8 +46,12 @@ export class CharityInfoComponent implements OnInit {
      const difference = fundsRequired - fundsRaised
 
 
-    if(!this.userToken){
-      alert("You are  not Logged In")
+    if(this.role=='donor'){
+      await Swal.fire({
+        title:"Not Donor",
+        text: `You are not Logged In as Donor`,
+        icon: "success"
+      })
       this.router.navigate(['/'])
     }
     else{

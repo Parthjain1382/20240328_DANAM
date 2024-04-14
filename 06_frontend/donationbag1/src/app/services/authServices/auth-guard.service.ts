@@ -6,25 +6,25 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { AuthServiceService } from './auth-service.service';
+import Swal from 'sweetalert2';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root', // This ensures your guard is provided at the root level
+})
 export class AuthGuard implements CanActivate {
-  constructor(public authservice: AuthServiceService, public router: Router) { }
+  constructor(private authService: AuthServiceService, private router: Router) {}
 
-  /**
-   * Checks if the user is authenticated before allowing access to a route.
-   * If not authenticated, redirects the user to the Landing page.
-   * @param route The route being activated.
-   * @param state The current router state snapshot.
-   * @returns True if the user is authenticated, false otherwise.
-   */
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    let isAuth = this.authservice.getIsAuth();
-    console.log('AuthGuard#canActivate called, isAuth:', isAuth); // Debugging line
-    if (!isAuth) {
-      this.router.navigate(['/login']); // Ensure this redirects to your login route
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean {
+    if (this.authService.isAuthTokenPresent()) {
+      // User is authenticated, allow access
+      return true;
+    } else {
+      // User is not authenticated, redirect to login page
+      this.router.navigate(['/']); // Optionally pass returnUrl for post-login redirection
       return false;
     }
-    return true;
   }
 }
