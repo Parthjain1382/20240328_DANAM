@@ -21,14 +21,14 @@ export class CharityInfoComponent implements OnInit {
   token: any;
   content: any;
   organization_name: string = '';
-  progressBar:number=0;
+  progressBar: number = 0;
 
-  userToken:string|null=""
-  role:string|null=''
+  userToken: string | null = ""
+  role: string | null = ''
   organization: any
   AmountDonation: number = 0
 
-  constructor(private http: HttpClient, private route: ActivatedRoute,private router:Router) { }
+  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
 
   /**Razor Pay integration
@@ -36,114 +36,117 @@ export class CharityInfoComponent implements OnInit {
   */
   async payNow() {
 
-    this.userToken=localStorage.getItem('userToken')
-    this.role=localStorage.getItem('role')
+    this.userToken = localStorage.getItem('userToken')
+    this.role = localStorage.getItem('role')
 
-     //Funds Raised
-     const fundsRaised = this.content.fundsRaised
-     //Funds Required
-     const fundsRequired = this.content.fundsRequired
-     //Required More Amount
-     const difference = fundsRequired - fundsRaised
+    //Funds Raised
+    const fundsRaised = this.content.fundsRaised
+    //Funds Required
+    const fundsRequired = this.content.fundsRequired
+    //Required More Amount
+    const difference = fundsRequired - fundsRaised
 
-  console.log(typeof(this.role));
 
-    if(this.role=='Donor'){
+    if (!(this.role == 'donor')) {
       await Swal.fire({
-        title:"Not Donor",
+        title: "Not Donor",
         text: `You are not Logged In as Donor`,
         icon: "error"
       })
       this.router.navigate(['/'])
     }
-    else{
-    // Assuming there's a minimum required amount (in rupees)
-    const minimumRequiredAmount = 10; // Example minimum amount
 
-    // // Validate if the donation amount meets the minimum requirement
-    if (this.AmountDonation < minimumRequiredAmount) {
+    else {
+      // Assuming there's a minimum required amount (in rupees)
+      const minimumRequiredAmount = 10; // Example minimum amount
+
+      // // Validate if the donation amount meets the minimum requirement
+      if (this.AmountDonation < minimumRequiredAmount) {
+
+        await Swal.fire({
+          title: "Amount Donation",
+          text: `The minimum donation amount is ${minimumRequiredAmount} INR.`
+        })
+        return; // Exit the function if the amount is less than required
+      }
+
+      const taxRate = 0.03;
+      const taxAmount = this.AmountDonation * taxRate;
+
+      // Calculate the net amount after deducting tax
+      const netAmount = this.AmountDonation - taxAmount;
+      // Inform the user about the net amount after tax deduction
 
       await Swal.fire({
-        title:"Amount Donation",
-        text: `The minimum donation amount is ${minimumRequiredAmount} INR.`
-      })
-      return; // Exit the function if the amount is less than required
-    }
+        title: "Net Amount",
+        text: `The net donation amount after deducting tax is ${netAmount} INR.`,
+        icon: "success"
+      }
+      );
 
-
-    const taxRate = 0.03;
-    const taxAmount = this.AmountDonation * taxRate;
-
-    // Calculate the net amount after deducting tax
-    const netAmount = this.AmountDonation - taxAmount;
-    // Inform the user about the net amount after tax deduction
-
-    await Swal.fire({
-      title: "Net Amount",
-      text: `The net donation amount after deducting tax is ${netAmount} INR.`,
-      icon: "success"
-    }
-  );
-
-    //If the amount required is already raised
-    if(difference<=netAmount){
+      //If the amount required is already raised
+      if (difference <= netAmount) {
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'The Donation is More than Needed, Thank You.',
         });
+      }
+
+      else {
+        // Convert the net amount to the smallest currency unit (paise)
+        const netAmountInPaise = Math.floor(netAmount * 100);
+
+        const options = {
+          description: 'Sample Razorpay demo',
+          currency: 'INR',
+          amount: netAmountInPaise,
+          name: 'Daanam',
+          key: 'rzp_test_D7Ve9gsjct6KgY',
+          image: '',
+          prefill: {
+            name: 'Pranay Jain',
+            email: 'pranayjain1382@gmail.com',
+            contact: '7387066313',
+          },
+          theme: {
+            color: '#51BE78',
+          },
+          modal: {
+            ondismiss: () => {
+              console.log('Payment dismissed');
+            },
+          },
+          handler:(response:any)=>{
+            this.addNewDonation(options)
+          }
+        };
+
+        //on Success Callback
+        const successCallback =  (paymentId: any) => {
+        };
+
+        //on failure callback
+        const failureCallback = (error: any) => {
+          Swal.fire({
+            title: "transcation Error",
+            text: `Can't Complete the Transcation, Sorry`,
+            icon: "error"
+          });
+          console.error('Payment failed with error:', error);
+        };
+
+        Razorpay.open(options, successCallback, failureCallback);
+
+      }
     }
-
-    else{
-    // Convert the net amount to the smallest currency unit (paise)
-    const netAmountInPaise = Math.floor(netAmount * 100);
-
-    const options = {
-      description: 'Sample Razorpay demo',
-      currency: 'INR',
-      amount: netAmountInPaise,
-      name: 'Daanam',
-      key: 'rzp_test_D7Ve9gsjct6KgY',
-      image: '',
-      prefill: {
-        name: 'Pranay Jain',
-        email: 'pranayjain1382@gmail.com',
-        contact: '7387066313',
-      },
-      theme: {
-        color: '#51BE78',
-      },
-      modal: {
-        ondismiss: () => {
-          console.log('Payment dismissed');
-        },
-      },
-    };
-
-    //on Success Callback
-    const successCallback = (paymentId: any) => {
-      this.addNewDonation(options)
-      console.log('Payment successful with ID:', paymentId);
-    };
-
-    const failureCallback = (error: any) => {
-      Swal.fire({
-        title: "transcation Error",
-        text: `Can't Complete the Transcation, Sorry`,
-        icon: "error"
-      });
-      console.error('Payment failed with error:', error);
-    };
-
-    Razorpay.open(options, successCallback, failureCallback);
-    this.addNewDonation(options)
-  }
-
-  }
   }
 
 
-  addNewDonation(options: any) {
+  /**Adding New Donation to the donation Table
+   * @param options all option needed to payment
+   */
+   addNewDonation(options: any) {
 
     //getting the jwt and donorID
     const jwt = localStorage.getItem('userToken');
@@ -166,14 +169,16 @@ export class CharityInfoComponent implements OnInit {
         }),
       };
 
-      //To create a new object in donation table
-      this.addNewDonationObject(jwt,donorId,options,httpOptions)
-
-      //To use put to change fundsRaised and FundsRequired
-      this.putChangeInCause(options,httpOptions)
-
-      //To change the user Schema for number of Donation and Contribution Amount
-      this.putChangeUser(donorId,options,httpOptions)
+      //first all three function are resolved then the again fetch
+      Promise.all([
+        this.addNewDonationObject(jwt, donorId, options, httpOptions),
+        this.putChangeInCause(options, httpOptions),
+        this.putChangeUser(donorId, options, httpOptions)
+      ]).then(() => {
+        window.location.reload();
+      }).catch(error => {
+        console.error('An error occurred:', error);
+      });
 
     }
 
@@ -183,16 +188,16 @@ export class CharityInfoComponent implements OnInit {
    * @param options The data needs to change in database like the amount etc
    * @param httpOptions Used For Authorization
    */
-  putChangeInCause(options:any,httpOptions:any){
+  putChangeInCause(options: any, httpOptions: any) {
     const url = `http://localhost:3000/donor/CauseDataChange?causeId=${this.causeId}`;
-    const body={
-        amountDonated:options.amount/100
+    const body = {
+      amountDonated: options.amount / 100
     }
-    this.http.put(url,body,httpOptions).subscribe({
+    this.http.put(url, body, httpOptions).subscribe({
       next: (response) => {
         //If successfully added
-        console.log("successfully Added to Cause Schema"+response);
-     },
+        console.log("successfully Added to Cause Schema" + response);
+      },
       error: (error) => {
         console.error('Error changing the Cause data', error);
       }
@@ -204,15 +209,15 @@ export class CharityInfoComponent implements OnInit {
    * @param options The data needs to change in database like the amount etc
    * @param httpOptions Used For Authorization
    */
-  putChangeUser(donorId:any,options:any,httpOptions:any){
+  putChangeUser(donorId: any, options: any, httpOptions: any) {
     const url = `http://localhost:3000/donor/userDonate?donorId=${donorId}`;
-    const body={
-        amountDonated:options.amount/100
+    const body = {
+      amountDonated: options.amount / 100
     }
-    this.http.put(url,body,httpOptions).subscribe({
+    this.http.put(url, body, httpOptions).subscribe({
       next: (response) => {
-        console.log("successfully Added to User Schema"+response);
-     },
+        console.log("successfully Added to User Schema" + response);
+      },
       error: (error) => {
         console.error('Error changing the User data', error);
       }
@@ -223,24 +228,24 @@ export class CharityInfoComponent implements OnInit {
  * @param body The key value pair of Model Donation
  * @param httpOptions The authorization Token
  */
-  addNewDonationObject(jwt:string|null,donorId:string|null,options:any,httpOptions:any){
+  addNewDonationObject(jwt: string | null, donorId: string | null, options: any, httpOptions: any) {
     const body = {
       organization: this.content.organization,
-      amount: options.amount/100,
+      amount: options.amount / 100,
       causeTitle: this.content.title,
       donor: donorId
     }
     const url = 'http://localhost:3000/donor/donate';
     //Api Call for Posting New Object in the Donation Database
-    this.http.post(url,body,httpOptions).subscribe({
+    this.http.post(url, body, httpOptions).subscribe({
       next: (response) => {
-        console.log("successfully Added to Donation Schema"+response);
-     },
+        console.log("successfully Added to Donation Schema" + response);
+      },
       error: (error) => {
         console.error('Error changing the Donation data', error);
       }
     });
-}
+  }
 
 
   //ngOnInit
@@ -260,13 +265,14 @@ export class CharityInfoComponent implements OnInit {
   fetchCauseContent(): void {
     const url = `http://localhost:3000/donor/getCause?_id=${this.causeId}`;
     // HTTP GET request to fetch page content
+
     this.http.get<any>(url).subscribe({
       next: (response) => {
         this.content = response;
 
         //Rounding off the required and raised Funds
-        this.content.fundsRaised=Math.floor(response.fundsRaised)
-        this.content.fundsRequired =Math.floor(response.fundsRequired)
+        this.content.fundsRaised = Math.floor(response.fundsRaised)
+        this.content.fundsRequired = Math.floor(response.fundsRequired)
 
         const organizationId = response.organization;
         if (organizationId) {
@@ -277,6 +283,7 @@ export class CharityInfoComponent implements OnInit {
         console.error('Error:', error);
       },
     });
+    console.log("hrlmsf");
   }
 
   //Getting the Organization Name

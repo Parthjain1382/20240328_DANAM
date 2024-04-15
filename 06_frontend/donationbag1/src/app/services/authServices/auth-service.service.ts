@@ -59,9 +59,9 @@
      */
     onLogout() {
       this.token = null;
+      this.router.navigate(['/']);
       this.isAuth = false;
-      this.router.navigate(['/signin']);
-      clearTimeout(this.expireTokenTime);
+      // clearTimeout(this.expireTokenTime);
     localStorage.clear();
     }
 
@@ -88,7 +88,7 @@
 
               this.isAuth=true
               this.isAuthenticated.next(true); // Update the authentication state
-this.showSuccessAlert("Signin Succesfull")
+            this.showSuccessAlert("Signin Succesfull")
               // Navigate based on the role
               if (role === 'donar') {
                 this.router.navigate(['/']);

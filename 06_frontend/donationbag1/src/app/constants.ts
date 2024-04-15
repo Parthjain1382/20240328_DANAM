@@ -4,5 +4,5 @@ export interface PeriodicElement {
   organization:string
   causeTitle: string;
   amount: number;
-  date: Date;
+  date: string;
 }

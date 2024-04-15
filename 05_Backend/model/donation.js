@@ -26,10 +26,6 @@ const DonationSchema = new Schema({
     date: {
       type: Date,
       default: Date.now
-    },
-    cause_Id:{
-        type:Schema.Types.ObjectId,
-        ref:causes
     }
     // sections: [{
     //     type: String

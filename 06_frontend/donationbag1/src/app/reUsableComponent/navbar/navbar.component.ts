@@ -90,7 +90,7 @@ export class NavbarComponent implements OnInit {
         // clearing the token from the local Storage
         this.authservice.onLogout();
         // localStorage.clear();
-        this.refreshPage()
+       
      }
     });
 

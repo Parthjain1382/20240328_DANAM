@@ -1,5 +1,28 @@
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color:#E1F0DA;">
+<nav class="navbar navbar-expand-lg navbar-light " style="background-color:#ffffff; display:flex; justify-content:space-between">
   <a class="navbar-brand" href="#"> </a>
+  <a class="navbar-brand" href="#"  style="padding-left: 50px"><img src="../../../assets/logo.png" alt="" style="height:50px;width:180px"></a>
+
+  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" style="padding-right: 50px" [ngClass]="{ show: navbarOpen }">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"style="padding-right: 50px" >
+      <li class="nav-item me-3">
+        <a class="nav-link" href="#"><b class="fs-6" >Home</b></a>
+      </li>
+
+      <li class="nav-item me-3">
+        <a class="nav-link" href="aboutUs"><b class="fs-6">About Us</b></a>
+      </li>
+      <li class="nav-item me-3">
+        <a class="nav-link" (click)="takeToCausespage()" style="cursor: pointer;"><b class="fs-6">Causes</b></a>
+      </li>
+      <li class="nav-item me-3">
+        <a class="nav-link" href="gallery"><b class="fs-6">Gallery</b></a>
+      </li>
+    </ul>
+
 
   <div class="col-lg-3 d-none d-md-block col-md-6 btn-bhed navbar-nav collapse ms-auto mb-2 mb-lg-0" [ngClass]="{ show: navbarOpen }" >
     <ng-container *ngIf="isAuthTokenPresent(); else notSignedUpOptions">
@@ -11,64 +34,45 @@
     <ng-template #adminOptions>
       <!-- Content for admin -->
 
-        
-        <button class="btn btn-sm btn-success" (click)="Logout()">Logout</button>
+
+        <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8); padding:13px"   (click)="Logout()">Logout</button>
 
     </ng-template>
 
     <ng-template #donorOptions>
       <!-- Content for donor -->
-      <button class="btn btn-sm btn-success" (click)="navToProfile()">
+      <div class="h-2" style="display: flex; padding:0px;margin:0px;width:550px;">
+      <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8); padding:13px" (click)="navToProfile()">
         My Donations
       </button>
-      <button class="btn btn-sm btn-default" (click)="Logout()">Logout</button>
+      <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8); padding:13px; margin-left:10px; border:none" (click)="Logout()">
+        Logout
+
+      </button>
+      </div>
     </ng-template>
 
     <ng-template #notDonorOptions>
       <!-- Content for non-donor -->
-      <button class="btn btn-sm btn-success" (click)="navToAddCause()">
+      <button class="btn btn-sm btn-success"  style="background-color: rgb(8, 62, 8); padding:13px"  (click)="navToAddCause()">
         Create Cause
       </button>
-      <button class="btn btn-sm btn-default" style="cursor: pointer;" (click)="Logout()">Logout</button>
+      <button class="btn btn-sm btn-success" style="cursor: pointer;background-color: rgb(8, 62, 8); padding:13px; margin-left:10px; border:none; color:#ffffff" (click)="Logout()">Logout</button>
     </ng-template>
 
     <ng-template #notSignedUpOptions >
       <!-- Content for not signed up -->
-      <button class="btn btn-sm  btn-style" style="background-color: rgb(8, 62, 8);" (click)="DonorSignUp()">
+        <div class="h-2" style="display: flex; padding:0px;margin:0px;width:550px;">
+        <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8);" (click)="DonorSignUp()">
         Sign Up as Donor
       </button>
-      <button class="btn btn-sm  btn-style" style="background-color: rgb(8, 62, 8);" (click)="OrgSignUp()">
+      <button class="btn btn-sm btn-style btn-success" style="background-color: rgb(8, 62, 8);" (click)="OrgSignUp()">
         Sign Up as Organization
       </button>
+    </div>
     </ng-template>
   </div>
-
+</div>
 </nav>
 
 
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color:#FEFDED">
-  <a class="navbar-brand" href="#"  style="padding-left: 50px"><img src="../../../assets/logo.png" alt="" style="height:50px;width:180px"></a>
-
-  <button class="navbar-toggler" type="button" (click)="toggleNavbar()">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" style="padding-right: 50px" [ngClass]="{ show: navbarOpen }">
-    <ul class="navbar-nav ms-auto mb-2 mb-lg-0"style="padding-right: 50px" >
-      <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="aboutUs">About Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="takeToCausespage()" style="cursor: pointer;">Causes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="gallery">Gallery</a>
-      </li>
-
-    </ul>
-  </div>
-</nav>
