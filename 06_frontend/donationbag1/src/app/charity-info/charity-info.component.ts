@@ -53,7 +53,6 @@ export class CharityInfoComponent implements OnInit {
         text: `You are not Logged In as Donor`,
         icon: "error"
       })
-      this.router.navigate(['/'])
     }
 
     else {
@@ -70,8 +69,8 @@ export class CharityInfoComponent implements OnInit {
         return; // Exit the function if the amount is less than required
       }
 
-      const taxRate = 0.03;
-      const taxAmount = this.AmountDonation * taxRate;
+      const taxRate = 0.03
+      const taxAmount = this.AmountDonation * taxRate
 
       // Calculate the net amount after deducting tax
       const netAmount = this.AmountDonation - taxAmount;
@@ -239,7 +238,7 @@ export class CharityInfoComponent implements OnInit {
     //Api Call for Posting New Object in the Donation Database
     this.http.post(url, body, httpOptions).subscribe({
       next: (response) => {
-        console.log("successfully Added to Donation Schema" + response);
+        console.log("successfully Added to Donation Schema" );
       },
       error: (error) => {
         console.error('Error changing the Donation data', error);
@@ -283,7 +282,7 @@ export class CharityInfoComponent implements OnInit {
         console.error('Error:', error);
       },
     });
-    console.log("hrlmsf");
+
   }
 
   //Getting the Organization Name
@@ -294,6 +293,7 @@ export class CharityInfoComponent implements OnInit {
     this.http.get<any>(url).subscribe({
       next: (response) => {
         this.organization_name = response.name;
+
       },
       error: (error) => {
         console.error('Error fetching organization details:', error);

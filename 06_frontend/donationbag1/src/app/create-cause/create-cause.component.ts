@@ -61,10 +61,7 @@ export class CreateCauseComponent {
       .subscribe({
         next: (response) => {
           this.UploadResponse=response
-
-
-
-          this.showSuccessAlert('File uploaded successfully');
+          this.showSuccessAlert("Image Added Successfully");
         },
         error: (error) => {
           // Use if-else to handle different error statuses

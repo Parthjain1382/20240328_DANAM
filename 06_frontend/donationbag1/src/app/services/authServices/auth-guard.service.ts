@@ -1,15 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthServiceService } from './auth-service.service';
-import Swal from 'sweetalert2';
-
 @Injectable({
-  providedIn: 'root', // This ensures your guard is provided at the root level
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthServiceService, private router: Router) {}
@@ -18,12 +11,22 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    if (this.authService.isAuthTokenPresent()) {
-      // User is authenticated, allow access
+    if (!this.authService.isAuthTokenPresent()) {
+      // User is not authenticated, redirect to login page
+      this.router.navigate(['/login']); // Adjust the route as necessary
+      return false;
+    }
+
+    // User is authenticated, now check for role
+    const expectedRole = route.data['expectedRole'];// The expected role defined in route data
+    const userRole = this.authService.getUserRole();
+
+    if (userRole === expectedRole) {
+      // User has the expected role, allow access
       return true;
     } else {
-      // User is not authenticated, redirect to login page
-      this.router.navigate(['/']); // Optionally pass returnUrl for post-login redirection
+      // User does not have the expected role, redirect to an unauthorized page or back to home
+      this.router.navigate(['/']); // Adjust the route as necessary
       return false;
     }
   }

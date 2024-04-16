@@ -12,12 +12,12 @@ const createCause = async (req, res) => {
 
     // Verify and decode the token to extract user ID
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    console.log(decoded);
+    
     const userId = decoded._id;
-    console.log(userId);
+    
     // Fetch user data from the database based on the user ID
     const user = await Organization.findById(userId);
-    console.log(user);
+   
     const { name, fundsRequired, category, descriptionText, descriptionImage } =
       req.body;
     const causeDetails = {
@@ -42,7 +42,8 @@ const createCause = async (req, res) => {
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
  * @returns {Object} - The response object with a success or error message.
-*/const upload = async (req, res) => {
+*/
+const upload = async (req, res) => {
   // Check if the file exists in the request
   if (!req.file) {
     return res.status(400).json({

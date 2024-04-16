@@ -29,10 +29,8 @@ const getAllPendingCauses = async (req, res) => {
       })
       .exec();
 
-    // console.log(allCauses);
     res.json(allCauses);
   } catch (err) {
-    console.log(err.message);
     res.status(500).send('Internal server error');
   }
 }
@@ -73,7 +71,7 @@ const updateCauseStatus = async (req, res) => {
     res.json(foundCause);
   }
   catch (err) {
-    console.log(err.message);
+
     res.status(500).send('Internal server error');
   }
 };
@@ -110,7 +108,7 @@ const deleteCause = async (req, res) => {
     // Return the deleted cause
     res.json(Cause);
   } catch (err) {
-    console.log(err.message);
+   
     res.status(500).send('Internal server error');
   }
 };
@@ -133,7 +131,7 @@ const orgDetails = async (req, res) => {
 
   try {
     const documents = await organization.find();
-    console.log(documents);
+  
     // This will be an array of all documents in the Organization collection
     res.status(200).json(documents);
   }

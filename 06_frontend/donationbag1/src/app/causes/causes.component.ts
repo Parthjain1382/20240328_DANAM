@@ -32,8 +32,9 @@ export class CausesComponent implements OnInit {
     const url = `http://localhost:3000/donor/causes`;
     this.http.get<any[]>(url).subscribe({
       next: (response) => {
-        
-        this.causes = response;
+        //getting all cause whose status is "pending"
+        const pendingCauses = response.filter(response  => response.status === 'accepted');
+        this.causes = pendingCauses;
 
       // Assuming this.causes is an array of objects where each object has a descriptionText property
       for (let i = 0; i < this.causes.length; i++) {

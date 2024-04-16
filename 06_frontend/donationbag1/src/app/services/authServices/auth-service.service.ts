@@ -20,15 +20,10 @@
     constructor(
       public http: HttpClient,
       public router: Router
-    ) {
-      // window.addEventListener('offline', () => this.updateOnlineStatus());
-      // window.addEventListener('online', () => this.updateOnlineStatus());
-     }
+    ) {}
 
 
-    //  updateOnlineStatus() {
-    //   this.isOffline = !navigator.onLine;
-    // }
+
   /**
      * Checks if the user is logged in by verifying the presence of a token.
      * Updates the isAuthenticated BehaviorSubject based on the token's presence.
@@ -88,7 +83,7 @@
 
               this.isAuth=true
               this.isAuthenticated.next(true); // Update the authentication state
-            this.showSuccessAlert("Signin Succesfull")
+             this.showSuccessAlert("Signin Succesfull")
               // Navigate based on the role
               if (role === 'donar') {
                 this.router.navigate(['/']);

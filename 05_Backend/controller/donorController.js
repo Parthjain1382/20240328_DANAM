@@ -41,7 +41,7 @@ const getDonor=async (req,res)=>{
     if(!userData){
       res.status(401).json("User not found")
     }
-    console.log(userData);
+  
     res.status(200).json(userData)
   }
   catch{
@@ -55,13 +55,12 @@ const getUserProfile = async (req, res) => {
   try {
     // Get user ID from the request object (assuming it's attached by the authentication middleware)
     const userId = req.user._id;
-    console.log(userId);
+
     // Retrieve user profile details from the database based on user ID
     // const userProfile = await Users.findById(userId).select(
     //   "username role phone_number email address numberOfDonations contributionAmmount"
     // );
     const userDonations = await Donation.find({ Donor: userId });
-    console.log(userDonations);
     res.json(userDonations)
     // Check if user profile exists
     // if (!userProfile) {
@@ -92,11 +91,11 @@ const getCauseById = async (req, res) => {
   const id = req.query._id;
   try {
     const cause = await Causes.findById(id);
-    console.log(cause)
+   
     if (!cause) {
       return res.status(404).json({ message: "Cause not found" });
     }
-    console.log(cause);
+    
     res.status(200).json(cause);
   } catch (err) {
     console.error(err.message);
@@ -175,21 +174,28 @@ const putCause= async(req,res)=>{
 const userDonate=async(req,res)=>{
   const  donorId  = req.query.donorId;
   const  amountDonated = req.body.amountDonated; 
-
+  let profitAmount=amountDonated*0.03
+  console.log(profitAmount);
   try {
     // Find the cause by ID
     const user = await Users.findById(donorId);
-
+    const admin=await Users.findOne({role:"admin"})
+    console.log("admin"+admin);
     if (!user) {
         return res.status(404).send('user not found');
     }
-
+    if (!admin) {
+      return res.status(404).send('admin not found');
+    }
     // Update NumberofDonation by 1 and numberOfDonors
     user.numberOfDonations+=1
+    admin.numberOfDonations+=1
     user.contributionAmmount+=amountDonated
-
-    // Save the updated cause
-    await user.save();
+    admin.contributionAmmount+=profitAmount
+    console.log(admin.contributionAmmount);
+    // Save the updated users
+    await user.save()
+    await admin.save() 
     res.status(200).json({ message: 'User updated successfully', user });
 } catch (error) {
     console.error('Error updating User Data:', error);

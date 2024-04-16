@@ -33,19 +33,23 @@
 
     <ng-template #adminOptions>
       <!-- Content for admin -->
-
-
-        <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8); padding:13px"   (click)="Logout()">Logout</button>
-
+      <div class="h-2" style="display: flex; padding:0px;margin:0px;width:550px;">
+        <button class="btn btn-sm btn-success navButtons AdminButton"  (click)="navToAdmin()">
+                   Admin Options
+        </button>
+        <button class="btn btn-sm btn-success  navButtons AdminButton" style="margin-left:10px;" (click)="Logout()">
+          Logout
+        </button>
+        </div>
     </ng-template>
 
     <ng-template #donorOptions>
       <!-- Content for donor -->
       <div class="h-2" style="display: flex; padding:0px;margin:0px;width:550px;">
-      <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8); padding:13px" (click)="navToProfile()">
+      <button class="btn btn-sm btn-success  navButtons"  (click)="navToProfile()">
         My Donations
       </button>
-      <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8); padding:13px; margin-left:10px; border:none" (click)="Logout()">
+      <button class="btn btn-sm btn-success  navButtons" style="margin-left:10px;" (click)="Logout()">
         Logout
 
       </button>
@@ -54,19 +58,19 @@
 
     <ng-template #notDonorOptions>
       <!-- Content for non-donor -->
-      <button class="btn btn-sm btn-success"  style="background-color: rgb(8, 62, 8); padding:13px"  (click)="navToAddCause()">
+      <button class="btn btn-sm btn-success  navButtons" (click)="navToAddCause()">
         Create Cause
       </button>
-      <button class="btn btn-sm btn-success" style="cursor: pointer;background-color: rgb(8, 62, 8); padding:13px; margin-left:10px; border:none; color:#ffffff" (click)="Logout()">Logout</button>
+      <button class="btn btn-sm btn-success  navButtons" style="cursor: pointer;margin-left:10px; border:none; color:#ffffff" (click)="Logout()">Logout</button>
     </ng-template>
 
     <ng-template #notSignedUpOptions >
       <!-- Content for not signed up -->
         <div class="h-2" style="display: flex; padding:0px;margin:0px;width:550px;">
-        <button class="btn btn-sm btn-success" style="background-color: rgb(8, 62, 8);" (click)="DonorSignUp()">
+        <button class="btn btn-sm btn-success  navButtons" (click)="DonorSignUp()">
         Sign Up as Donor
       </button>
-      <button class="btn btn-sm btn-style btn-success" style="background-color: rgb(8, 62, 8);" (click)="OrgSignUp()">
+      <button class="btn btn-sm btn-style btn-success  navButtons" (click)="OrgSignUp()">
         Sign Up as Organization
       </button>
     </div>

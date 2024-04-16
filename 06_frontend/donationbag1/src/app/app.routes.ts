@@ -30,25 +30,24 @@ import { Error404Component } from './error404/error404.component';
 import { AuthGuard } from './services/authServices/auth-guard.service';
 
 export const routes: Routes = [
+  
   { path: '', component: LandingComponent },
   { path: 'aboutUs', component: AboutservicesComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'gallery', component: GalleryComponent },
-
   { path: 'blog', component: BlogComponent },
   { path: 'causes', component: CausesComponent },
-  { path: '', component: LandingComponent },
 
   //path for admin
-  {path:'admin',canActivate: [AuthGuard],component:AdminDashboardComponent},
-  {path:'charityrequest',canActivate: [AuthGuard],component:CharityRequestComponent},
-  {path:'donation',canActivate: [AuthGuard],component:DonationComponent},
-  {path:'donorList',canActivate: [AuthGuard],component:DonorListComponent},
-  {path:'charityList',canActivate: [AuthGuard],component:ChartyListComponent},
+  {path:'admin',component:AdminDashboardComponent,canActivate: [AuthGuard],data: {expectedRole: 'admin'}},
+  {path:'charityrequest',canActivate: [AuthGuard],data: {expectedRole: 'admin'},component:CharityRequestComponent},
+  {path:'donation',canActivate: [AuthGuard],data: {expectedRole: 'admin'},component:DonationComponent},
+  {path:'donorList',canActivate: [AuthGuard],data: {expectedRole: 'admin'},component:DonorListComponent},
+  {path:'charityList',canActivate: [AuthGuard],data: {expectedRole: 'admin'},component:ChartyListComponent},
 
 
-  {path:'profile',canActivate: [AuthGuard],component:DonorProfilePageComponent},
-  {path:'createcause',canActivate: [AuthGuard],component:CreateCauseComponent},
+  {path:'profile',canActivate: [AuthGuard],data: {expectedRole: 'donor'},component:DonorProfilePageComponent},
+  {path:'createcause',canActivate: [AuthGuard],data: {expectedRole: 'organization'},component:CreateCauseComponent},
   { path: 'causeCard', component: CauseCardComponent },
   { path: 'causeDetail', component: CharityInfoComponent },
 
@@ -66,7 +65,7 @@ export const routes: Routes = [
   { path: 'resetpassword', component: ResetPasswordComponent},
 
 
-  //error & confirmation  page
+  //error  page
   {path:'**',component:Error404Component}
 
 ];

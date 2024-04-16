@@ -37,6 +37,9 @@ export class NavbarComponent implements OnInit {
   navToAddCause(){
     this.router.navigate(['/createcause']);
   }
+  navToAdmin(){
+    this.router.navigate(['/admin']);
+  }
   takeToCausespage() {
     this.router.navigate(['/causes']);
   }
@@ -90,7 +93,7 @@ export class NavbarComponent implements OnInit {
         // clearing the token from the local Storage
         this.authservice.onLogout();
         // localStorage.clear();
-       
+
      }
     });
 

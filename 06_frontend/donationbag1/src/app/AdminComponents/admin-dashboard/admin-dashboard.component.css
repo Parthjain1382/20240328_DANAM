@@ -6,3 +6,62 @@
 
 /* Bootstrap Icons */
 @import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&family=Roboto:wght@300;400&display=swap");
+
+:root {
+  --main-light-clr: #f3eed9;
+  --main-medium-clr: #824936;
+  --main-dark-clr: #222c2a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+.header {
+  background-color: var(--main-light-clr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 660px;
+}
+
+h3 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-size: 1.12rem;
+  letter-spacing: 10px;
+  text-transform: capitalize;
+  text-align: center;
+  color: var(--main-dark-clr);
+}
+
+h1 {
+  color: var(--main-medium-clr);
+  font-size: 3.75rem;
+  text-align: center;
+  color: #083E08;
+}
+h1,
+h3 {
+  margin: 50px;
+}
+.header__container {
+  width: 100%;
+  margin: 10px auto;
+}
+
+.container {
+  max-width: 1128px;
+}
+
+h2 {
+  color: var(--main-medium-clr);
+  font-family: "Playfair Display", serif;
+  font-size: 2.25rem;
+}

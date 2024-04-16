@@ -21,3 +21,15 @@
  color: aquamarine;
 }
 
+
+.navButtons{
+  background-color: rgb(8, 62, 8);
+  padding:13px;
+  border:none
+}
+.AdminButton
+{
+  position:relative;
+  bottom: 20px;
+  height: 47px;
+}
