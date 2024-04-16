@@ -35,7 +35,7 @@
 
               <mat-form-field appearance="outline">
                   <mat-label>Image URL</mat-label>
-                  <input matInput formControlName="imageUrl" required>
+                  <input matInput formControlName="imageUrl" type="File" (change)="fileChangeEvent($event)"required>
                   <mat-error *ngIf="(causeForm.get('imageUrl')?.hasError('required') ?? false)">Image URL is required</mat-error>
                 </mat-form-field>
 
