@@ -7,7 +7,7 @@ import authRoutes from './router/auth.js';
 import orgRoutes from './router/organization.js';
 import userRoutes from './router/users.js';
 import adminRoutes from './router/admin.js';
-
+import { cloudinaryConfig } from "./config/cloudinaryConfig.js";
 // Middleware
 const app = express();
 app.use(cors());
@@ -17,6 +17,7 @@ app.use(express.json());
 connectDatabase().then(() => {
     // Routes
     app.use('/', authRoutes);
+    app.use('*', cloudinaryConfig);
     app.use('/org', orgRoutes);
     app.use('/donor', userRoutes);
     app.use('/admin', adminRoutes);
