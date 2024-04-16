@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CreateCauseServiceService } from '../services/createCauseService/create-cause-service.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -50,11 +51,21 @@ export class CreateCauseComponent {
       this.createCauseService.createCause(causeData).subscribe(
         (response) => {
           console.log('Cause created successfully:', response);
-          this.router.navigateByUrl('/confirmationpage');
-          
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: "Cause created successfully",
+          });
+          this.router.navigate(['/'])
         },
         (error) => {
           console.error('Error creating cause:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: "Cause Can't be created",
+          });
+
           // Add any additional logic for error handling
         }
       );

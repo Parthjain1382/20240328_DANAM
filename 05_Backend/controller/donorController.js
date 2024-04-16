@@ -92,10 +92,12 @@ const getCauseById = async (req, res) => {
   const id = req.query._id;
   try {
     const cause = await Causes.findById(id);
+    console.log(cause)
     if (!cause) {
       return res.status(404).json({ message: "Cause not found" });
     }
-    res.json(cause);
+    console.log(cause);
+    res.status(200).json(cause);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -105,8 +107,8 @@ const getCauseById = async (req, res) => {
 const createDonation = async (req, res) => {
   try {
     const donationDetails = {
-      organization: req.organization._id,
-      donor: req.donor._id,
+      organization: req.body.organization,
+      Donor: req.body.donor,
       amount: req.body.amount,
       causeTitle: req.body.causeTitle,
     };
@@ -132,6 +134,70 @@ const organizationById = async (req, res) => {
     res.status(500).send("Server Error");
   }
 };
+
+/**To change the cause Schema when a Donor Donate to a Specific Cause
+ * @param {*} req causeId and AmountDonated
+ * @param {*} res The new Changes in the cause Object 
+ */
+const putCause= async(req,res)=>{
+  const  causeId  = req.query.causeId;
+  const amountDonated  = req.body.amountDonated; 
+    try {
+        // Find the cause by ID
+        const cause = await Causes.findById(causeId);
+
+        if (!cause) {
+            return res.status(404).send('Cause not found');
+        }
+        
+        if(amountDonated+cause.fundsRaised>cause.fundsRequired){
+          return res.status(200).send("The donation Amount is greater than required");
+        }
+
+        // Update fundsRaised and numberOfDonors
+        cause.fundsRaised += amountDonated;
+        cause.numberOfDonors += 1;
+        // Check if fundsRaised equals or exceeds fundsRequired
+      
+        if (cause.fundsRaised == cause.fundsRequired) {
+            cause.status = 'completed';
+        }
+      
+        // Save the updated cause
+        await cause.save();
+        res.status(200).json({ message: 'Cause updated successfully', cause });
+    } catch (error) {
+        console.error('Error updating cause:', error);
+        res.status(500).send('Server error');
+    }  
+}
+
+const userDonate=async(req,res)=>{
+  const  donorId  = req.query.donorId;
+  const  amountDonated = req.body.amountDonated; 
+
+  try {
+    // Find the cause by ID
+    const user = await Users.findById(donorId);
+
+    if (!user) {
+        return res.status(404).send('user not found');
+    }
+
+    // Update NumberofDonation by 1 and numberOfDonors
+    user.numberOfDonations+=1
+    user.contributionAmmount+=amountDonated
+
+    // Save the updated cause
+    await user.save();
+    res.status(200).json({ message: 'User updated successfully', user });
+} catch (error) {
+    console.error('Error updating User Data:', error);
+    res.status(500).send('Server error');
+}  
+}
+
+
 export default {
   getUserProfile,
   getAllCauses,
@@ -139,5 +205,7 @@ export default {
   createDonation,
   getCauseById,
   organizationById,
-  getDonor
+  getDonor,
+  putCause,
+  userDonate
 };

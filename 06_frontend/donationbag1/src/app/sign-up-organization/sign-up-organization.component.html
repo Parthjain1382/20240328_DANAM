@@ -1,26 +1,51 @@
 <form>
   <div class="container" style="    top: 450px;">
-    <h1>Sign Up</h1>
-    <p>Please fill this form to register your Organization</p>
+    <h1><b>Sign Up</b></h1>
+    <p>Please fill this form to register your <b style="color: #3CC88F;">Organization</b></p>
     <label for="psw"><b>Organization name </b></label>
     <input type="text" name="companyName" placeholder="Company name" [(ngModel)]="companyName" required>
-      <label for="email"><b>Email</b></label>
-      <input type="text" name="email" (blur)="validateEmail()" (focus)="hideEmailError()" [(ngModel)]="email" placeholder="Enter Your Email" type="text"  required>
-      <span class="error emailError"  [ngStyle]="{'display':emailErrorVisibility?'':'none'}"  >{{emailErrorMessage}}</span>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" name="password" (change)="validatePassword()"  (focus)="hidePasswordError()" [(ngModel)]="password" placeholder="Enter Your Password" type="text"  required>
-      <span class="error passwordError"  [ngStyle]="{'display':passwordErrorVisibility?'':'none'}" >{{passwordErrorMessage}}</span>
-      <label for="psw"><b>Location </b></label>
-      <input type="text" name="address" placeholder="Enter Address"  [(ngModel)]="address" required>
 
-      <label for="psw"><b>Contact Number </b></label>
-      <input type="text" name="ContactNumber" placeholder="Enter Contact Number"  [(ngModel)]="contactNumber" required>
+    <label for="email"><b>Email</b></label>
+    <input type="text" name="email" (blur)="validateEmail()" (focus)="hideEmailError()" [(ngModel)]="email"
+      placeholder="Enter Your Email" style="margin-bottom: 0px;" required>
+    <span class="error emailError" [ngStyle]="{'display':emailErrorVisibility?'':'none'}">{{emailErrorMessage}}</span>
 
-     <br>
-     <span class="already-have-an">Already have an account?</span>&nbsp;
-     <span class="login2" style="font-size:2em;"><a href="signin" (click)="navToLogin()"style="color:blue; ">Login</a></span>
+    <label style="margin-top: 20px; "><b>Password</b></label>
+    <input type="password" name="password" (change)="validatePassword()" (focus)="hidePasswordError()"
+      [(ngModel)]="password" placeholder="Enter Your Password" type="text"  style="margin-bottom: 0px;" />
+    <span class="error passwordError" [ngStyle]="{ display: passwordErrorVisibility ? '' : 'none' }">{{
+      passwordErrorMessage }}</span>
 
-     <div class="clearfix">
+
+      <label style="margin-top: 20px;"><b>Location </b></label>
+    <input type="text" name="address" placeholder="Enter Address" [(ngModel)]="address" required>
+
+    <label style="margin-top: 10px;"><b>Contact Number </b></label>
+    <input
+    type="phoneNumber"
+    name="phoneNumber"
+    (change)="validatePhoneNumber()"
+    (focus)="hidePhoneError()"
+    [(ngModel)]="phonenumber"
+    placeholder="Enter Your Phone Number"
+    style="margin-bottom:0px"
+    type="text"
+    required
+  />
+    <span
+    class="error phoneNumberError"
+    [ngStyle]="{ display: phoneNumberErrorVisibility ? '' : 'none' }"
+    >{{ phonenumberErrorMessage }}</span
+    >
+
+
+    <br>
+    <br>
+    <span class="already-have-an">Already have an account?</span>&nbsp;
+    <span class="login2" style="font-size:2em;"><a  (click)="navToLogin()"
+        style="color:#3CC88F; font-size:20px; cursor:pointer ">Login</a></span>
+
+    <div class="clearfix">
       <button type="submit" class="btn" [disabled]="submitDisabled" (click)="storeUserCred()">Sign Up</button>
     </div>
   </div>

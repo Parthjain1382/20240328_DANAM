@@ -1,5 +1,4 @@
 
-// const mongoose = require('mongoose');
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
@@ -27,7 +26,7 @@ const DonationSchema = new Schema({
     date: {
       type: Date,
       default: Date.now
-  },
+    }
     // sections: [{
     //     type: String
     // }]

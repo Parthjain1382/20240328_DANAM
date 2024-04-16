@@ -1,46 +1,46 @@
 <div class="create-cause-page">
-    <div class="inside-content">
-        <div class="header">
-            <h1>Create Cause</h1>
-        </div>
-        
-        <div class="form-details">
-            <form [formGroup]="causeForm" (ngSubmit)="onSubmit()">
-                <mat-form-field appearance="outline">
-                  <mat-label>Cause Name</mat-label>
-                  <input matInput formControlName="causeName" required>
-                  <mat-error *ngIf="(causeForm.get('causeName')?.hasError('required') ?? false)">Cause name is required</mat-error>
+  <div class="inside-content">
+      <div class="header">
+          <h1>Create Cause</h1>
+      </div>
+
+      <div class="form-details">
+          <form [formGroup]="causeForm" (ngSubmit)="onSubmit()">
+              <mat-form-field appearance="outline">
+                <mat-label>Cause Name</mat-label>
+                <input matInput formControlName="causeName" required>
+                <mat-error *ngIf="(causeForm.get('causeName')?.hasError('required') ?? false)">Cause name is required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Funds Required</mat-label>
+                <input matInput formControlName="fundsRequired" required>
+                <mat-error *ngIf="(causeForm.get('fundsRequired')?.hasError('required') ?? false)">Funds required is required</mat-error>
+                <mat-error *ngIf="(causeForm.get('fundsRequired')?.hasError('pattern') ?? false)">Invalid amount</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Category</mat-label>
+                <mat-select formControlName="category" required>
+                  <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="(causeForm.get('category')?.hasError('required') ?? false)">Category is required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="description" required></textarea>
+                <mat-error *ngIf="(causeForm.get('description')?.hasError('required') ?? false)">Description is required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                  <mat-label>Image URL</mat-label>
+                  <input matInput formControlName="imageUrl" required>
+                  <mat-error *ngIf="(causeForm.get('imageUrl')?.hasError('required') ?? false)">Image URL is required</mat-error>
                 </mat-form-field>
-              
-                <mat-form-field appearance="outline">
-                  <mat-label>Funds Required</mat-label>
-                  <input matInput formControlName="fundsRequired" required>
-                  <mat-error *ngIf="(causeForm.get('fundsRequired')?.hasError('required') ?? false)">Funds required is required</mat-error>
-                  <mat-error *ngIf="(causeForm.get('fundsRequired')?.hasError('pattern') ?? false)">Invalid amount</mat-error>
-                </mat-form-field>
-              
-                <mat-form-field appearance="outline">
-                  <mat-label>Category</mat-label>
-                  <mat-select formControlName="category" required>
-                    <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="(causeForm.get('category')?.hasError('required') ?? false)">Category is required</mat-error>
-                </mat-form-field>
-              
-                <mat-form-field appearance="outline">
-                  <mat-label>Description</mat-label>
-                  <textarea matInput formControlName="description" required></textarea>
-                  <mat-error *ngIf="(causeForm.get('description')?.hasError('required') ?? false)">Description is required</mat-error>
-                </mat-form-field>
-            
-                <mat-form-field appearance="outline">
-                    <mat-label>Image URL</mat-label>
-                    <input matInput formControlName="imageUrl" required>
-                    <mat-error *ngIf="(causeForm.get('imageUrl')?.hasError('required') ?? false)">Image URL is required</mat-error>
-                  </mat-form-field>
-              
-                <button mat-raised-button color="primary" type="submit" [disabled]="causeForm.invalid">Submit</button>
-              </form>
-        </div>
-    </div>
+
+              <button mat-raised-button color="primary" type="submit" [disabled]="causeForm.invalid">Submit</button>
+            </form>
+      </div>
+  </div>
 </div>

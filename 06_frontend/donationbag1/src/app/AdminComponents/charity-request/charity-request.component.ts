@@ -118,10 +118,9 @@ this.router.navigate(['/charityList'])
 
       //body param as status and id
       const body = { "id":`${_id}`, "status":'accepted' };
-      console.log(body);
-
+   
       const jwt = localStorage.getItem("userToken");
-      console.log(jwt);
+
 
 
       // Prepare the headers, including the Authorization header with the JWT token

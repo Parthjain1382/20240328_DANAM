@@ -7,15 +7,17 @@ import { passwordValidator } from "../dependencies/validations/userValidations.j
 import nodemailer from "nodemailer";
 import randomstring from "randomstring";
 import config from "../config/config.js";
+
+
 // Controller function for user signup
 const userSignup = async (req, res) => {
   try {
     const { username, password, phone_number, email, address, role } = req.body;
     // Validate user input
-    const validation = signupValidation({ username, email, password });
-    if (!validation.success) {
-      return res.status(400).json({ error: validation.error });
-    }
+    // const validation = signupValidation({ username, email, password });
+    // if (!validation.success) {
+    //   return res.status(400).json({ error: validation.error });
+    // }
     // Check if username or email already exists
     const existingUser = await Users.findOne({
       $or: [{ username }, { email }],
@@ -81,35 +83,28 @@ const userLogin = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-// const orgSignup = async (req, res) => {
-//   try {
-//       const { name, email, password, location } = req.body;
-//       // Validate user input
-//       // const validation = signupValidation({ name, email, password });
-//       // if (!validation.success) {
-//       //     return res.status(400).json({ error: validation.error });
-//       // }
-//       // Check if username or email already exists
-//       const existingOrg = await Organization.findOne({ name });     //Doubt syntax coloring not happening
-//       if (existingOrg) {
-//           return res.status(400).json({ error: 'Username or email already exists' });
 
+/**Organization Signup function
+ * @param {*} req  The param for signup
+ * @param {*} res The response 
+ * @returns 
+ */
 const orgSignup = async (req, res) => {
   try {
     const { name, email, password, location, contactNumber } = req.body;
 
-    // Validate user input (You can uncomment this part if you have validation logic)
-    // const validation = signupValidation({ name, email, password });
-    // if (!validation.success) {
-    //     return res.status(400).json({ error: validation.error });
-    // }
-    // Check if organization name already exists
-    const existingOrg = await Organization.findOne({ name });
+    //check for existing email
+    const existingOrg = await Organization.findOne({email});
     if (existingOrg) {
-      return res
-        .status(400)
-        .json({ error: "Organization name already exists" });
+     return res.status(401).json({ error: "Organization email already exists" });
     }
+
+    // Check if organization name already exists
+    const existingOrgByName = await Organization.findOne({name});
+    if (existingOrgByName) {
+      return res.status(401).json({ error: "Organization name already exists" });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create a new organization
     const newOrg = new Organization({
@@ -134,8 +129,9 @@ const orgSignup = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-/**
- * Send a reset password email.
+
+
+/**Send a reset password email.
  * @param {object} req - The request object.
  * @param {object} res - The response object.
  * @returns {object} The response object.
@@ -175,8 +171,8 @@ const forget_password = async (req, res) => {
     res.status(400).send({ success: false, msg: error.message });
   }
 };
-/**
- * Send a reset password email.
+
+/** Send a reset password email.
  * @param {string} name - The user's name.
  * @param {string} email - The user's email.
  * @param {string} token - The reset password token.
@@ -224,8 +220,8 @@ const sendResetPasswordMail = async (name, email, token) => {
     res.status(400).send({ success: false, msg: error.message });
   }
 };
-/**
- * Resets the user password
+
+/** Resets the user password
  * @param {object} req - The request object.
  * @param {object} res - The response object.
  * @returns {object} The response object.
@@ -267,16 +263,20 @@ const reset_password = async (req, res) => {
     res.status(400).send({ success: false, msg: error.message });
   }
 };
+
+
 const isTokenExpired = (timestamp) => {
   const expirationTime = 86400000;
   const currentTime = new Date().getTime();
   return currentTime - timestamp > expirationTime;
 };
+
 const orgLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
     // Find user by username
-    const org = await Organization.findOne({ email }); // Doubt syntax coloring not happening
+    const org = await Organization.findOne({ email }); 
+    
       // Check if user exists
       if (!org) {
           return res.status(404).json({ error: 'Org not found' });
