@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   ): boolean {
     if (!this.authService.isAuthTokenPresent()) {
       // User is not authenticated, redirect to login page
-      this.router.navigate(['/login']); // Adjust the route as necessary
+      this.router.navigate(['/donorsignin']); // Adjust the route as necessary
       return false;
     }
 

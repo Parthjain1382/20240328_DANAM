@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
+import { environment } from '../../environment';
 @Component({
   selector: 'app-forget-password',
   standalone: true,
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
   styleUrl: './forget-password.component.css'
 })
 export class ForgetPasswordComponent {
-
+  apiurl = environment.apiUrl
   email: string = '';
   emailErrorMessage: string = '';
   emailIsValid: boolean = false; // New variable to track email validity
@@ -58,7 +58,7 @@ export class ForgetPasswordComponent {
 
   forgetPassword(): void {
 
-    this.http.post('http://localhost:3000/forgot_password', { email: this.email })
+    this.http.post(`${this.apiurl}/forgot_password`, { email: this.email })
     .subscribe(
       (response) => {
         // Handle the response from the backend

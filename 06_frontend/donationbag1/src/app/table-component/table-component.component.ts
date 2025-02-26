@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { NgStyle } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-table-component',
@@ -24,7 +25,7 @@ export class TableComponentComponent implements OnInit {
   totalDonations: number = 0;
   srno: number = 0;
   causes: any
-
+  apiUrl = environment.apiUrl;
 
   @Output() totalAmountChanged = new EventEmitter<number>();
   @Output() allDonations = new EventEmitter<number>();
@@ -41,7 +42,7 @@ export class TableComponentComponent implements OnInit {
   loadData(): void {
     this.dataService.getTableData().subscribe(data => {
       this.dataSource = data
-      
+
       //looping through the element of the dataSource
       for (let i = 0; i < this.dataSource.length; i++) {
         let temp = 0
@@ -63,7 +64,7 @@ export class TableComponentComponent implements OnInit {
   fetchCause(name: string): void {
     let id: string = ''
 
-    const url = `http://localhost:3000/donor/causes`;
+    const url = `${environment.apiUrl}/donor/causes`;
     this.http.get<any[]>(url).subscribe({
       next: (response) => {
         this.causes = response;

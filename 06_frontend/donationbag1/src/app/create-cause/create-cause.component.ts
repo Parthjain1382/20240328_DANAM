@@ -9,7 +9,7 @@ import { CreateCauseServiceService } from '../services/createCauseService/create
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-create-cause',
@@ -34,7 +34,7 @@ export class CreateCauseComponent {
     description: new FormControl('', Validators.required),
     imageUrl: new FormControl('', Validators.required)
   });
-
+  apiUrl = environment.apiUrl;
 
 
   categories = ['Health', 'Education', 'Environment', 'Social', 'Other'];
@@ -57,7 +57,7 @@ export class CreateCauseComponent {
     formData.append('image', file, file.name); // Ensure you pass 'file' not 'fileInput'
 
     // Adjusted the URL to include '/org' based on your example
-    this.http.post('http://localhost:3000/org/upload', formData)
+    this.http.post(`${this.apiUrl}/org/upload`, formData)
       .subscribe({
         next: (response) => {
           this.UploadResponse=response

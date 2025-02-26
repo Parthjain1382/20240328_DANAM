@@ -12,9 +12,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
   styleUrls: ['./carasol.component.css']
 })
 export class CarasolComponent {
-  // customOptions: OwlOptions = {
-  //   // Your OwlOptions configuration here
-  // }
+
 
   slides = [
     { img: "https://images.rawpixel.com/image_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvczkzLXBtLTI3NTcuanBn.jpg" },

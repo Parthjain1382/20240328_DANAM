@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environment';
+
 
 @Component({
   selector: 'app-charty-list',
@@ -10,6 +12,9 @@ import { Router } from '@angular/router';
   styleUrl: './charty-list.component.css'
 })
 export class ChartyListComponent implements OnInit {
+
+  apiUrl = environment.apiUrl;
+
   charity_array: {_id:string, charity_name:string,email: string, Location: string, contact_info: string}[] = [{
     _id:'',
     charity_name:"",
@@ -55,7 +60,7 @@ this.router.navigate(['/charityList'])
  *
  */
 fetchData(){
-  const apiUrl = 'http://localhost:3000/admin/orgDetails';
+  const apiUrl = `${this.apiUrl}/admin/orgDetails`;
   const jwt = localStorage.getItem("userToken");
 
 
@@ -91,7 +96,7 @@ fetchData(){
  *
  */
 charityFetch(){
-  const apiUrl='http://localhost:3000/donor/causes';
+  const apiUrl=`${this.apiUrl}/donor/causes`;
 
   this.http.get<any[]>(apiUrl).subscribe(
     (data) => {
@@ -109,7 +114,7 @@ charityFetch(){
  *
  */
 donorFetch(){
-  const apiUrl='http://localhost:3000/donor/donorList';
+  const apiUrl=`${this.apiUrl}/donor/donorList`;
 
   this.http.get<any[]>(apiUrl).subscribe(
 

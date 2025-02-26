@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
+
 @Component({
   selector: 'app-gallery',
   standalone: true,
@@ -9,13 +11,13 @@ import { HttpClient } from '@angular/common/http';
 })
 export class GalleryComponent implements OnInit {
 imageArray:{descriptionImage:string}[]=[]
-
+apiUrl = environment.apiUrl;
 ngOnInit(): void {this.fetchImage()}
 
 constructor(private http:HttpClient){
 }
 fetchImage(){
-  const url = `http://localhost:3000/donor/causes`;
+  const url = `${this.apiUrl}/donor/causes`;
   this.http.get<any[]>(url).subscribe({
     next: (response) => {
       this.imageArray=response

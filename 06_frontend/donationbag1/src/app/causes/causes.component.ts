@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-causes',
@@ -16,7 +17,7 @@ export class CausesComponent implements OnInit {
   selectedCategories: string[] = [];
   causes: any[] = [];
   token: any;
-
+  private apiurl = environment.apiUrl
   constructor(private http: HttpClient, private router: Router) {}
 
   takeToCauseDetailPage(causeId: string): void {
@@ -29,7 +30,7 @@ export class CausesComponent implements OnInit {
   }
 
   getAllCauses(): void {
-    const url = `http://localhost:3000/donor/causes`;
+    const url = `${this.apiurl}/donor/causes`;
     this.http.get<any[]>(url).subscribe({
       next: (response) => {
         //getting all cause whose status is "pending"

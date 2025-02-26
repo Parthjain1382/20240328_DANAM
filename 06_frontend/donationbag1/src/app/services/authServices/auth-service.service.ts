@@ -3,7 +3,7 @@
   import { HttpClient } from '@angular/common/http';
   import { Router } from '@angular/router';
   import Swal from 'sweetalert2';
-
+  import { environment } from '../../../environment';
   @Injectable({
     providedIn: 'root',
   })
@@ -15,7 +15,7 @@
     private token!: any;
     private expireTokenTime: any;
     private userid: any;
-
+    private apiUrl = environment.apiUrl;
     // isOffline: boolean = !navigator.onLine;
     constructor(
       public http: HttpClient,
@@ -70,7 +70,7 @@
       const loginData = { email, password };
 
       if (email && password) {
-        this.http.post('http://localhost:3000/login', loginData).subscribe({
+        this.http.post(`${this.apiUrl}/login`, loginData).subscribe({
           next: (response: any) => {
             const token = response.token;
             const role = response.role;
@@ -122,7 +122,7 @@
         address: address,
       };
 
-      this.http.post('http://localhost:3000/signup', userData).subscribe({
+      this.http.post(`${this.apiUrl}/signup`, userData).subscribe({
         next: (response: any) => {
           console.log('User registered successfully');
           this.showSuccessAlert('User registered successfully');
@@ -146,7 +146,7 @@
 
 
       if (email && password) {
-        this.http.post('http://localhost:3000/org/login', loginData).subscribe({
+        this.http.post(`${this.apiUrl}/org/login`, loginData).subscribe({
           next: (response: any) => {
             console.log('Signin successful');
             const token = response.token;
@@ -192,7 +192,7 @@
         contactNumber: contactNumber,
       };
 
-      this.http.post('http://localhost:3000/org/signup', orgData).subscribe({
+      this.http.post(`${this.apiUrl}/org/signup`, orgData).subscribe({
         next: (response: any) => {
           console.log('Organization registered successfully');
           this.showSuccessAlert('Organization registered successfully');

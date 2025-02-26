@@ -4,6 +4,8 @@ import { formatDate } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../environment';
+
 @Component({
   selector: 'app-charity-request',
   standalone: true,
@@ -12,6 +14,8 @@ import { Router } from '@angular/router';
   styleUrl: './charity-request.component.css'
 })
 export class CharityRequestComponent implements OnInit{
+
+  apiurl = environment.apiUrl;
 
   //Intialization of the charity array
   charity_array: { _id:string,orphanage_name: string, date: string, category: string, amount: number, title: string }[] = [];
@@ -46,7 +50,7 @@ this.router.navigate(['/charityList'])
    *
    */
     fetchData() {
-      const apiUrl = 'http://localhost:3000/admin/requests?status=pending';
+      const apiUrl = `${this.apiurl}/admin/requests?status=pending`;
 
       const jwt = localStorage.getItem("userToken");
 
@@ -114,11 +118,11 @@ this.router.navigate(['/charityList'])
      * @param _id To search with the unique id
      */
     private callAcceptCauseApi(_id: string) {
-      const apiUrl = `http://localhost:3000/admin/update/request`;
+      const apiUrl = `${this.apiurl}/admin/update/request`;
 
       //body param as status and id
       const body = { "id":`${_id}`, "status":'accepted' };
-   
+
       const jwt = localStorage.getItem("userToken");
 
 
@@ -160,7 +164,7 @@ this.router.navigate(['/charityList'])
      * @param _id
      */
     private calldeleteCauseApi(_id: string) {
-      const apiUrl = `http://localhost:3000/admin/deleteCause`;
+      const apiUrl = `${this.apiurl}/admin/deleteCause`;
       const jwt = localStorage.getItem("userToken");
 
 

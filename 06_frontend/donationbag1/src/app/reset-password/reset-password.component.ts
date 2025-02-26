@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-reset-password',
@@ -15,8 +16,8 @@ import { Router } from '@angular/router';
 export class ResetPasswordComponent {
   passwordInputFocused: boolean = false;
   password: string = '';
-  token: string | null = ''; 
-
+  token: string | null = '';
+  apiUrl = environment.apiUrl
   constructor(
     private http: HttpClient, private route: ActivatedRoute,private router: Router
   ) {this.token = this.route.snapshot.queryParamMap.get('token');}
@@ -70,7 +71,7 @@ export class ResetPasswordComponent {
   }
 
 
- 
+
   /**To handel onblue event and show error if required on password
    *
    * @param {event}
@@ -121,7 +122,7 @@ export class ResetPasswordComponent {
     }
 
     // Construct the URL with the dynamic token
-    const url = `http://localhost:3000/resetpassword?token=${this.token}`;
+    const url = `${this.apiUrl}/resetpassword?token=${this.token}`;
 
     this.http.post(url, { password: this.password })
       .subscribe(

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import swal from 'sweetalert';
+import { environment } from '../../environment';
 
 declare var Razorpay: any;
 
@@ -27,7 +28,7 @@ export class CharityInfoComponent implements OnInit {
   role: string | null = ''
   organization: any
   AmountDonation: number = 0
-
+  apiUrl = environment.apiUrl;
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
 
@@ -188,7 +189,7 @@ export class CharityInfoComponent implements OnInit {
    * @param httpOptions Used For Authorization
    */
   putChangeInCause(options: any, httpOptions: any) {
-    const url = `http://localhost:3000/donor/CauseDataChange?causeId=${this.causeId}`;
+    const url = `${this.apiUrl}/donor/CauseDataChange?causeId=${this.causeId}`;
     const body = {
       amountDonated: options.amount / 100
     }
@@ -209,7 +210,7 @@ export class CharityInfoComponent implements OnInit {
    * @param httpOptions Used For Authorization
    */
   putChangeUser(donorId: any, options: any, httpOptions: any) {
-    const url = `http://localhost:3000/donor/userDonate?donorId=${donorId}`;
+    const url = `${this.apiUrl}/donor/userDonate?donorId=${donorId}`;
     const body = {
       amountDonated: options.amount / 100
     }
@@ -234,7 +235,7 @@ export class CharityInfoComponent implements OnInit {
       causeTitle: this.content.title,
       donor: donorId
     }
-    const url = 'http://localhost:3000/donor/donate';
+    const url = `${this.apiUrl}/donor/donate`;
     //Api Call for Posting New Object in the Donation Database
     this.http.post(url, body, httpOptions).subscribe({
       next: (response) => {
@@ -262,7 +263,7 @@ export class CharityInfoComponent implements OnInit {
 
   //Fetching the Cause Content
   fetchCauseContent(): void {
-    const url = `http://localhost:3000/donor/getCause?_id=${this.causeId}`;
+    const url = `${this.apiUrl}/donor/getCause?_id=${this.causeId}`;
     // HTTP GET request to fetch page content
 
     this.http.get<any>(url).subscribe({
@@ -287,7 +288,7 @@ export class CharityInfoComponent implements OnInit {
 
   //Getting the Organization Name
   getOrganizationName(organizationId: string): void {
-    const url = `http://localhost:3000/donor/getOrganization?_id=${organizationId}`;
+    const url = `${this.apiUrl}/donor/getOrganization?_id=${organizationId}`;
 
     // HTTP GET request to fetch organization details
     this.http.get<any>(url).subscribe({

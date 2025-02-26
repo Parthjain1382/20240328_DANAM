@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environment';
 
 @Component({
   selector: 'app-donation',
@@ -11,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class DonationComponent implements OnInit {
 
+  private apiUrl = environment.apiUrl;
   //donor_array storing all the data in
   donation_array: { _id: string, organization: string, donor: string, amount: number, causeTitle: string, date: string,organization_Name:any }[] = []
 
@@ -54,7 +56,7 @@ this.router.navigate(['/charityList'])
    *
    */
   fetchData() {
-    const apiUrl = 'http://localhost:3000/admin/orgDetails';
+    const apiUrl = `${this.apiUrl}/admin/orgDetails`;
     const jwt = localStorage.getItem("userToken");
 
 
@@ -80,7 +82,7 @@ this.router.navigate(['/charityList'])
    *
    */
   charityFetch() {
-    const apiUrl = 'http://localhost:3000/donor/causes';
+    const apiUrl = `${this.apiUrl}/donor/causes`;
 
 
     this.http.get<any[]>(apiUrl).subscribe(
@@ -99,7 +101,7 @@ this.router.navigate(['/charityList'])
    *
    */
   donorFetch() {
-    const apiUrl = 'http://localhost:3000/admin/donationList';
+    const apiUrl = `${this.apiUrl}/admin/donationList`;
 
     this.http.get<any[]>(apiUrl).subscribe(
 
@@ -117,7 +119,7 @@ this.router.navigate(['/charityList'])
  * the donor to which organization
  */
   donationFetch() {
-    const apiUrl = 'http://localhost:3000/admin/donationList';
+    const apiUrl = `${this.apiUrl}/admin/donationList`;
     // Get the JWT token from local storage
     const jwt = localStorage.getItem("userToken");
 
@@ -156,13 +158,13 @@ this.router.navigate(['/charityList'])
 
  //Getting the Organization Name
  getOrganizationName(organizationId: string): void {
-  const url = `http://localhost:3000/donor/getOrganization?_id=${organizationId}`;
+  const url = `${this.apiUrl}/donor/getOrganization?_id=${organizationId}`;
 
   // HTTP GET request to fetch organization details
   this.http.get<any>(url).subscribe({
     next: (response) => {
 
-     
+
     return response.name
     },
     error: (error) => {

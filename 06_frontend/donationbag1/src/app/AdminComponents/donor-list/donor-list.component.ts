@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../../environment';
 
 @Component({
   selector: 'app-donor-list',
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './donor-list.component.css'
 })
 export class DonorListComponent implements OnInit{
+private apiUrl = environment.apiUrl;
 
 //donor_array storing all the data in
 donor_array: {_id:string,donor_name:string,email: string, address: string, phone_number: string,numberOfDonation:number}[]=[]
@@ -52,7 +54,7 @@ this.router.navigate(['/charityList'])
 *
 */
 fetchData(){
-const apiUrl = 'http://localhost:3000/admin/orgDetails';
+const apiUrl = `${this.apiUrl}/admin/orgDetails`;
 
 const jwt = localStorage.getItem("userToken");
 const headers = {
@@ -76,7 +78,7 @@ this.http.get<any[]>(apiUrl,headers).subscribe(
 *
 */
 charityFetch(){
-const apiUrl='http://localhost:3000/donor/causes';
+const apiUrl=`${this.apiUrl}/donor/causes`;
 const jwt = localStorage.getItem("userToken");
 const headers = {
   headers: new HttpHeaders({
@@ -99,7 +101,7 @@ this.http.get<any[]>(apiUrl,headers).subscribe(
 *
 */
 donorFetch(){
-const apiUrl='http://localhost:3000/donor/donorList';
+const apiUrl=`${this.apiUrl}/donor/donorList`;
 const jwt = localStorage.getItem("userToken");
 
 const headers = {

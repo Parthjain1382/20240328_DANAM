@@ -3,6 +3,8 @@ import { TableComponentComponent } from '../table-component/table-component.comp
 import {jsPDF} from 'jspdf';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment';
+
 @Component({
   selector: 'app-donor-profile-page',
   standalone: true,
@@ -15,6 +17,7 @@ export class DonorProfilePageComponent implements OnInit{
   totalAmountFromChild: number = 0;
   totalDonationsDonated: number = 0;
   userprofile:any;
+  apiUrl = environment.apiUrl;
 
   onTotalAmountChanged(totalAmount: number): void {
     this.totalAmountFromChild = totalAmount;
@@ -39,7 +42,7 @@ export class DonorProfilePageComponent implements OnInit{
     const id=localStorage.getItem('donarId')
     console.log(id);
 
-    const url =`http://localhost:3000/donor/getDonor?id=${id}`;
+    const url =`${this.apiUrl}/donor/getDonor?id=${id}`;
 
     const headers = {
       headers: new HttpHeaders({
@@ -60,7 +63,7 @@ export class DonorProfilePageComponent implements OnInit{
   }
 
 
-
+//pdf generation function
   generatePDF(){
     // Creating a jsPDF instance in landscape orientation.
     const doc = new jsPDF('l', 'pt', 'a4');
@@ -130,6 +133,6 @@ export class DonorProfilePageComponent implements OnInit{
     doc.rect(10, 10, doc.internal.pageSize.getWidth() - 20, doc.internal.pageSize.getHeight() - 20);
   // Save the document
   doc.save('DonationCertificate.pdf');
-  })
+   })
 }
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { environment } from '../../../environment';
 @Injectable({
   providedIn: 'root'
 })
 export class CreateCauseServiceService {
-  private apiUrl = 'http://localhost:3000/org/cause';
+  private apiUrl = `${environment.apiUrl}/org/cause`;
   private bearerToken = localStorage.getItem('orgToken');
 
   constructor(private http: HttpClient) { }
@@ -19,6 +19,6 @@ export class CreateCauseServiceService {
 
     return this.http.post(this.apiUrl, causeData, { headers });
   }
-  
+
 }
 
