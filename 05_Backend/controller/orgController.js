@@ -30,10 +30,10 @@ const createCause = async (req, res) => {
     };
     const cause = new Cause(causeDetails);
     await cause.save();
-    res.status(201).json(cause);
+    res.status(200).json({"message":"The cause has successfully changed "});
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send({"message":"Internal Server Error"});
   }
 };
 

@@ -113,7 +113,8 @@ const createDonation = async (req, res) => {
     };
     const donation = new Donation(donationDetails);
     await donation.save();
-    res.status(201).json(donation);
+    
+    res.status(200).json("succesfully added new Donation ");
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
@@ -175,7 +176,7 @@ const userDonate=async(req,res)=>{
   const  donorId  = req.query.donorId;
   const  amountDonated = req.body.amountDonated; 
   let profitAmount=amountDonated*0.03
-  console.log(profitAmount);
+  // console.log(profitAmount);
   try {
     // Find the cause by ID
     const user = await Users.findById(donorId);
@@ -192,7 +193,7 @@ const userDonate=async(req,res)=>{
     admin.numberOfDonations+=1
     user.contributionAmmount+=amountDonated
     admin.contributionAmmount+=profitAmount
-    console.log(admin.contributionAmmount);
+    // console.log(admin.contributionAmmount);
     // Save the updated users
     await user.save()
     await admin.save() 

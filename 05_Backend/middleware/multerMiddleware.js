@@ -4,10 +4,9 @@ import path from 'path';
 
 //storage
 const storage = multer.memoryStorage();
-// Define allowed formats
-const allowedFormats = ['image/png', 'image/jpg', 'image/jpeg'];
 
 const multerUploads = multer({ storage }).single('image');
+
 const dUri = new DatauriParser(); 
 
 /**

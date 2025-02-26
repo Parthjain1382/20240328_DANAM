@@ -1,6 +1,7 @@
 import { config, uploader } from 'cloudinary'
 import dotenv from 'dotenv';
 dotenv.config();
+
 const cloudinaryConfig = (req, res, next) => {
   config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
